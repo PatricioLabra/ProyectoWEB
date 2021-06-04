@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend del proyecto web",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PatricioLabra/ProyectoWEB.git"
+  },
+  "author": "Dan Rivaille & Patricio Labra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PatricioLabra/ProyectoWEB/issues"
+  },
+  "homepage": "https://github.com/PatricioLabra/ProyectoWEB#readme"
+}
