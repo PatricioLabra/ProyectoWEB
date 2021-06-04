@@ -1,5 +1,8 @@
-import express, { json } from 'express';
+import express from 'express';
 import morgan from 'morgan';
+
+// Internal imports
+import indexRoutes from './routes/index.routes';
 
 const app = express();
 
@@ -11,6 +14,10 @@ app.set('port', process.env.PORT || 4000);
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+
+
+// Routes
+app.use(indexRoutes);
 
 
 // Putting the server in listen
