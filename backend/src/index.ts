@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { json } from 'express';
 import morgan from 'morgan';
 
 const app = express();
@@ -9,6 +9,8 @@ app.set('port', process.env.PORT || 4000);
 
 // Middlewares
 app.use(morgan('dev'));
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 
 
 // Putting the server in listen
