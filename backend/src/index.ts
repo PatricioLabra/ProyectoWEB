@@ -6,8 +6,8 @@ import cors from 'cors';
 import indexRoutes from './routes/index.routes';
 
 const app = express();
-const cors_config = {
-  origin: 'localhost:4200',
+const corsConfig = {
+  origin: 'http://localhost:4200',
   credentials: true
 }
 
@@ -19,7 +19,7 @@ app.set('port', process.env.PORT || 4000);
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use(cors(cors_config));
+app.use(cors(corsConfig));
 
 
 // Routes
