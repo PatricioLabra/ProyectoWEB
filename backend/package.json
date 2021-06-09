@@ -21,10 +21,12 @@
   },
   "homepage": "https://github.com/PatricioLabra/ProyectoWEB#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.12.13"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.10",
     "@types/express": "^4.17.12",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.2",
