@@ -4,6 +4,7 @@ import cors from 'cors';
 
 // Internal imports
 import indexRoutes from './routes/index.routes';
+import { startConnection } from './database';
 
 const app = express();
 const corsConfig = {
@@ -27,6 +28,12 @@ app.use(indexRoutes);
 
 
 // Putting the server in listen
-app.listen(app.get('port'), () => {
-  console.log(`Server running on port ${app.get('port')}`);
-});
+async function main() {
+  startConnection();
+
+  app.listen(app.get('port'), () => {
+    console.log(`Server running on port ${app.get('port')}`);
+  });
+}
+
+main();
