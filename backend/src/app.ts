@@ -1,13 +1,16 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // Internal imports
 import indexRoutes from './routes/index.routes';
 
 const app = express();
 const corsConfig = {
-  origin: 'http://localhost:4200',
+  origin: process.env.ORIGIN_FRONT_IP,
   credentials: true
 }
 
