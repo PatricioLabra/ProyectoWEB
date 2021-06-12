@@ -21,13 +21,49 @@ export const addUser: RequestHandler = async (req, res) => {
 	}
 };
 
-export const getUser: RequestHandler = (req, res) => {
-	res.send({success: true, nickname: req.params.nick});
+export const getUser: RequestHandler = async (req, res) => {
+	const userFound = await  User.findOne({ nickname: req.params.nick });
+
+	if( userFound ){
+		res.status(200);
+		res.send ({
+			success: true, 
+			user_info: {
+				"nickname": userFound.nickname,
+				"names": userFound.names,
+				"last_name" : userFound.last_name,
+				"rut": userFound.rut,
+				"region": userFound.region,
+				"commune": userFound.commune,
+				"address": userFound.address,
+				"email": userFound.email
+			}
+		});	
+	}else{
+		res.status(404);
+		res.send ({
+			success: false, 
+			type: 'getUser'
+		});	
+	}
 };
 
-export const validUser: RequestHandler = (req, res) => {
-	console.log(req.params.nick);
-	res.send({success: true, type: 'validUser'});
+export const validUser: RequestHandler = async (req, res) => {
+	const userFound = await  User.findOne({ nickname: req.params.nick });
+
+	if ( userFound ) {
+		res.status(200);
+		res.send ({
+			success: true, 
+			type: 'validUser'
+		});		
+	} else {
+		res.status(404);
+		res.send ({
+			success: false, 
+			type: 'validUser'
+		});
+	}
 };
 
 export const validPass: RequestHandler = (req, res) => {
