@@ -12,7 +12,8 @@ export const addUser: RequestHandler = async (req, res) => {
 		});		
 	} else {
 		const user = new User(req.body);
-		await user.save()							/*almacenamos el usuario en la BD */
+		user.password = encrypt(user.nickname, user.password);
+		await user.save()							
 		res.status(200);
 		res.send ({
 			success: true, 
@@ -66,12 +67,36 @@ export const validUser: RequestHandler = async (req, res) => {
 	}
 };
 
-export const validPass: RequestHandler = (req, res) => {
-	res.send({success: true, type: 'validPass'});
+export const validPass: RequestHandler = async (req, res) => {
+	const userFound = await User.findOne({ nickname: req.body.nickname });
+	const passencrypt = encrypt(req.body.nickname, req.body.password)
+
+	if ( userFound && ( userFound.password === passencrypt ) ){
+		res.status(200);
+		res.send ({
+			success: true, 
+			type: 'validPass'
+		});
+	} else {
+		res.status(400);
+		res.send ({
+			success: false, 
+			type: 'validPass'
+		});
+	}
 };
 
-export const getNewerUsers: RequestHandler = (req, res) => {
+export const getNewerUsers: RequestHandler = async (req, res) => {
 	const initial_user = parseInt(req.params.init);
 	const last_user = parseInt(req.params.quantity) + initial_user - 1;
-	res.send({success: true, initial: initial_user, last: last_user});
+
+	const users = await User.find().sort({createdAt:-1}).limit(last_user) ;
+	//falta seleccionar
+	return res.json(users);
 };
+
+function encrypt(user: string, pass: string) {
+	var crypto = require('crypto')
+	var hmac = crypto.createHmac('sha1', user).update(pass).digest('hex')
+	return hmac
+ }
