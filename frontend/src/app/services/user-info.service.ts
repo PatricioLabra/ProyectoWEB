@@ -14,8 +14,17 @@ export class UserInfoService {
   constructor() {
     this.isLogged = false;
     this.isAdmin = false;
-    this.profileInfo = {
-      nickname: 'Visitant'
-    };
+    this.profileInfo = { nickname: 'Visitant' };
+  }
+
+  signInUser(profileInfo: ProfileInfo, isAdmin: boolean) {
+    this.isAdmin = isAdmin;
+    this.isLogged = true;
+    this.profileInfo = profileInfo;
+  }
+
+  signOutUser() {
+    this.isLogged = false;
+    this.profileInfo = { nickname: 'Visitant' };
   }
 }
