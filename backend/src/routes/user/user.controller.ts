@@ -1,8 +1,15 @@
 import { RequestHandler } from "express";
 import { createHmac } from "crypto"
 import User from './user.model';
+import { signToken } from "../jwt";
 
-export const addUser: RequestHandler = async (req, res) => {
+/**
+ * Funcion que maneja la peticion de agregar un nuevo usuario al sistema
+ * @rute Post /user/signup
+ * @param req Request de la peticion, se espera que tenga la informacion del nuevo usuario
+ * @param res Response, retornara el token si todo sale bien
+ */
+export const signUp: RequestHandler = async (req, res) => {
 
 	const { nickname, password, email, rut } = req.body;
 
@@ -10,19 +17,27 @@ export const addUser: RequestHandler = async (req, res) => {
 	if (!nickname || !password || !email || !rut)
 		return res.status(400).send({ success: false, message: 'Error: datos inválidos' + req.body });	
 
-	const userFound = await User.findOne({ nickname: req.body.nickname });
+	const userFound = await User.findOne({ nickname });
 
 	// Se valida si ya existe un usuario con el nickname ingresado
 	if (userFound)
 		return res.status(301).send({ success: false, message: 'Error: el usuario ya existe en el sistema.' })
 
-	const user = new User(req.body);
-	user.password = encrypt(user.nickname, user.password);
-	await user.save()							
+	const newUser = new User(req.body);
+	newUser.password = encrypt(nickname, password);
+	await newUser.save()							
 
-	return res.status(201).send({ success: true });
-};
+	const token = signToken(newUser._id);
 
+	return res.status(201).send({ success: true, token });
+}
+
+/**
+ * Funcion que maneja la peticion de los datos de un usuario en particular
+ * @rute get /user/:nick
+ * @param req Request de la peticion, se espera que tenga como parametro el nickname del usuario
+ * @param res Response, retornara la informacion del usuario si todo sale bien
+ */
 export const getUser: RequestHandler = async (req, res) => {
 	const userFound = await  User.findOne({ nickname: req.params.nick });
 
@@ -35,30 +50,37 @@ export const getUser: RequestHandler = async (req, res) => {
 		success: true, 
 		userInfo
 	});	
-};
+}
 
-export const validUser: RequestHandler = async (req, res) => {
-	const userFound = await User.findOne({ nickname: req.params.nick });
+/**
+ * Funcion que manejara el inicio de sesion de un usuario
+ * @rute post /user/signin
+ * @param req Request de la peticion, se espera que tenga el nick y la pass del usuario que va a loguear
+ * @param res Response, retornara el token si todo sale bien
+ */
+export const signIn: RequestHandler = async (req, res) => {
+	const { nickname, password } = req.body;
+	const user = await User.findOne({ nickname });
+	const passEncrypt = encrypt(nickname, password)
 
-	if (!userFound)
-		return res.status(404).send({ success: false, message: 'Error: El usuario ingresado no existe en el sistema.' });
-
-	return res.status(200).send({ success: true });
-};
-
-export const validPass: RequestHandler = async (req, res) => {
-	const userFound = await User.findOne({ nickname: req.body.nickname });
-	const passEncrypt = encrypt(req.body.nickname, req.body.password)
-
-	if (!userFound)
+	if (!user)
 		return res.status(404).send({ success: false, message: 'Error: el usuario ingresado no existe en el sistema.' });
 
-	if (userFound.password !== passEncrypt)
+	if (user.password !== passEncrypt)
 		return res.status(400).send({ success: false, message: 'Error: la password ingresada no es válida.' });
 
-	return res.status(200).send({ success: true });
-};
+	const token = signToken(user._id);
 
+	return res.status(200).send({ success: true, token });
+}
+
+/**
+ * Funcion que maneja la peticion de un fragmento de todos los usuarios registrados, obtiene desde
+ * el usuario numero 'initialUser', la cantidad de 'quantityUsers'
+ * @rute Get '/users/newer/:init/:quantity'
+ * @param req Request de la peticion, se espera que tenga el inicio y la cantidad de usuarios como parametro
+ * @param res Response, retorna la cantidad de usuario registrados y el fragmento que se solicito
+ */
 export const getNewerUsers: RequestHandler = async (req, res) => {
 	
 	try {
@@ -85,13 +107,24 @@ export const getNewerUsers: RequestHandler = async (req, res) => {
 			messaje: 'Error inesperado: ' + error.message
 		});
 	}
-};
+}
 
+/**
+ * Encripta la contraseña del usuario, usando como clave de encriptacion su nickname
+ * @param user Nickname del usuario
+ * @param pass Password del usuario
+ * @returns Password cifrada del usuario
+ */
 function encrypt(user: string, pass: string) {
 	var hmac = createHmac('sha1', user).update(pass).digest('hex');
 	return hmac
 }
 
+/**
+ * Extrae los datos publicos del usuario ingresado
+ * @param user Usuario extraido de la base de datos
+ * @returns Los datos publicos del usuario (los que se mandan al front)
+ */
 function destructureUser(user: any) {
 	const { nickname, names, last_name, rut, region, commune, address, email } = user;
 
