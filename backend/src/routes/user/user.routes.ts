@@ -4,7 +4,7 @@ import * as userCtrl from './user.controller';
 const router = Router();
 
 // Agregar un nuevo usuario
-router.post('/user', userCtrl.addUser);
+router.post('/user/signup', userCtrl.signUp);
 
 // Obtener la informacion de un usuario
 router.get('/user/:nick', userCtrl.getUser);
