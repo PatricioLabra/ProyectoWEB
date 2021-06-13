@@ -110,7 +110,7 @@ export const getNewerUsers: RequestHandler = async (req, res) => {
 		const initial_user = parseInt(req.params.init);
 		const quantity_user = parseInt(req.params.quantity);
 	
-		const users = await User.find().sort({createdAt:-1}).skip(initial_user).limit(quantity_user) ;
+		const users = await User.find().sort({updatedAt:-1}).skip(initial_user).limit(quantity_user) ;
 		const quantityUsers = await User.countDocuments();
 
 		res.status(200);
