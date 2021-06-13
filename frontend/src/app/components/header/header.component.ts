@@ -30,11 +30,6 @@ export class HeaderComponent implements OnInit {
   }
 
   // Just for debug, remove later
-  login() {
-    this.userInfo.isLogged = true;
-    this.userInfo.isAdmin = true;
-  }
-
   signout() {
     this.userInfo.isLogged = false;
   }
