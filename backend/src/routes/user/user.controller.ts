@@ -1,14 +1,18 @@
 import { RequestHandler } from "express";
+import { createHmac } from "crypto"
 import User from './user.model';
 
 export const addUser: RequestHandler = async (req, res) => {
+
+	/*validar el req.body*/
+
 	const userFound = await User.findOne({ nickname: req.body.nickname });
 
 	if ( userFound ) {
 		res.status(301);
 		res.send ({
 			success: false, 
-			type: 'addUser'
+			message: 'Error: el usuario ya existe en el sistema.'
 		});		
 	} else {
 		const user = new User(req.body);
@@ -17,7 +21,6 @@ export const addUser: RequestHandler = async (req, res) => {
 		res.status(200);
 		res.send ({
 			success: true, 
-			type: 'addUser'
 		});
 	}
 };
@@ -44,7 +47,7 @@ export const getUser: RequestHandler = async (req, res) => {
 		res.status(404);
 		res.send ({
 			success: false, 
-			type: 'getUser'
+			message: 'Error: El usuario ingresado no existe en el sistema.'
 		});	
 	}
 };
@@ -55,14 +58,13 @@ export const validUser: RequestHandler = async (req, res) => {
 	if ( userFound ) {
 		res.status(200);
 		res.send ({
-			success: true, 
-			type: 'validUser'
+			success: true
 		});		
 	} else {
 		res.status(404);
 		res.send ({
-			success: false, 
-			type: 'validUser'
+			success: false,
+			message: 'Error: El usuario ingresado no existe en el sistema.'
 		});
 	}
 };
@@ -71,34 +73,39 @@ export const validPass: RequestHandler = async (req, res) => {
 	const userFound = await User.findOne({ nickname: req.body.nickname });
 	const passencrypt = encrypt(req.body.nickname, req.body.password)
 
-	if ( userFound && ( userFound.password === passencrypt ) ){
-		res.status(200);
-		res.send ({
-			success: true, 
-			type: 'validPass'
-		});
+	if ( userFound ){
+		if (  userFound.password === passencrypt ){
+			res.status(200);
+			res.send ({
+				success: true, 
+			});
+		} else {
+			res.status(400);
+			res.send ({
+				success: false, 
+				message: 'Error: la password ingresada no es válida.'
+			});
+		}
 	} else {
 		res.status(400);
 		res.send ({
 			success: false, 
-			type: 'validPass'
+			message: 'Error: el usuario ingresado no existe en el sistema.'
 		});
 	}
 };
 
 export const getNewerUsers: RequestHandler = async (req, res) => {
 	const initial_user = parseInt(req.params.init);
-	const last_user = parseInt(req.params.quantity) + initial_user - 1;
+	const quantity_user = parseInt(req.params.quantity);
 
-	const users = await User.find().sort({createdAt:-1}).skip(initial_user).limit(last_user) ;
-	const quantityUsers = await User.count();
+	const users = await User.find().sort({createdAt:-1}).skip(initial_user).limit(quantity_user) ;
+	const quantityUsers = await User.countDocuments();
 
-	//falta seleccionar
-	return res.json(users);
+	/*armar la estructura de retorno*/
 };
 
 function encrypt(user: string, pass: string) {
-	var crypto = require('crypto');
-	var hmac = crypto.createHmac('sha1', user).update(pass).digest('hex');
+	var hmac = createHmac('sha1', user).update(pass).digest('hex');
 	return hmac
  }
