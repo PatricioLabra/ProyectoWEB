@@ -4,24 +4,33 @@ import User from './user.model';
 
 export const addUser: RequestHandler = async (req, res) => {
 
-	/*validar el req.body*/
+	if ( req.body.nickname || req.body.password || req.body.email || req.body.rut ){
 
-	const userFound = await User.findOne({ nickname: req.body.nickname });
+		const userFound = await User.findOne({ nickname: req.body.nickname });
 
-	if ( userFound ) {
-		res.status(301);
+		if ( userFound ) {
+			res.status(301);
+			res.send ({
+				success: false, 
+				message: 'Error: el usuario ya existe en el sistema.'
+			});	
+
+		} else {
+			const user = new User(req.body);
+			user.password = encrypt(user.nickname, user.password);
+			await user.save()							
+			res.status(201);
+			res.send ({
+				success: true, 
+			});
+		}
+
+	} else {
+		res.status(400);
 		res.send ({
 			success: false, 
-			message: 'Error: el usuario ya existe en el sistema.'
-		});		
-	} else {
-		const user = new User(req.body);
-		user.password = encrypt(user.nickname, user.password);
-		await user.save()							
-		res.status(200);
-		res.send ({
-			success: true, 
-		});
+			message: 'Error: datos inválidos' + req.body
+		});	
 	}
 };
 
@@ -87,7 +96,7 @@ export const validPass: RequestHandler = async (req, res) => {
 			});
 		}
 	} else {
-		res.status(400);
+		res.status(404);
 		res.send ({
 			success: false, 
 			message: 'Error: el usuario ingresado no existe en el sistema.'
@@ -96,13 +105,30 @@ export const validPass: RequestHandler = async (req, res) => {
 };
 
 export const getNewerUsers: RequestHandler = async (req, res) => {
-	const initial_user = parseInt(req.params.init);
-	const quantity_user = parseInt(req.params.quantity);
+	
+	try {
+		const initial_user = parseInt(req.params.init);
+		const quantity_user = parseInt(req.params.quantity);
+	
+		const users = await User.find().sort({updatedAt:-1}).skip(initial_user).limit(quantity_user) ;
+		const quantityUsers = await User.countDocuments();
 
-	const users = await User.find().sort({createdAt:-1}).skip(initial_user).limit(quantity_user) ;
-	const quantityUsers = await User.countDocuments();
+		res.status(200);
+		res.send({
+			succes: true,
+			data: {
+				quantity_user: quantityUsers,
+				users
+			}
+		});
 
-	/*armar la estructura de retorno*/
+	} catch (error) {
+		res.status(500);
+		res.send({
+			succes: false,
+			messaje: 'Error inesperado: ' + error.message
+		});
+	}
 };
 
 function encrypt(user: string, pass: string) {
