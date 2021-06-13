@@ -9,6 +9,7 @@ import { TestingComponent } from './components/testing/testing.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FormLoginComponent } from './components/form-login/form-login.component';
+import { FieldErrorComponent } from './components/field-error/field-error.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FormLoginComponent } from './components/form-login/form-login.component
     TestingComponent,
     HeaderComponent,
     FooterComponent,
-    FormLoginComponent
+    FormLoginComponent,
+    FieldErrorComponent
   ],
   imports: [
     BrowserModule,
