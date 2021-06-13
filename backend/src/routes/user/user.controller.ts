@@ -90,13 +90,15 @@ export const getNewerUsers: RequestHandler = async (req, res) => {
 	const initial_user = parseInt(req.params.init);
 	const last_user = parseInt(req.params.quantity) + initial_user - 1;
 
-	const users = await User.find().sort({createdAt:-1}).limit(last_user) ;
+	const users = await User.find().sort({createdAt:-1}).skip(initial_user).limit(last_user) ;
+	const quantityUsers = await User.count();
+
 	//falta seleccionar
 	return res.json(users);
 };
 
 function encrypt(user: string, pass: string) {
-	var crypto = require('crypto')
-	var hmac = crypto.createHmac('sha1', user).update(pass).digest('hex')
+	var crypto = require('crypto');
+	var hmac = crypto.createHmac('sha1', user).update(pass).digest('hex');
 	return hmac
  }
