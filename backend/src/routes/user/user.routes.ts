@@ -9,11 +9,8 @@ router.post('/user', userCtrl.addUser);
 // Obtener la informacion de un usuario
 router.get('/user/:nick', userCtrl.getUser);
 
-// Validar que existe un usuario
-router.get('/user/valid_nick/:nick', userCtrl.validUser);
-
-// Validar que la contraseña (body) sea valida, body con nick + password
-router.post('/user/valid_pass', userCtrl.validPass);
+// Inicia sesion
+router.post('/user/signin', userCtrl.signIn);
 
 // Obtener una seccion de los usuarios mas nuevos
 router.get('/users/newer/:init/:quantity', userCtrl.getNewerUsers)

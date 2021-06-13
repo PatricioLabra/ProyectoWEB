@@ -1,6 +1,10 @@
 import { RequestHandler } from "express";
 import { createHmac } from "crypto"
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
 import User from './user.model';
+
+dotenv.config();
 
 export const addUser: RequestHandler = async (req, res) => {
 
@@ -16,12 +20,14 @@ export const addUser: RequestHandler = async (req, res) => {
 	if (userFound)
 		return res.status(301).send({ success: false, message: 'Error: el usuario ya existe en el sistema.' })
 
-	const user = new User(req.body);
-	user.password = encrypt(user.nickname, user.password);
-	await user.save()							
+	const newUser = new User(req.body);
+	newUser.password = encrypt(newUser.nickname, newUser.password);
+	await newUser.save()							
 
-	return res.status(201).send({ success: true });
-};
+	const token = jwt.sign({_id: newUser._id}, process.env.SECRET_KEY || 'secret_key');
+
+	return res.status(201).send({ success: true, token });
+}
 
 export const getUser: RequestHandler = async (req, res) => {
 	const userFound = await  User.findOne({ nickname: req.params.nick });
@@ -35,29 +41,24 @@ export const getUser: RequestHandler = async (req, res) => {
 		success: true, 
 		userInfo
 	});	
-};
+}
 
-export const validUser: RequestHandler = async (req, res) => {
-	const userFound = await User.findOne({ nickname: req.params.nick });
+export const signIn: RequestHandler = async (req, res) => {
+	console.log(req.body);
+	const { nickname, password } = req.body;
+	const user = await User.findOne({ nickname: nickname });
+	const passEncrypt = encrypt(nickname, password)
 
-	if (!userFound)
-		return res.status(404).send({ success: false, message: 'Error: El usuario ingresado no existe en el sistema.' });
-
-	return res.status(200).send({ success: true });
-};
-
-export const validPass: RequestHandler = async (req, res) => {
-	const userFound = await User.findOne({ nickname: req.body.nickname });
-	const passEncrypt = encrypt(req.body.nickname, req.body.password)
-
-	if (!userFound)
+	if (!user)
 		return res.status(404).send({ success: false, message: 'Error: el usuario ingresado no existe en el sistema.' });
 
-	if (userFound.password !== passEncrypt)
+	if (user.password !== passEncrypt)
 		return res.status(400).send({ success: false, message: 'Error: la password ingresada no es válida.' });
 
-	return res.status(200).send({ success: true });
-};
+	const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY || 'secret_key');
+
+	return res.status(200).send({ success: true, token });
+}
 
 export const getNewerUsers: RequestHandler = async (req, res) => {
 	
@@ -85,7 +86,7 @@ export const getNewerUsers: RequestHandler = async (req, res) => {
 			messaje: 'Error inesperado: ' + error.message
 		});
 	}
-};
+}
 
 function encrypt(user: string, pass: string) {
 	var hmac = createHmac('sha1', user).update(pass).digest('hex');
