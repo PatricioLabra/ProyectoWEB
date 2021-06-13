@@ -2,8 +2,16 @@
 	<span>Iniciar Sesion</span>
 
 	<input formControlName="nickname" type="text">
-	<input formControlName="password" type="password">
+	<app-field-error
+		[displayError]="isFieldInvalid('nickname')"
+		[errorMessage]="'nickname requerido'">
+	</app-field-error>
 
-	<span *ngIf="showError('nickname')">tiene que ingresar</span>
+	<input formControlName="password" type="password">
+	<app-field-error
+		[displayError]="isFieldInvalid('password')"
+		[errorMessage]="'password requerido'">
+	</app-field-error>
+
 	<button type="submit">Iniciar Sesion</button>
 </form>

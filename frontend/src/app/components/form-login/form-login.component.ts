@@ -9,6 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class FormLoginComponent {
 
   profileForm: FormGroup;
+  submitAttempt: boolean;
 
   constructor(private _fb: FormBuilder) {
     this.profileForm = this._fb.group(
@@ -17,20 +18,22 @@ export class FormLoginComponent {
         password: [null, Validators.required]
       }
     )
+
+    this.submitAttempt = false;
   }
 
-  public showError(controlName: string): boolean {
-    const control = this.profileForm.controls.nickname;
-    console.log(control);
-    return control.invalid && control.dirty;
-  }
-
-  public isFieldValid(field: string): boolean {
+  public isFieldInvalid(field: string) {
     const control = this.profileForm.get(field);
-    return (!control?.valid && control?.touched) || false;
+    if (!control) return false;
+
+    return (!control.valid && control.touched) || (control.untouched && this.submitAttempt);
   }
   
   public onSubmit(): void {
-    console.log(this.profileForm.get('nickname')?.valid);
+    this.submitAttempt = true;
+
+    if (this.profileForm.valid) {
+      console.log(this.profileForm.getRawValue());
+    }
   }
 }
