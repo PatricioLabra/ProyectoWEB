@@ -13,7 +13,6 @@ const adminSchema = new Schema({
   },
   permission_level: {
       type: Number,
-      trim: true, 
       required: true
   }
 }, {
