@@ -4,127 +4,83 @@ import User from './user.model';
 
 export const addUser: RequestHandler = async (req, res) => {
 
-	if ( req.body.nickname || req.body.password || req.body.email || req.body.rut ){
+	const { nickname, password, email, rut } = req.body;
 
-		const userFound = await User.findOne({ nickname: req.body.nickname });
+	// Se valida si algun atributo no es valido
+	if (!nickname || !password || !email || !rut)
+		return res.status(400).send({ success: false, message: 'Error: datos inválidos' + req.body });	
 
-		if ( userFound ) {
-			res.status(301);
-			res.send ({
-				success: false, 
-				message: 'Error: el usuario ya existe en el sistema.'
-			});	
+	const userFound = await User.findOne({ nickname: req.body.nickname });
 
-		} else {
-			const user = new User(req.body);
-			user.password = encrypt(user.nickname, user.password);
-			await user.save()							
-			res.status(201);
-			res.send ({
-				success: true, 
-			});
-		}
+	// Se valida si ya existe un usuario con el nickname ingresado
+	if (userFound)
+		return res.status(301).send({ success: false, message: 'Error: el usuario ya existe en el sistema.' })
 
-	} else {
-		res.status(400);
-		res.send ({
-			success: false, 
-			message: 'Error: datos inválidos' + req.body
-		});	
-	}
+	const user = new User(req.body);
+	user.password = encrypt(user.nickname, user.password);
+	await user.save()							
+
+	return res.status(201).send({ success: true });
 };
 
 export const getUser: RequestHandler = async (req, res) => {
 	const userFound = await  User.findOne({ nickname: req.params.nick });
 
-	if( userFound ){
-		res.status(200);
-		res.send ({
-			success: true, 
-			user_info: {
-				"nickname": userFound.nickname,
-				"names": userFound.names,
-				"last_name" : userFound.last_name,
-				"rut": userFound.rut,
-				"region": userFound.region,
-				"commune": userFound.commune,
-				"address": userFound.address,
-				"email": userFound.email
-			}
-		});	
-	}else{
-		res.status(404);
-		res.send ({
-			success: false, 
-			message: 'Error: El usuario ingresado no existe en el sistema.'
-		});	
-	}
+	if (!userFound)
+		return res.status(404).send({ success: false, message: 'Error: El usuario ingresado no existe en el sistema.' });
+
+	const userInfo = destructureUser(userFound);
+
+	return res.status(200).send({
+		success: true, 
+		userInfo
+	});	
 };
 
 export const validUser: RequestHandler = async (req, res) => {
-	const userFound = await  User.findOne({ nickname: req.params.nick });
+	const userFound = await User.findOne({ nickname: req.params.nick });
 
-	if ( userFound ) {
-		res.status(200);
-		res.send ({
-			success: true
-		});		
-	} else {
-		res.status(404);
-		res.send ({
-			success: false,
-			message: 'Error: El usuario ingresado no existe en el sistema.'
-		});
-	}
+	if (!userFound)
+		return res.status(404).send({ success: false, message: 'Error: El usuario ingresado no existe en el sistema.' });
+
+	return res.status(200).send({ success: true });
 };
 
 export const validPass: RequestHandler = async (req, res) => {
 	const userFound = await User.findOne({ nickname: req.body.nickname });
-	const passencrypt = encrypt(req.body.nickname, req.body.password)
+	const passEncrypt = encrypt(req.body.nickname, req.body.password)
 
-	if ( userFound ){
-		if (  userFound.password === passencrypt ){
-			res.status(200);
-			res.send ({
-				success: true, 
-			});
-		} else {
-			res.status(400);
-			res.send ({
-				success: false, 
-				message: 'Error: la password ingresada no es válida.'
-			});
-		}
-	} else {
-		res.status(404);
-		res.send ({
-			success: false, 
-			message: 'Error: el usuario ingresado no existe en el sistema.'
-		});
-	}
+	if (!userFound)
+		return res.status(404).send({ success: false, message: 'Error: el usuario ingresado no existe en el sistema.' });
+
+	if (userFound.password !== passEncrypt)
+		return res.status(400).send({ success: false, message: 'Error: la password ingresada no es válida.' });
+
+	return res.status(200).send({ success: true });
 };
 
 export const getNewerUsers: RequestHandler = async (req, res) => {
 	
 	try {
-		const initial_user = parseInt(req.params.init);
-		const quantity_user = parseInt(req.params.quantity);
+		const initialUser = parseInt(req.params.init);
+		const quantityUsers = parseInt(req.params.quantity);
 	
-		const users = await User.find().sort({updatedAt:-1}).skip(initial_user).limit(quantity_user) ;
-		const quantityUsers = await User.countDocuments();
+		const users = await User.find().sort({ updatedAt: -1 }).skip(initialUser).limit(quantityUsers);
+		const quantityUsersRegistered: number = await User.countDocuments();
 
-		res.status(200);
-		res.send({
+		// Se filtran los atributos de los usuarios, para no mostrar mas info de la necesaria
+		const dataFiltered = users.map((user: any) => destructureUser(user));
+
+		return res.status(200).send({
 			succes: true,
 			data: {
-				quantity_user: quantityUsers,
-				users
+				quantityUsersRegistered,
+				dataFiltered
 			}
 		});
 
 	} catch (error) {
-		res.status(500);
-		res.send({
+		return res.status(500).send({
 			succes: false,
 			messaje: 'Error inesperado: ' + error.message
 		});
@@ -134,4 +90,19 @@ export const getNewerUsers: RequestHandler = async (req, res) => {
 function encrypt(user: string, pass: string) {
 	var hmac = createHmac('sha1', user).update(pass).digest('hex');
 	return hmac
- }
+}
+
+function destructureUser(user: any) {
+	const { nickname, names, last_name, rut, region, commune, address, email } = user;
+
+	return {
+		nickname,
+		names,
+		last_name,
+		rut,
+		region,
+		commune,
+		address,
+		email
+	};
+}
