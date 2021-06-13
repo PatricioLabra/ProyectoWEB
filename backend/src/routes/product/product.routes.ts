@@ -1,16 +1,17 @@
 import { Router } from 'express';
 import * as productCtrl from './product.controller';
+import { verifyToken } from '../jwt';
 
 const router = Router();
 
 // Agregar un nuevo producto
-router.post('/product', productCtrl.addProduct);
+router.post('/product', verifyToken, productCtrl.addProduct);
+
+// Modificar un producto
+router.put('/product/update/:id', verifyToken, productCtrl.updateProduct);
 
 // Obtener la informacion de un producto
 router.get('/product/:id', productCtrl.getProduct);
-
-// Modificar un producto
-router.put('/product/update/:id', productCtrl.updateProduct);
 
 // Obtener una seccion de los productos mas nuevos
 router.get('/products/newer/:init/:quantity', productCtrl.getNewerProducts);
