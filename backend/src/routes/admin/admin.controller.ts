@@ -31,7 +31,7 @@ export const addAdmin: RequestHandler = async (req, res) => {
 			message: 'Error: datos inválidos'+ req.body
 		});
 	}
-};
+}
 
 export const getAdmin: RequestHandler = async (req, res) => {
 	const adminFound = await  Admin.findOne({ nickname: req.params.nick });
@@ -52,7 +52,7 @@ export const getAdmin: RequestHandler = async (req, res) => {
 			message: 'Error: El admin ingresado no existe en el sistema.'
 		});	
 	}
-};
+}
 
 export const validAdmin: RequestHandler = async (req, res) => {
 	const userFound = await  Admin.findOne({ nickname: req.params.nick });
@@ -69,7 +69,7 @@ export const validAdmin: RequestHandler = async (req, res) => {
 			message: 'Error: El admin ingresado no existe en el sistema.'
 		});
 	}
-};
+}
 
 export const validPass: RequestHandler = async (req, res) => {
 	const adminFound = await Admin.findOne({ nickname: req.body.nickname });
@@ -95,9 +95,9 @@ export const validPass: RequestHandler = async (req, res) => {
 			message: 'Error: el admin ingresado no existe en el sistema.'
 		});
 	}
-};
+}
 
 function encrypt(user: string, pass: string) {
 	var hmac = createHmac('sha1', user).update(pass).digest('hex');
 	return hmac
- }
+}
