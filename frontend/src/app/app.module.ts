@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './modules/app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from '@components/app-component/app.component';
 import { TestingComponent } from './components/testing/testing.component';
@@ -21,6 +22,7 @@ import { FormLoginComponent } from './components/form-login/form-login.component
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

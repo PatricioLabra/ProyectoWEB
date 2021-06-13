@@ -1,1 +1,9 @@
-<p>form-login works!</p>
+<form novalidate [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+	<span>Iniciar Sesion</span>
+
+	<input formControlName="nickname" type="text">
+	<input formControlName="password" type="password">
+
+	<span *ngIf="showError('nickname')">tiene que ingresar</span>
+	<button type="submit">Iniciar Sesion</button>
+</form>
