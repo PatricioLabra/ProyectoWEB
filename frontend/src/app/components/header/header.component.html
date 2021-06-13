@@ -1,7 +1,30 @@
 <div>Logo</div>
-<div>Categorias</div>
-<input type="text">
 <div>
-	<button>Iniciar Sesion</button>
-	<button>Registrarse</button>
+	Categorias
+	<ul>
+		<li *ngFor="let category of CategoryTypes">{{ category }}</li>
+	</ul>
 </div>
+<input type="text">
+
+<div *ngIf="isLogged; else noEstaLogueado">
+	<div>
+		{{ nickname }}
+	</div>
+	<div *ngIf="isAdmin; else carrito">
+		Panel admin
+	</div>
+
+	<button (click)="signout()">Cerrar Sesion</button>
+
+	<ng-template #carrito>
+		<div>
+			Carrito
+		</div>
+	</ng-template>
+</div>
+
+<ng-template #noEstaLogueado>
+	<button (click)="login()">Iniciar Sesion</button>
+	<button>Registrarse</button>
+</ng-template>

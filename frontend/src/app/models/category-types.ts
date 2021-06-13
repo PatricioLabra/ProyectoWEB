@@ -4,3 +4,10 @@ export enum Categorytypes {
 	MUSIC='music',
 	FOOD='food'
 }
+
+export const CategoryTypesList = [
+	'movies',
+	'clothes',
+	'music',
+	'food'
+];
