@@ -4,7 +4,7 @@ import User from './user.model';
 
 export const addUser: RequestHandler = async (req, res) => {
 
-	if ( !req.body.nickname || !req.body.password || !req.body.email || !req.body.rut ){
+	if ( req.body.nickname || req.body.password || req.body.email || req.body.rut ){
 
 		const userFound = await User.findOne({ nickname: req.body.nickname });
 
