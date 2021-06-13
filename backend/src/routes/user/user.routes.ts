@@ -12,7 +12,7 @@ router.get('/user/:nick', userCtrl.getUser);
 // Validar que existe un usuario
 router.get('/user/valid_nick/:nick', userCtrl.validUser);
 
-// Validar que la contraseña (body) sea valida
+// Validar que la contraseña (body) sea valida, body con nick + password
 router.post('/user/valid_pass', userCtrl.validPass);
 
 // Obtener una seccion de los usuarios mas nuevos
