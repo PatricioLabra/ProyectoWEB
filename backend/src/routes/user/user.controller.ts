@@ -1,10 +1,7 @@
 import { RequestHandler } from "express";
 import { createHmac } from "crypto"
-import dotenv from 'dotenv';
-import jwt from 'jsonwebtoken';
 import User from './user.model';
-
-dotenv.config();
+import { signToken } from "../jwt";
 
 /**
  * Funcion que maneja la peticion de agregar un nuevo usuario al sistema
@@ -30,7 +27,7 @@ export const signUp: RequestHandler = async (req, res) => {
 	newUser.password = encrypt(nickname, password);
 	await newUser.save()							
 
-	const token = jwt.sign({ _id: newUser._id }, process.env.SECRET_KEY || 'secret_key');
+	const token = signToken(newUser._id);
 
 	return res.status(201).send({ success: true, token });
 }
@@ -72,7 +69,7 @@ export const signIn: RequestHandler = async (req, res) => {
 	if (user.password !== passEncrypt)
 		return res.status(400).send({ success: false, message: 'Error: la password ingresada no es válida.' });
 
-	const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY || 'secret_key');
+	const token = signToken(user._id);
 
 	return res.status(200).send({ success: true, token });
 }
@@ -141,19 +138,4 @@ function destructureUser(user: any) {
 		address,
 		email
 	};
-}
-
-export const verifyToken: RequestHandler = (req, res, next) => {
-	if (!req.headers.authorization)
-		return res.status(400).send({ success: false, message: 'Headers dont have authorization param' });
-
-	const token = req.headers.authorization.split(' ')[1];
-
-	if (!token)
-		return res.status(400).send({ success: false, message: 'Bad syntax header authorization' });
-
-	const payload: any = jwt.verify(token, process.env.SECRET_KEY || 'secret_key');
-	req.body._id = payload._id;
-
-	next();
 }

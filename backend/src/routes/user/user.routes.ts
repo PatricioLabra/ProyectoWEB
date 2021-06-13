@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import * as userCtrl from './user.controller';
+import { verifyToken } from '../jwt';
 
 const router = Router();
 
@@ -13,6 +14,6 @@ router.get('/user/:nick', userCtrl.getUser);
 router.post('/user/signin', userCtrl.signIn);
 
 // Obtener una seccion de los usuarios mas nuevos
-router.get('/users/newer/:init/:quantity', userCtrl.verifyToken, userCtrl.getNewerUsers)
+router.get('/users/newer/:init/:quantity', verifyToken, userCtrl.getNewerUsers)
 
 export default router;
