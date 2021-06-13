@@ -13,7 +13,7 @@ const productSchema = new Schema({
     required: true
   },
   images_urls: {
-    type: String,
+    type: Array(),
     required: true
   },
   price:{
@@ -24,10 +24,19 @@ const productSchema = new Schema({
   description: String,
   weight: Number,
   dimensions: Dimension,
-  stock: Number,
+  stock: {
+    type : Number,
+    required: true
+  },
   calification: Number,
-  category: String,
-  subcategories: String,
+  category: {
+    type : String,
+    required: true
+  },
+  subcategories: {
+    type : Array(),
+    required: true
+  }
 }, {
   versionKey: false,
   timestamps: true
