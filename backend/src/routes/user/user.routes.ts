@@ -13,6 +13,6 @@ router.get('/user/:nick', userCtrl.getUser);
 router.post('/user/signin', userCtrl.signIn);
 
 // Obtener una seccion de los usuarios mas nuevos
-router.get('/users/newer/:init/:quantity', userCtrl.getNewerUsers)
+router.get('/users/newer/:init/:quantity', userCtrl.verifyToken, userCtrl.getNewerUsers)
 
 export default router;

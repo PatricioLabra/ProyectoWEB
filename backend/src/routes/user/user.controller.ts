@@ -20,17 +20,17 @@ export const signUp: RequestHandler = async (req, res) => {
 	if (!nickname || !password || !email || !rut)
 		return res.status(400).send({ success: false, message: 'Error: datos inválidos' + req.body });	
 
-	const userFound = await User.findOne({ nickname: req.body.nickname });
+	const userFound = await User.findOne({ nickname });
 
 	// Se valida si ya existe un usuario con el nickname ingresado
 	if (userFound)
 		return res.status(301).send({ success: false, message: 'Error: el usuario ya existe en el sistema.' })
 
 	const newUser = new User(req.body);
-	newUser.password = encrypt(newUser.nickname, newUser.password);
+	newUser.password = encrypt(nickname, password);
 	await newUser.save()							
 
-	const token = jwt.sign({_id: newUser._id}, process.env.SECRET_KEY || 'secret_key');
+	const token = jwt.sign({ _id: newUser._id }, process.env.SECRET_KEY || 'secret_key');
 
 	return res.status(201).send({ success: true, token });
 }
@@ -63,7 +63,7 @@ export const getUser: RequestHandler = async (req, res) => {
  */
 export const signIn: RequestHandler = async (req, res) => {
 	const { nickname, password } = req.body;
-	const user = await User.findOne({ nickname: nickname });
+	const user = await User.findOne({ nickname });
 	const passEncrypt = encrypt(nickname, password)
 
 	if (!user)
@@ -141,4 +141,19 @@ function destructureUser(user: any) {
 		address,
 		email
 	};
+}
+
+export const verifyToken: RequestHandler = (req, res, next) => {
+	if (!req.headers.authorization)
+		return res.status(400).send({ success: false, message: 'Headers dont have authorization param' });
+
+	const token = req.headers.authorization.split(' ')[1];
+
+	if (!token)
+		return res.status(400).send({ success: false, message: 'Bad syntax header authorization' });
+
+	const payload: any = jwt.verify(token, process.env.SECRET_KEY || 'secret_key');
+	req.body._id = payload._id;
+
+	next();
 }
