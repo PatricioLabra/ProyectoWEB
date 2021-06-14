@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ProfileInfo } from '@models/profile-info.model';
+import { UserInfo } from '@models/profile-info.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class UserInfoService {
 
   isLogged: boolean;
   isAdmin: boolean;
-  profileInfo: ProfileInfo;
+  profileInfo: UserInfo;
 
   constructor() {
     this.isLogged = false;
@@ -17,7 +17,7 @@ export class UserInfoService {
     this.profileInfo = { nickname: 'Visitant' };
   }
 
-  signInUser(profileInfo: ProfileInfo, isAdmin: boolean) {
+  signInUser(profileInfo: UserInfo, isAdmin: boolean) {
     this.isAdmin = isAdmin;
     this.isLogged = true;
     this.profileInfo = profileInfo;
