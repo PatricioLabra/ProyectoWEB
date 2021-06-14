@@ -24,9 +24,11 @@ export class UserInfoService {
     this.isAdmin = isAdmin;
     this.isLogged = true;
     this.token = token;
+    this.userInfo.nickname = nickname;
 
-    this.auth.getUserData(nickname, token).subscribe((data: UserInfo) => {
+    this.auth.getUserData(nickname, token).subscribe((data: any) => {
       console.log(data);
+      this.userInfo = data.userInfo;
     });
   }
 
