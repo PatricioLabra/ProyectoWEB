@@ -8,7 +8,7 @@ const router = Router();
 router.post('/user/signup', userCtrl.signUp);
 
 // Obtener la informacion de un usuario
-router.get('/user/:nick', userCtrl.getUser);
+router.get('/user/:nick', verifyToken, userCtrl.getUser);
 
 // Inicia sesion
 router.post('/user/signin', userCtrl.signIn);
