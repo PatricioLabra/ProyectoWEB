@@ -28,16 +28,31 @@ router.post('/image', async (req, res) => {
 	const imagesArray: UploadedFile[] = (Array.isArray(images)) ? images : [images];
 
 	try {
-		s3.endpoint = new AWS.Endpoint(process.env.AWS_ENDPOINT + '/Peliculas' || '')
+		const categoria = 'Prueba';
 
-		const uploadedImage = await s3.putObject({
-			ACL: 'public-read',
-			Bucket: process.env.AWS_BUCKET_NAME || '',
-			Body: imagesArray[0].data,
-			Key: imagesArray[0].name
-		}).promise();
+		const endpoint = `${process.env.AWS_ENDPOINT}/${categoria}`;
+		s3.endpoint = new AWS.Endpoint(endpoint);
 
-		console.log(uploadedImage);
+		console.log('partio');
+
+		for (let i = 0; i < imagesArray.length; ++i) {
+			const image: UploadedFile = imagesArray[i];
+
+			const uploadedImage = await s3.putObject({
+				ACL: 'public-read',
+				Bucket: process.env.AWS_BUCKET_NAME || '',
+				Body: image.data,
+				Key: image.name
+			}).promise();
+
+			const urlImage = `${process.env.AWS_BUCKET_NAME}.${endpoint}/${image.name}`;
+
+			console.log(urlImage);
+			console.log(uploadedImage);
+		}
+
+		console.log('termino');
+
 	} catch (error) {
 		console.log(error);
 		return res.status(400).send({ success: false, message: 'Error inesperado', error });
