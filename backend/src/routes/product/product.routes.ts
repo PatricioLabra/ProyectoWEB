@@ -5,10 +5,10 @@ import { verifyToken } from '../jwt';
 const router = Router();
 
 // Agregar un nuevo producto
-router.post('/product', verifyToken, productCtrl.addProduct);
+router.post('/product'/*, verifyToken*/, productCtrl.addProduct);
 
 // Modificar un producto
-router.put('/product/update/:id', verifyToken, productCtrl.updateProduct);
+router.put('/product/update/:id'/*, verifyToken*/, productCtrl.updateProduct);
 
 // Obtener la informacion de un producto
 router.get('/product/:id', productCtrl.getProduct);

@@ -7,11 +7,7 @@ const productSchema = new Schema({
     required: true
   },
 
-  trademark: {
-    type: String,
-    trim: true,
-    required: true
-  },
+  trademark: String,
 
   images_urls: {
     type: [String],
