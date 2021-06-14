@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
   }
 
   get nickname() {
-    return this.userInfo.profileInfo.nickname;
+    return this.userInfo.userInfo.nickname;
   }
 
   // Just for debug, remove later
