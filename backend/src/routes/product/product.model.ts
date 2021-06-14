@@ -1,5 +1,4 @@
 import { Schema, Model, model } from "mongoose";
-import Dimension from './dimension.model'
 
 const productSchema = new Schema({
 	name: {
@@ -7,34 +6,44 @@ const productSchema = new Schema({
     trim: true,
     required: true
   },
+
   trademark: {
     type: String,
     trim: true,
     required: true
   },
+
   images_urls: {
-    type: Array(),
+    type: [String],
     required: true
   },
+
   price:{
       type: Number,
       required: true
   },
+
   discount:Number,
+
   description: String,
+
   weight: Number,
-  dimensions: Dimension,
+  dimensions: Schema.Types.Mixed,
+
   stock: {
     type : Number,
     required: true
   },
+
   calification: Number,
+
   category: {
     type : String,
     required: true
   },
+
   subcategories: {
-    type : Array(),
+    type : [String],
     required: true
   }
 }, {
