@@ -38,6 +38,7 @@ export const getProduct: RequestHandler = async (req, res) => {
 
     const _id = req.params.id;
     
+    //se valida el _id ingresado 
     if ( !Types.ObjectId.isValid( _id ))
         return res.status(400).send({ success:false, message:'Error: el id ingresado no es válido.' });
 
