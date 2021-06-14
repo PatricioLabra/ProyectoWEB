@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { ProfileInfo } from '@models/profile-info.model';
+import { UserInfo } from '@models/user-info.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,22 +10,32 @@ export class UserInfoService {
 
   isLogged: boolean;
   isAdmin: boolean;
-  profileInfo: ProfileInfo;
+  userInfo: UserInfo;
+  token: string;
 
-  constructor() {
+  constructor(private auth: AuthService) {
     this.isLogged = false;
     this.isAdmin = false;
-    this.profileInfo = { nickname: 'Visitant' };
+    this.userInfo = { nickname: 'Visitant' };
+    this.token = '';
   }
 
-  signInUser(profileInfo: ProfileInfo, isAdmin: boolean) {
+  signInUser(nickname: string, token: string, isAdmin: boolean) {
     this.isAdmin = isAdmin;
     this.isLogged = true;
-    this.profileInfo = profileInfo;
+    this.token = token;
+    this.userInfo.nickname = nickname;
+
+    this.auth.getUserData(nickname, token).subscribe((data: any) => {
+      console.log(data);
+      this.userInfo = data.userInfo;
+    });
   }
 
   signOutUser() {
     this.isLogged = false;
-    this.profileInfo = { nickname: 'Visitant' };
+    this.isAdmin = false;
+    this.userInfo = { nickname: 'Visitant' };
+    this.token = '';
   }
 }
