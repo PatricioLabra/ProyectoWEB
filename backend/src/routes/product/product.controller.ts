@@ -44,6 +44,7 @@ export const getProduct: RequestHandler = async (req, res) => {
 
     const productFound = await Product.findById( _id );
 
+    //se valida la existencia del producto
     if (!productFound)
         return res.status(404).send({ success: false, message:'Error: el producto no existe en el sistema.' });
 
@@ -52,8 +53,31 @@ export const getProduct: RequestHandler = async (req, res) => {
         productFound
     });
 }
-
+/**
+ * Función que maneja la petición de actualizar un nuevo producto en el sistema
+ * @route Put '/product/update/:id'
+ * @param req Request de la peticion, se espera que tenga como parametro el id del producto y un json con el producto actualizado
+ * @param res Response, retornará true si todo sale bien
+ */
 export const updateProduct: RequestHandler = async (req, res) => {
+    
+    const _id = req.params.id;
+    const updatedProduct = req.body;
+
+    //se valida el _id ingresasado
+    if ( !Types.ObjectId.isValid( _id ))
+        return res.status(400).send({ success:false, message:'Error: el id ingresado no es válido.' });
+
+    const productFound = await Product.findById( _id );
+
+    //se valida la existencia del producto
+    if (!productFound)
+        return res.status(404).send({ success: false, message:'Error: el producto no existe en el sistema.' });
+
+    //se actualiza el producto en el sistema
+    await Product.findByIdAndUpdate(_id, updatedProduct);
+    
+    return res.status(200).send({ success: true });
 }
 
 /**

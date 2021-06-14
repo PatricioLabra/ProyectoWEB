@@ -8,7 +8,7 @@ const router = Router();
 router.post('/product/add', verifyToken, productCtrl.addProduct);
 
 // Modificar un producto
-router.put('/product/update/:id'/*, verifyToken*/, productCtrl.updateProduct);
+router.put('/product/update/:id', verifyToken, productCtrl.updateProduct);
 
 // Obtener la informacion de un producto
 router.get('/product/:id', productCtrl.getProduct);
