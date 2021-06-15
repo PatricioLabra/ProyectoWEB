@@ -5,10 +5,13 @@ import { verifyToken } from '../jwt';
 const router = Router();
 
 // Agregar un nuevo producto
-router.post('/product/add', verifyToken, productCtrl.addProduct);
+router.post('/product', verifyToken, productCtrl.addProduct);
+
+// Agregar las rutas de las imagenes a un producto
+router.put('/product/:id/images', verifyToken, productCtrl.setImagesProduct);
 
 // Modificar un producto
-router.put('/product/update/:id', verifyToken, productCtrl.updateProduct);
+router.put('/product/:id', verifyToken, productCtrl.updateProduct);
 
 // Obtener la informacion de un producto
 router.get('/product/:id', productCtrl.getProduct);
@@ -17,7 +20,7 @@ router.get('/product/:id', productCtrl.getProduct);
 router.get('/products/newer/:init/:quantity', productCtrl.getNewerProducts);
 
 // Obtener lista de productos filtrados 
-router.get('/products/filtered', productCtrl.getFilteredProducts);
+router.post('/products/filtered', productCtrl.getFilteredProducts);
 
 //Obtener lista de productos buscados
 router.get('/products/search/:text', productCtrl.getSearchProducts);
