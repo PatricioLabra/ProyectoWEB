@@ -3,17 +3,19 @@ import Product from './product.model';
 import { Types } from "mongoose"
 
 /**
- * Función que maneja la petición de agregar un nuevo producto al sistema
- * @route Post /product/add
+ * Función que maneja la petición de agregar un nuevo producto al sistema, NO SUBE LAS FOTOS
+ * @route Post /product
  * @param req Request de la petición, se espera que tenga la información del nuevo producto
- * @param res Response, retorna un true si todo sale bien
+ * @param res Response, retorna un true y el id del nuevo producto si todo sale bien
  */
 export const addProduct: RequestHandler = async (req, res) => {
-    
-    const { name, images_urls, price, stock, category, subcategories } = req.body;
+    const {
+        name, trademark, price, discount, description, weight, dimensions,
+        stock, category, subcategories    
+    } = req.body;
 
     //se valida si alguno de los atributos required no sea válidos
-    if ( !name || !images_urls || !price || !stock || !category || !subcategories)
+    if ( !name || !price || !stock || !category || !subcategories)
         return res.status(400).send({ success: false, message: "Error: datos inválidos" + req.body });
     
      const productFound = await Product.findOne({ name });   
@@ -22,10 +24,40 @@ export const addProduct: RequestHandler = async (req, res) => {
     if (productFound)
         return res.status(301).send({ success: false, message:'Error: el producto ya existe en el sistema' });
 
-    const newProduct = new Product( req.body );
-    await newProduct.save();
+    const newProduct = {
+        name, trademark, price, discount, description, weight, dimensions,
+        stock, category, subcategories, calification: 0
+    };
 
-    return res.status(201).send({ success:true });
+    const productSaved = new Product(newProduct);
+    await productSaved.save();
+
+    return res.status(201).send({ success: true, _id: productSaved._id });
+}
+
+/**
+ * Establece las direcciones url de las imagenes de un producto en particular
+ * @route Post /product/images
+ * @param req Request, se espera que tenga el id y el array de urls de las imagenes a actualizar
+ * @param res Response, returna true si todo sale bien
+ */
+export const setImagesProduct: RequestHandler = async (req, res) => {
+    const _id = req.body.id;
+    const imagesUrls = req.body.imagesUrls;
+    
+    //se valida el _id ingresado 
+    if ( !Types.ObjectId.isValid(_id))
+        return res.status(400).send({ success:false, message:'Error: el id ingresado no es válido.' });
+
+    const productFound = await Product.findById(_id);
+
+    //se valida la existencia del producto
+    if (!productFound)
+        return res.status(404).send({ success: false, message:'Error: el producto no existe en el sistema.' });
+
+    await Product.findByIdAndUpdate(_id, { $set: { images_urls: imagesUrls } });
+
+    return res.send({ success: true, message: 'Imagenes actualizadas correctamente' });
 }
 
 /**
@@ -55,7 +87,7 @@ export const getProduct: RequestHandler = async (req, res) => {
 }
 /**
  * Función que maneja la petición de actualizar un nuevo producto en el sistema
- * @route Put '/product/update/:id'
+ * @route Put '/product//:id'
  * @param req Request de la peticion, se espera que tenga como parametro el id del producto y un json con el producto actualizado
  * @param res Response, retornará true si todo sale bien
  */
@@ -66,7 +98,7 @@ export const updateProduct: RequestHandler = async (req, res) => {
 
     //se valida el _id ingresasado
     if ( !Types.ObjectId.isValid( _id ))
-        return res.status(400).send({ success:false, message:'Error: el id ingresado no es válido.' });
+        return res.status(400).send({ success: false, message:'Error: el id ingresado no es válido.' });
 
     const productFound = await Product.findById( _id );
 
@@ -117,4 +149,3 @@ export const getFilteredProducts: RequestHandler = async (req, res) => {
 export const getSearchProducts: RequestHandler = async (req, res) => {
 
 }
-

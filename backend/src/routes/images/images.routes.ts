@@ -30,9 +30,9 @@ router.post('/image', async (req, res) => {
 	const imagesUrls: Array<string> = [];
 
 	try {
-		const categoria = 'Prueba';
+		const category = req.body.category;
 
-		const endpoint = createEndpoint(categoria);
+		const endpoint = createEndpoint(category);
 		s3.endpoint = new AWS.Endpoint(endpoint);
 
 		for (let i = 0; i < imagesArray.length; ++i) {
