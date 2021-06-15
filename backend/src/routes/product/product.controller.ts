@@ -162,6 +162,7 @@ export const getSearchProducts: RequestHandler = async (req, res) => {
  */
 function destructureProduct(productFound: any) {
     const productFiltered = {
+        _id: productFound._id,
         name: productFound.name,
         trademark: productFound.trademark,
         images_urls: productFound.images_urls,
