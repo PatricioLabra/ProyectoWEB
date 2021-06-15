@@ -7,16 +7,12 @@ dotenv.config();
 
 const s3 = new AWS.S3();
 
-export const getUrlImage: RequestHandler = (req, res) => {
-	const category: string = req.params.category;
-	const name: string = req.params.name;
-
-	const endpoint: string = createEndpoint(category);
-	const urlImage: string = makeURLImage(endpoint, name);
-
-	return res.send({ success: true, urlImage });
-}
-
+/**
+ * Sube todas las imagenes del request hacia digital y retorna la urls de las imagenes subidas
+ * @route Post /image
+ * @param req Request, se espera que traiga las imagenes
+ * @param res Response, retornara la cantidad de imagenes subidas y sus urls si todo sale bien
+ */
 export const uploadImage: RequestHandler = async (req, res) => {
 	if (!req.files)
 		return res.status(401).send({ succes: false, message: 'No images' });
@@ -57,6 +53,12 @@ export const uploadImage: RequestHandler = async (req, res) => {
 	return res.status(200).send({ success: true, imagesSaved: imagesUrls.length, imagesUrls });
 }
 
+/**
+ * Elimina una imagen de digital
+ * @route Delete /image/:id
+ * @param req Request
+ * @param res Response retornara true si todo sale bien
+ */
 export const deleteImage: RequestHandler = (req, res) => {
 	return res.send('Todo ok');
 }
