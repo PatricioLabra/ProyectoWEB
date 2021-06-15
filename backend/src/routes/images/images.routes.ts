@@ -8,8 +8,14 @@ dotenv.config();
 const s3 = new AWS.S3();
 const router = Router();
 
-router.get('/image/:id', (req, res) => {
-	return res.send('Todo ok');
+router.get('/image/:category/:name', (req, res) => {
+	const category: string = req.params.category;
+	const name: string = req.params.name;
+
+	const endpoint: string = createEndpoint(category);
+	const urlImage: string = makeURLImage(endpoint, name);
+
+	return res.send({ success: true, urlImage });
 });
 
 router.post('/image', async (req, res) => {
