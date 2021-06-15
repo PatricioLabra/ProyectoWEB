@@ -10,6 +10,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FormLoginComponent } from './components/form-login/form-login.component';
 import { FieldErrorComponent } from './components/field-error/field-error.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FieldErrorComponent } from './components/field-error/field-error.compon
     HeaderComponent,
     FooterComponent,
     FormLoginComponent,
-    FieldErrorComponent
+    FieldErrorComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
