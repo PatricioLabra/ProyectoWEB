@@ -7,6 +7,6 @@ const router = Router();
 router.post('/image', imagesCtrl.uploadImage);
 
 // Eliminar una imagen
-router.delete('/image/:id', imagesCtrl.deleteImage);
+router.delete('/image/:category/:imageName', imagesCtrl.deleteImage);
 
 export default router;

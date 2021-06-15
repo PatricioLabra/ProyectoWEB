@@ -55,8 +55,8 @@ export const uploadImage: RequestHandler = async (req, res) => {
 
 /**
  * Elimina una imagen de digital
- * @route Delete /image/:id
- * @param req Request
+ * @route Delete /image/:category/:imageName
+ * @param req Request, se espera que tenga la categoria y el nombre de la imagen
  * @param res Response retornara true si todo sale bien
  */
 export const deleteImage: RequestHandler = (req, res) => {
