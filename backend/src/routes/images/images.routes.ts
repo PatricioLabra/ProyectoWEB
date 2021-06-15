@@ -9,7 +9,7 @@ const s3 = new AWS.S3();
 const router = Router();
 
 router.get('/image/:id', (req, res) => {
-
+	return res.send('Todo ok');
 });
 
 router.post('/image', async (req, res) => {
@@ -58,7 +58,7 @@ router.put('/image/:id', (req, res) => {
 });
 
 router.delete('/image/:id', (req, res) => {
-
+	return res.send('Todo ok');
 });
 
 /**
