@@ -6,14 +6,9 @@ import AWS from 'aws-sdk';
 dotenv.config();
 
 const s3 = new AWS.S3();
-
 const router = Router();
 
 router.get('/image/:id', (req, res) => {
-
-});
-
-router.get('/images', (req, res) => {
 
 });
 
