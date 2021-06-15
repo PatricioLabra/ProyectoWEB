@@ -30,7 +30,7 @@ router.post('/image', async (req, res) => {
 	try {
 		const categoria = 'Prueba';
 
-		const endpoint = `${process.env.AWS_ENDPOINT}/${categoria}`;
+		const endpoint = createEndpoint(categoria);
 		s3.endpoint = new AWS.Endpoint(endpoint);
 
 		console.log('partio');
@@ -45,7 +45,7 @@ router.post('/image', async (req, res) => {
 				Key: image.name
 			}).promise();
 
-			const urlImage = `${process.env.AWS_BUCKET_NAME}.${endpoint}/${image.name}`;
+			const urlImage = makeURLImage(endpoint, image.name);
 
 			console.log(urlImage);
 			console.log(uploadedImage);
@@ -62,11 +62,33 @@ router.post('/image', async (req, res) => {
 });
 
 router.put('/image/:id', (req, res) => {
-
+	
+	return res.send(req.files);
 });
 
 router.delete('/image/:id', (req, res) => {
 
 });
+
+/**
+ * Crea el endpoint en donde se guardara una imagen de un producto
+ * @param category Categoria del producto, se usara para guardar la imagen en la carpeta de su categoria
+ * @returns Endpoint en donde se guardara como cadena
+ */
+function createEndpoint(category: string): string {
+	const endpoint = `${process.env.AWS_ENDPOINT}/${category}`;
+	return endpoint;
+}
+
+/**
+ * Crea y retorna la url de una imagen de un producto
+ * @param endpoint Endpoint en donde se guardo la imagen del producto
+ * @param imageName Nombre de la imagen guardada
+ * @returns La url de la imagen recien guardada como cadena
+ */
+function makeURLImage(endpoint: string, imageName: string): string {
+	const urlImage = `https://${process.env.AWS_BUCKET_NAME}.${endpoint}/${imageName}`;
+	return urlImage;
+}
 
 export default router;
