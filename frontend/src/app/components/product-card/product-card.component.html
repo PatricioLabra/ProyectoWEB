@@ -1,1 +1,14 @@
-<p>product-card works!</p>
+<div style="display: flex; flex-direction: column; width: 150px;">
+	{{ product.name }}
+
+	<img [src]="product.images_urls[0]" alt="No Image" style="width: 120px; height: 120px;">
+
+	{{ product.price }}
+
+	<span *ngIf="product.discount">{{ product.discount }}</span>
+	
+	<span *ngIf="product.discount">{{ product.price * (1 - product.discount) }}</span>
+	{{ product.calification }}
+
+	<button>Agregar</button>
+</div>

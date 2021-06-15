@@ -166,7 +166,7 @@ function destructureProduct(productFound: any) {
         name: productFound.name,
         trademark: productFound.trademark,
         images_urls: productFound.images_urls,
-        price: productFound.images_urls,
+        price: productFound.price,
         discount: productFound.discount,
         description: productFound.description,
         weight: productFound.weight,

@@ -5,9 +5,9 @@ export interface Product {
 	images_urls: Array<string>,
 	price: number,
 	discount: number,
-	description: number,
+	description: string,
 	weight: number,
-	dimensions: {
+	dimensions?: {
 			height_cm: number,
 			width_cm: number,
 			length_cm: number
