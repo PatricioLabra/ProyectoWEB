@@ -27,18 +27,18 @@ router.post('/image', async (req, res) => {
 	// Se parsea para trabajar con un array, independiente de si era 1 o mas de una
 	const imagesArray: UploadedFile[] = (Array.isArray(images)) ? images : [images];
 
+	const imagesUrls: Array<string> = [];
+
 	try {
 		const categoria = 'Prueba';
 
 		const endpoint = createEndpoint(categoria);
 		s3.endpoint = new AWS.Endpoint(endpoint);
 
-		console.log('partio');
-
 		for (let i = 0; i < imagesArray.length; ++i) {
 			const image: UploadedFile = imagesArray[i];
 
-			const uploadedImage = await s3.putObject({
+			await s3.putObject({
 				ACL: 'public-read',
 				Bucket: process.env.AWS_BUCKET_NAME || '',
 				Body: image.data,
@@ -46,19 +46,15 @@ router.post('/image', async (req, res) => {
 			}).promise();
 
 			const urlImage = makeURLImage(endpoint, image.name);
-
-			console.log(urlImage);
-			console.log(uploadedImage);
+			imagesUrls.push(urlImage);
 		}
-
-		console.log('termino');
 
 	} catch (error) {
 		console.log(error);
 		return res.status(400).send({ success: false, message: 'Error inesperado', error });
 	}
 	
-	return res.status(200).send({ success: true });
+	return res.status(200).send({ success: true, imagesSaved: imagesUrls.length, imagesUrls });
 });
 
 router.put('/image/:id', (req, res) => {
