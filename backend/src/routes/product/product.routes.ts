@@ -8,7 +8,7 @@ const router = Router();
 router.post('/product', verifyToken, productCtrl.addProduct);
 
 // Agregar las rutas de las imagenes a un producto
-router.post('/product/images', verifyToken, productCtrl.setImagesProduct);
+router.put('/product/:id/images', verifyToken, productCtrl.setImagesProduct);
 
 // Modificar un producto
 router.put('/product/:id', verifyToken, productCtrl.updateProduct);

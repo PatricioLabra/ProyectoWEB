@@ -37,12 +37,12 @@ export const addProduct: RequestHandler = async (req, res) => {
 
 /**
  * Establece las direcciones url de las imagenes de un producto en particular
- * @route Post /product/images
+ * @route Post /product/:id/images
  * @param req Request, se espera que tenga el id y el array de urls de las imagenes a actualizar
  * @param res Response, returna true si todo sale bien
  */
 export const setImagesProduct: RequestHandler = async (req, res) => {
-    const _id = req.body.id;
+    const _id = req.params.id;
     const imagesUrls = req.body.imagesUrls;
     
     //se valida el _id ingresado 
