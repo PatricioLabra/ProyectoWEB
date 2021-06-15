@@ -59,8 +59,25 @@ export const uploadImage: RequestHandler = async (req, res) => {
  * @param req Request, se espera que tenga la categoria y el nombre de la imagen
  * @param res Response retornara true si todo sale bien
  */
-export const deleteImage: RequestHandler = (req, res) => {
-	return res.send('Todo ok');
+export const deleteImage: RequestHandler = async (req, res) => {
+	const category: string = req.params.category;
+	const imageName: string = req.params.imageName;
+
+	const endpoint = createEndpoint(category);
+	s3.endpoint = new AWS.Endpoint(endpoint);
+
+	try {
+		await s3.deleteObject({
+			Bucket: process.env.AWS_BUCKET_NAME || '',
+			Key: imageName
+		}).promise();
+
+	} catch (error) {
+		console.log(error);
+		return res.status(500).send({ success: false, error });
+	}
+
+	return res.send({ success: true });
 }
 
 /**
