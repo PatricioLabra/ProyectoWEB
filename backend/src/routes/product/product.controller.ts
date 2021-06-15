@@ -80,9 +80,12 @@ export const getProduct: RequestHandler = async (req, res) => {
     if (!productFound)
         return res.status(404).send({ success: false, message:'Error: el producto no existe en el sistema.' });
 
+    // Se seleccionan los atributos que se van a mandar al front
+    const productFiltered = destructureProduct(productFound);
+
     return res.status(200).send({
         success: true, 
-        productFound
+        product: productFiltered
     });
 }
 /**
@@ -128,10 +131,12 @@ export const getNewerProducts: RequestHandler = async (req, res) => {
         const products = await Product.find().sort({ updated: -1}).skip(initialProduct).limit(quantityProducts);
         const quantityProductsRegistered: number = await Product.countDocuments();
 
+        const productsFiltered = products.map((product: any) => destructureProduct(product));
+
         return res.status(200).send({
             success: true,
             quantityProductsRegistered,
-            products
+            products: productsFiltered
         });
         
     } catch (error) {
@@ -148,4 +153,28 @@ export const getFilteredProducts: RequestHandler = async (req, res) => {
 
 export const getSearchProducts: RequestHandler = async (req, res) => {
 
+}
+
+/**
+ * Extrae los atributos publicos del producto extraido de la base de datos
+ * @param productFound Producto extraido de la base de datos
+ * @returns Object con los atributos publicos del producto ingresado
+ */
+function destructureProduct(productFound: any) {
+    const productFiltered = {
+        name: productFound.name,
+        trademark: productFound.trademark,
+        images_urls: productFound.images_urls,
+        price: productFound.images_urls,
+        discount: productFound.discount,
+        description: productFound.description,
+        weight: productFound.weight,
+        dimensions: productFound.dimensions,
+        stock: productFound.stock,
+        calification: productFound.calification,
+        category: productFound.category,
+        subcategories: productFound.subcategories,
+    };
+
+    return productFiltered;
 }
