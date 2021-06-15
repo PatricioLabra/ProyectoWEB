@@ -5,7 +5,7 @@ import { signToken } from "../jwt";
 
 /**
  * Función que maneja la petición de agregar un nuevo administrador al sistema
- * @rute Post /admin/signup
+ * @route Post /admin/signup
  * @param req Request de la peticion, se espera que tenga la informacion del nuevo administrador
  * @param res Response, retornara el token si todo sale bien
  */
@@ -34,7 +34,7 @@ export const signUp: RequestHandler = async (req, res) => {
 
 /**
  * Funcion que maneja la peticion de los datos de un administrador en particular
- * @rute get /admin/:nick
+ * @route get /admin/:nick
  * @param req Request de la petición, se espera que tenga como parametro el nickname del usuario
  * @param res Response, retornará la infomación del administrador si todo sale bien
  */
@@ -54,7 +54,7 @@ export const getAdmin: RequestHandler = async (req, res) => {
 
 /**
  * Funcion que manejará el inicio de sesión de un administrador
- * @rute post /admin/signin
+ * @route post /admin/signin
  * @param req Request de la peticion, se espera que tenga el nick y la pass del admin que va a loguear
  * @param res Response, retornara el token si todo sale bien
  */
