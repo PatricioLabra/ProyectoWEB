@@ -101,14 +101,22 @@ export class CartHeaderComponent {
 
   incrementProduct(index: number) {
     if (this.products[index].hasDisponibility()) {
+      const unitPrice = this.products[index].getUnitPriceWithDiscount();
+
+      this.products[index].finalPrice += unitPrice;
+      this.totalPrice += unitPrice;
+
       this.products[index].quantity++;
-      this.products[index].finalPrice = this.products[index].getFinalPrice();
     }
   }
 
   decrementProduct(index: number) {
+    const unitPrice = this.products[index].getUnitPriceWithDiscount();
+
+    this.products[index].finalPrice -= unitPrice;
+    this.totalPrice -= unitPrice;
+
     this.products[index].quantity--;
-      this.products[index].finalPrice = this.products[index].getFinalPrice();
 
     if (this.products[index].quantity <= 0) {
       this.products.splice(index, 1);

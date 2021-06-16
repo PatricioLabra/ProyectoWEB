@@ -25,7 +25,11 @@ export class ProductCart {
     return this.stock > this.quantity;
   }
 
+  getUnitPriceWithDiscount(): number {
+    return (this.price * (1 - this.discount));
+  }
+
   getFinalPrice(): number {
-    return (this.price * (1 - this.discount)) * this.quantity;
+    return this.getUnitPriceWithDiscount() * this.quantity;
   }
 }
