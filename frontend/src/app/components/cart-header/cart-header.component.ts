@@ -114,4 +114,9 @@ export class CartHeaderComponent {
       this.products.splice(index, 1);
     }
   }
+
+  vaciar() {
+    this.products = [];
+    this.totalPrice = 0;
+  }
 }
