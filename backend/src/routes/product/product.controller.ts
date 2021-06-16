@@ -176,26 +176,26 @@ export const getFilteredProducts: RequestHandler = async (req, res) => {
 }
 
 /**
-* Funcion que maneja la peticion productos buscados con un texto ingresado, obtiene un params = text 
+* Funcion que maneja la peticion productos buscados con un texto ingresado, obtiene un params = keyword
  * con la palabra clave a buscar en el sistema y que coincida con los productos, tanto en name, trademark, category o subcategories.
- * @route Get '/products/search/:text'
- * @param req Request de la peticion, se espera que tenga el index_text a buscar
+ * @route Get '/products/:keyword'
+ * @param req Request de la peticion, se espera que tenga el keyword a buscar
  * @param res Response, retorna los productos que coincidan con la palabra clave ingresada
  */
 export const getSearchProducts: RequestHandler = async (req, res) => {
 
-    const text_index = req.params.text_index;
+    const keyword = req.params.keyword;
 
-    if (!text_index)
-        return res.status(400).send({success: false, message: "Error: texto ingresado inválido."+ text_index});
+    if (!keyword)
+        return res.status(400).send({success: false, message: "Error: texto ingresado inválido."+ keyword});
 
-    if (text_index == ""){
+    if (keyword == ""){
         const products = await Product.find().sort({ updated: -1});
 
         return res.status(200).send({success: true, products}); 
     }
 
-    const products = await Product.find({$text:{$search: text_index }}).sort({ updated: -1});
+    const products = await Product.find({$text:{$search: keyword }}).sort({ updated: -1});
 
     return res.status(200).send({success: true, products}); 
 }
