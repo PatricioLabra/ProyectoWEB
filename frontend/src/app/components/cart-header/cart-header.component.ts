@@ -9,6 +9,7 @@ import { Product } from '@models/product.model';
 })
 export class CartHeaderComponent {
 
+  // Just for debub, remove later
   products_: Array<Product> = [
     {
         "_id": "60c6bf9282cdd039186ae8f3",
@@ -91,6 +92,7 @@ export class CartHeaderComponent {
   ];
 
   products: Array<ProductCart> = this.products_.map((product: Product) => new ProductCart(product, 2));
+  //products: Array<ProductCart> = [];
 
   constructor() { }
 
@@ -104,7 +106,7 @@ export class CartHeaderComponent {
     this.products[index].quantity--;
 
     if (this.products[index].quantity <= 0) {
-      this.products = this.products.filter((product: ProductCart, indexProduct: number) => indexProduct != index);
+      this.products.splice(index, 1);
     }
   }
 }
