@@ -99,6 +99,11 @@ export class CartHeaderComponent {
     this.totalPrice = this.products.reduce((total, producto) => total + producto.finalPrice, 0);
   }
 
+  /**
+   * Si tiene disponibilidad, incrementa en 1 la cantidad, actualizando el precio final
+   * de ese producto y el precio total, sino no hace nada.
+   * @param index Indice del producto que se va a incrementar
+   */
   incrementProduct(index: number) {
     if (this.products[index].hasDisponibility()) {
       const unitPrice = this.products[index].getUnitPriceWithDiscount();
@@ -110,6 +115,11 @@ export class CartHeaderComponent {
     }
   }
 
+  /**
+   * Decrementa en 1 la cantidad de un producto, actualizando el precio final de ese producto
+   * y el precio total. Si la cantidad llega a 0, se elimina del carrito.
+   * @param index Indice del producto que se va a decrementar
+   */
   decrementProduct(index: number) {
     const unitPrice = this.products[index].getUnitPriceWithDiscount();
 
@@ -123,6 +133,9 @@ export class CartHeaderComponent {
     }
   }
 
+  /**
+   * Elimina todos los elementos del carrito, y establece el precio final en 0
+   */
   vaciar() {
     this.products = [];
     this.totalPrice = 0;
