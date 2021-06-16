@@ -21,14 +21,23 @@ export class ProductCart {
     this.finalPrice = this.getFinalPrice();
   }
 
+  /**
+   * @returns True si tiene disponibilidad el producto, false en caso contrario
+   */
   hasDisponibility(): boolean {
     return this.stock > this.quantity;
   }
 
+  /**
+   * @returns Precio de un producto, aplicando el descuento
+   */
   getUnitPriceWithDiscount(): number {
     return (this.price * (1 - this.discount));
   }
 
+  /**
+   * @returns Precio total del producto (precio con descuento * cantidad)
+   */
   getFinalPrice(): number {
     return this.getUnitPriceWithDiscount() * this.quantity;
   }
