@@ -108,10 +108,8 @@ export class CartHeaderComponent {
     if (this.products[index].hasDisponibility()) {
       const unitPrice = this.products[index].getUnitPriceWithDiscount();
 
-      this.products[index].finalPrice += unitPrice;
+      this.products[index].increaseQuantity(1);
       this.totalPrice += unitPrice;
-
-      this.products[index].quantity++;
     }
   }
 
@@ -123,10 +121,9 @@ export class CartHeaderComponent {
   decrementProduct(index: number) {
     const unitPrice = this.products[index].getUnitPriceWithDiscount();
 
-    this.products[index].finalPrice -= unitPrice;
+    this.products[index].decreaseQuantity(1);
     this.totalPrice -= unitPrice;
 
-    this.products[index].quantity--;
 
     if (this.products[index].quantity <= 0) {
       this.products.splice(index, 1);
