@@ -23,6 +23,6 @@ router.get('/products/newer/:init/:quantity', productCtrl.getNewerProducts);
 router.post('/products/filtered', productCtrl.getFilteredProducts);
 
 //Obtener lista de productos buscados
-router.get('/products/search/:text', productCtrl.getSearchProducts);
+router.get('/products/:text_index', productCtrl.getSearchProducts);
 
 export default router;

@@ -147,12 +147,57 @@ export const getNewerProducts: RequestHandler = async (req, res) => {
     }
 }
 
+/**
+* Funcion que maneja la peticion productos filtrados, obtiene un JSON con los filtros asignados:
+ * tex_index, category, subcategories, lower_limit  y upper_limit.  
+ * @route Get '/products/filtered'
+ * @param req Request de la peticion, se espera que tenga el formulario filtro
+ * @param res Response, retorna los productos filtrados
+ */
 export const getFilteredProducts: RequestHandler = async (req, res) => {
 
+    const {text_index, category, subcategories, lower_limit, upper_limit} = req.body;
+
+    //si limitInf y limitSup < 0 se manda error
+    //si el limInf > limiSup se manda error
+
+    const filter = {
+        $text:{$search: text_index},
+        "category": category,
+        "subcategories":  {"$all":subcategories},
+        "price":{$gt: lower_limit-1 , $lt: upper_limit+1}
+    };
+
+
+    const products = await Product.find(filter).sort({ updated: -1});
+
+    return res.json(products);
+    
 }
 
+/**
+* Funcion que maneja la peticion productos buscados con un texto ingresado, obtiene un params = text 
+ * con la palabra clave a buscar en el sistema y que coincida con los productos, tanto en name, trademark, category o subcategories.
+ * @route Get '/products/search/:text'
+ * @param req Request de la peticion, se espera que tenga el index_text a buscar
+ * @param res Response, retorna los productos que coincidan con la palabra clave ingresada
+ */
 export const getSearchProducts: RequestHandler = async (req, res) => {
 
+    const text_index = req.params.text_index;
+
+    if (!text_index)
+        return res.status(400).send({success: false, message: "Error: texto ingresado inválido."+ text_index});
+
+    if (text_index == ""){
+        const products = await Product.find().sort({ updated: -1});
+
+        return res.status(200).send({success: true, products}); 
+    }
+
+    const products = await Product.find({$text:{$search: text_index }}).sort({ updated: -1});
+
+    return res.status(200).send({success: true, products}); 
 }
 
 /**
