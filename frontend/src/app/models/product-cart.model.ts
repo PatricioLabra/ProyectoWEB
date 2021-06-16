@@ -22,6 +22,24 @@ export class ProductCart {
   }
 
   /**
+   * Incrementa la cantidad en 'quantityToIncrement' y actualiza el precio final
+   * @param quantityToIncrement Cantidad a incrementar
+   */
+  increaseQuantity(quantityToIncrement: number): void {
+    this.quantity += quantityToIncrement;
+    this.finalPrice += this.getUnitPriceWithDiscount() * quantityToIncrement;
+  }
+
+  /**
+   * Decrementa la cantidad en 'quantityToDecrement' y actualiza el precio final
+   * @param quantityToDecrement Cantidad a decrementar
+   */
+  decreaseQuantity(quantityToDecrement: number): void {
+    this.quantity -= quantityToDecrement;
+    this.finalPrice -= this.getUnitPriceWithDiscount() * quantityToDecrement;
+  }
+
+  /**
    * @returns True si tiene disponibilidad el producto, false en caso contrario
    */
   hasDisponibility(): boolean {
