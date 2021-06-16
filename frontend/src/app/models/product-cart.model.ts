@@ -18,4 +18,8 @@ export class ProductCart {
     this.quantity = quantity;
     this.stock = product.stock;
   }
+
+  hasDisponibility(): boolean {
+    return this.stock > this.quantity;
+  }
 }

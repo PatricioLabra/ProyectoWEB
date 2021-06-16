@@ -95,7 +95,7 @@ export class CartHeaderComponent {
   constructor() { }
 
   incrementProduct(index: number) {
-    if (this.products[index].stock > this.products[index].quantity) {
+    if (this.products[index].hasDisponibility()) {
       this.products[index].quantity++;
     }
   }
