@@ -11,6 +11,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { FormLoginComponent } from './components/form-login/form-login.component';
 import { FieldErrorComponent } from './components/field-error/field-error.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { CartHeaderComponent } from './components/cart-header/cart-header.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     FooterComponent,
     FormLoginComponent,
     FieldErrorComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    CartHeaderComponent
   ],
   imports: [
     BrowserModule,
