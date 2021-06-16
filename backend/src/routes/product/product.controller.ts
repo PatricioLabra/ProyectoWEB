@@ -62,7 +62,7 @@ export const setImagesProduct: RequestHandler = async (req, res) => {
 
 /**
  * Funcion que maneja la petición de los datos de un producto en particular.
- * @rute Get '/product/:id'
+ * @route Get '/product/:id'
  * @param req Request de la peticion, se espera que tenga como parametro el id del producto
  * @param res Response, retornará la informacion del producto si todo sale bien
  */
@@ -118,7 +118,7 @@ export const updateProduct: RequestHandler = async (req, res) => {
 /**
  * Funcion que maneja la peticion de un fragmento de todos los productos registrados, obtiene desde
  * el product numero 'initialProduct', la cantidad de 'quantityProduct'
- * @rute Get '/products/newer/:init/:quantity'
+ * @route Get '/products/newer/:init/:quantity'
  * @param req Request de la peticion, se espera que tenga el inicio y la cantidad de productos como parametro
  * @param res Response, retorna la cantidad de productos registrados y el fragmento que se solicito
  */

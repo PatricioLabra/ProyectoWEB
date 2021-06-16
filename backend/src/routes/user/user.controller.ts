@@ -5,7 +5,7 @@ import { signToken } from "../jwt";
 
 /**
  * Funcion que maneja la peticion de agregar un nuevo usuario al sistema
- * @rute Post /user/signup
+ * @route Post /user/signup
  * @param req Request de la peticion, se espera que tenga la informacion del nuevo usuario
  * @param res Response, retornara el token si todo sale bien
  */
@@ -34,7 +34,7 @@ export const signUp: RequestHandler = async (req, res) => {
 
 /**
  * Funcion que maneja la peticion de los datos de un usuario en particular
- * @rute get /user/:nick
+ * @route get /user/:nick
  * @param req Request de la peticion, se espera que tenga como parametro el nickname del usuario
  * @param res Response, retornara la informacion del usuario si todo sale bien
  */
@@ -54,7 +54,7 @@ export const getUser: RequestHandler = async (req, res) => {
 
 /**
  * Funcion que manejara el inicio de sesion de un usuario
- * @rute post /user/signin
+ * @route post /user/signin
  * @param req Request de la peticion, se espera que tenga el nick y la pass del usuario que va a loguear
  * @param res Response, retornara el token si todo sale bien
  */
@@ -77,7 +77,7 @@ export const signIn: RequestHandler = async (req, res) => {
 /**
  * Funcion que maneja la peticion de un fragmento de todos los usuarios registrados, obtiene desde
  * el usuario numero 'initialUser', la cantidad de 'quantityUsers'
- * @rute Get '/users/newer/:init/:quantity'
+ * @route Get '/users/newer/:init/:quantity'
  * @param req Request de la peticion, se espera que tenga el inicio y la cantidad de usuarios como parametro
  * @param res Response, retorna la cantidad de usuario registrados y el fragmento que se solicito
  */
