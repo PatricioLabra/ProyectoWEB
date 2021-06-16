@@ -8,6 +8,7 @@ export class ProductCart {
   discount: number;
   image_url: string;
   stock: number;
+  finalPrice:number;
 
   constructor(product: Product, quantity: number = 0) {
     this._id = product._id;
@@ -17,9 +18,14 @@ export class ProductCart {
     this.discount = product.discount;
     this.quantity = quantity;
     this.stock = product.stock;
+    this.finalPrice = this.getFinalPrice();
   }
 
   hasDisponibility(): boolean {
     return this.stock > this.quantity;
+  }
+
+  getFinalPrice(): number {
+    return (this.price * (1 - this.discount)) * this.quantity;
   }
 }

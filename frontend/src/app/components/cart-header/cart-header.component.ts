@@ -93,17 +93,22 @@ export class CartHeaderComponent {
 
   products: Array<ProductCart> = this.products_.map((product: Product) => new ProductCart(product, 2));
   //products: Array<ProductCart> = [];
+  totalPrice: number = 0;
 
-  constructor() { }
+  constructor() {
+    this.totalPrice = this.products.reduce((total, producto) => total + producto.finalPrice, 0);
+  }
 
   incrementProduct(index: number) {
     if (this.products[index].hasDisponibility()) {
       this.products[index].quantity++;
+      this.products[index].finalPrice = this.products[index].getFinalPrice();
     }
   }
 
   decrementProduct(index: number) {
     this.products[index].quantity--;
+      this.products[index].finalPrice = this.products[index].getFinalPrice();
 
     if (this.products[index].quantity <= 0) {
       this.products.splice(index, 1);

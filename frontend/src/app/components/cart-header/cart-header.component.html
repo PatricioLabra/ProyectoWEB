@@ -4,10 +4,11 @@
     <p>{{ product.price }}</p>
     <p>{{ product.discount }}</p>
     <p>{{ product.quantity }}</p>
-    <p>{{ ((1 - product.discount) * product.price) * product.quantity }}</p>
+    <p>{{ product.finalPrice }}</p>
     <button [disabled]="product.stock <= product.quantity" (click)="incrementProduct(i)">+</button>
     <button (click)="decrementProduct(i)">-</button>
   </li>
 </ul>
 
+<p>{{ totalPrice }}</p>
 <p>cart-header works!</p>
