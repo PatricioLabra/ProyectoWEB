@@ -211,17 +211,17 @@ export const getSearchProducts: RequestHandler = async (req, res) => {
     //se valida que keyword sea igual a una cadena vacía
     if (keyword == ""){
         const products = await Product.find().sort({ updated: -1});
-        const productsFiltered = products.map((product: any) => destructureProduct(product))
-        const quantityFilteredProducts = Object.keys(productsFiltered).length;
+        const productsFound = products.map((product: any) => destructureProduct(product))
+        const quantityProductsFound = Object.keys(productsFound).length;
 
-        return res.status(200).send({success: true, quantityFilteredProducts: quantityFilteredProducts, productsFiltered});
+        return res.status(200).send({success: true, quantityProductsFound: quantityProductsFound, productsFound});
     }
 
     const products = await Product.find({$text:{$search: keyword }}).sort({ updated: -1});
-    const productsFiltered = products.map((product: any) => destructureProduct(product))
-    const quantityFilteredProducts = Object.keys(productsFiltered).length;
+    const productsFound = products.map((product: any) => destructureProduct(product))
+    const quantityProductsFound = Object.keys(productsFound).length;
 
-    return res.status(200).send({success: true, quantityFilteredProducts: quantityFilteredProducts, productsFiltered});
+    return res.status(200).send({success: true, quantityProductsFound: quantityProductsFound, productsFound});
 }
 
 /**
