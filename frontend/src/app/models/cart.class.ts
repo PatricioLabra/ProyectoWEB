@@ -6,15 +6,9 @@ export class Cart {
   products: Array<ProductCart> = [];
   totalPrice: number = 0;
 
-  constructor(private cart: CartService) {
-    this.cart.currentDataCart$.subscribe(this.handleCartChange);
-  }
+  constructor(protected cart: CartService) { }
 
-  handleCartChange = (listProducts: Array<ProductCart>) => {
-    console.log(listProducts);
-    this.products = listProducts;
-    this.totalPrice = this.products.reduce((total: number, product: ProductCart) => total + product.finalPrice, 0);
-  };
+  handleCartChange = (listProducts: Array<ProductCart>) => { };
 
   /**
    * Si tiene disponibilidad, incrementa en 1 la cantidad, actualizando el precio final

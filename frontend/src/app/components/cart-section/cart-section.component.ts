@@ -14,10 +14,10 @@ export class CartSectionComponent extends Cart {
 
   constructor(cart: CartService) {
     super(cart);
+    this.cart.currentDataCart$.subscribe(this.handleCartChange);
   }
 
   handleCartChange = (listProducts: Array<ProductCart>) => {
-    console.log(listProducts);
     this.products = listProducts;
     this.totalPrice = this.products.reduce((total: number, product: ProductCart) => total + product.finalPrice, 0);
     this.totalDiscount = this.products.reduce((total: number, product: ProductCart) => total + (product.price * product.discount), 0);
