@@ -8,6 +8,10 @@ export class Cart {
 
   constructor(protected cart: CartService) { }
 
+  /**
+   * Funcion que sera llamada cuando se subscriba al observable cart
+   * @param listProducts Lista de los productos del carrito
+   */
   handleCartChange = (listProducts: Array<ProductCart>) => { };
 
   /**

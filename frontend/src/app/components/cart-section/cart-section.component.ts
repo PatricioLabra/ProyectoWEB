@@ -17,6 +17,10 @@ export class CartSectionComponent extends Cart {
     this.cart.currentDataCart$.subscribe(this.handleCartChange);
   }
 
+  /**
+   * Actualiza los productos del carro, el precio final y el precio total descontado
+   * @param listProducts Lista de los productos del carrito
+   */
   handleCartChange = (listProducts: Array<ProductCart>) => {
     this.products = listProducts;
     this.totalPrice = this.products.reduce((total: number, product: ProductCart) => total + product.finalPrice, 0);
