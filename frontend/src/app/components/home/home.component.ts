@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit {
       this.music = this.products.filter((product: Product) => product.category == CategoryTypes.MUSIC);
       this.clothes = this.products.filter((product: Product) => product.category == CategoryTypes.CLOTHES);
       this.food = this.products.filter((product: Product) => product.category == CategoryTypes.FOOD);
-      console.log(this.food);
     });
   }
 }
