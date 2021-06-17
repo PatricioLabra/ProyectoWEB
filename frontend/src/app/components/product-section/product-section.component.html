@@ -1,1 +1,20 @@
-<p>product-section works!</p>
+<div>
+  <img [src]="product.images_urls[0]" alt="Image Product">
+  <p>{{ product.trademark }}</p>
+  <p>{{ product.name }}</p>
+  <p>{{ product.calification }}</p>
+  <p>{{ product.description }}</p>
+  <p>{{ product.price }}</p>
+  <p>{{ product.discount }}</p>
+  <p>{{ product.price * (1 - product.discount) }}</p>
+  <button>+</button>
+  <button>-</button>
+  <p>{{ product.category }}</p>
+  <p>{{ product.subcategories }}</p>
+
+  <div>
+    <p>{{ product.description }}</p>
+    <p>{{ product.weight }}</p>
+    <p>{{ product.dimensions | json }}</p>
+  </div>
+</div>
