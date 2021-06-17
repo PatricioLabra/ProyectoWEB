@@ -1,4 +1,4 @@
-export enum Categorytypes {
+export enum CategoryTypes {
 	MOVIES='Películas',
 	CLOTHES='Ropa',
 	MUSIC='Música',
