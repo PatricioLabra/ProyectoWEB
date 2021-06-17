@@ -115,6 +115,7 @@ export class CartService {
     else
       listProducts.push(product);
 
+    console.log(listProducts);
     this._cart.next(listProducts);
   }
 
@@ -134,6 +135,7 @@ export class CartService {
       if (listProducts[index].quantity <= 0)
         listProducts.splice(index, 1);
 
+      console.log(listProducts);
       this._cart.next(listProducts);
     }
   }
@@ -143,6 +145,7 @@ export class CartService {
    */
   emptyCart(): void {
     const listProducts: Array<ProductCart> = [];
+    console.log(listProducts);
     this._cart.next(listProducts);
   }
 

@@ -8,8 +8,8 @@
   <p>{{ product.discount }}</p>
   <p>{{ product.price * (1 - product.discount) }}</p>
   <p>{{ product.stock }}</p>
-  <button>+</button>
-  <button>-</button>
+  <button (click)="insertCart()">+</button>
+  <button (click)="removeCart()">-</button>
   <p>{{ product.category }}</p>
   <p>{{ product.subcategories }}</p>
 
