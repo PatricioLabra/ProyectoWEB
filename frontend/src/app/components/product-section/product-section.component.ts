@@ -27,15 +27,17 @@ export class ProductSectionComponent implements OnInit {
   ngOnInit(): void {
     this.http.get('http://localhost:4000/product/' + this._id).subscribe((data: any) => {
       this.product = data.product;
-      this.productCart = new ProductCart(this.product);
+      this.productCart = new ProductCart(this.product, 1);
     });
   }
 
   insertCart(): void {
     this.cart.insertProduct(this.productCart);
+    console.log(this.productCart);
   }
 
   removeCart(): void {
     this.cart.removeProduct(this.productCart);
+    console.log(this.productCart);
   }
 }
