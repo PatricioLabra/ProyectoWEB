@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from '@models/product.model';
 
 @Component({
@@ -8,12 +10,16 @@ import { Product } from '@models/product.model';
 })
 export class ProductSectionComponent implements OnInit {
 
-  @Input()
+  _id: string;
   product: Product = new Product();
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private activeRoute: ActivatedRoute, private http: HttpClient) {
+    this._id = this.activeRoute.snapshot.params.id;
   }
 
+  ngOnInit(): void {
+    this.http.get('http://localhost:4000/product/' + this._id).subscribe((data: any) => {
+      this.product = data.product;
+    });
+  }
 }
