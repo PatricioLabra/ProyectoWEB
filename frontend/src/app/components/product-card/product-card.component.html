@@ -12,5 +12,5 @@
 	<span *ngIf="product.discount">{{ product.price * (1 - product.discount) }}</span>
 	{{ product.calification }}
 
-	<button>Agregar</button>
+	<button (click)="insertCart()">Agregar</button>
 </div>
