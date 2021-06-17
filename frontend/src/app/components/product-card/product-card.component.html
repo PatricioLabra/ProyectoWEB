@@ -1,7 +1,9 @@
 <div style="display: flex; flex-direction: column; width: 150px;">
-	{{ product.name }}
+	<div [routerLink]="['/product', product._id]">
+		{{ product.name }}
 
-	<img [src]="product.images_urls[0]" alt="No Image" style="width: 120px; height: 120px;">
+		<img [src]="product.images_urls[0]" alt="No Image" style="width: 120px; height: 120px;">
+	</div>
 
 	{{ product.price }}
 
