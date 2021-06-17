@@ -169,7 +169,7 @@ export const getFilteredProducts: RequestHandler = async (req, res) => {
     if ( category && category != "" )
         filter.category  = category;
 
-    //se calida que se ingrese una subcategoria y que no esté vacía
+    //se valida que se ingrese una subcategoria y que no esté vacía
     if ( subcategories  && subcategories != "")
         filter.subcategories =  {"$all":subcategories};
 
