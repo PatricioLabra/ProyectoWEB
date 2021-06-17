@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductCart } from '@models/product-cart.model';
 import { Product } from '@models/product.model';
+import { CartService } from '@services/cart.service';
 
 @Component({
   selector: 'app-cart-header',
@@ -95,8 +96,9 @@ export class CartHeaderComponent {
   //products: Array<ProductCart> = [];
   totalPrice: number = 0;
 
-  constructor() {
+  constructor(private cartService: CartService) {
     this.totalPrice = this.products.reduce((total, producto) => total + producto.finalPrice, 0);
+    this.products.forEach((product: ProductCart) => this.cartService.insertProduct(product));
   }
 
   /**
@@ -105,12 +107,10 @@ export class CartHeaderComponent {
    * @param index Indice del producto que se va a incrementar
    */
   incrementProduct(index: number) {
-    if (this.products[index].hasDisponibility()) {
-      const unitPrice = this.products[index].getUnitPriceWithDiscount();
+    const itChanges = this.cartService.insertProduct(this.products[index]);
 
-      this.products[index].increaseQuantity(1);
-      this.totalPrice += unitPrice;
-    }
+    if (itChanges)
+      this.totalPrice += this.products[index].getUnitPriceWithDiscount();
   }
 
   /**
@@ -119,15 +119,10 @@ export class CartHeaderComponent {
    * @param index Indice del producto que se va a decrementar
    */
   decrementProduct(index: number) {
-    const unitPrice = this.products[index].getUnitPriceWithDiscount();
+    const itChanges = this.cartService.removeProduct(this.products[index]);
 
-    this.products[index].decreaseQuantity(1);
-    this.totalPrice -= unitPrice;
-
-
-    if (this.products[index].quantity <= 0) {
-      this.products.splice(index, 1);
-    }
+    if (itChanges)
+      this.totalPrice -= this.products[index].getUnitPriceWithDiscount();
   }
 
   /**
