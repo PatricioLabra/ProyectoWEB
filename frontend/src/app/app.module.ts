@@ -14,6 +14,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { CartHeaderComponent } from './components/cart-header/cart-header.component';
 import { ProductSectionComponent } from './components/product-section/product-section.component';
 import { CategoryCatalogComponent } from './components/category-catalog/category-catalog.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CategoryCatalogComponent } from './components/category-catalog/category
     ProductCardComponent,
     CartHeaderComponent,
     ProductSectionComponent,
-    CategoryCatalogComponent
+    CategoryCatalogComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

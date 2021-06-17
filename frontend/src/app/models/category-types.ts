@@ -1,8 +1,8 @@
-export enum Categorytypes {
-	MOVIES='movies',
-	CLOTHES='clothes',
-	MUSIC='music',
-	FOOD='food'
+export enum CategoryTypes {
+	MOVIES='Películas',
+	CLOTHES='Ropa',
+	MUSIC='Música',
+	FOOD='Comida'
 }
 
 export const CategoryTypesList = [
