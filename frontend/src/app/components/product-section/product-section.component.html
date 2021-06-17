@@ -1,0 +1,22 @@
+<div>
+  <img [src]="product.images_urls[0]" alt="Image Product" style="width: 300px; height: 300px;">
+  <p>{{ product.trademark }}</p>
+  <p>{{ product.name }}</p>
+  <p>{{ product.calification }}</p>
+  <p>{{ product.description }}</p>
+  <p>{{ product.price }}</p>
+  <p>{{ product.discount }}</p>
+  <p>{{ product.price * (1 - product.discount) }}</p>
+  <p>{{ product.stock }}</p>
+  <button (click)="insertCart()">+</button>
+  <button (click)="removeCart()">-</button>
+  <p>{{ product.category }}</p>
+  <p>{{ product.subcategories }}</p>
+
+  <div>
+    Descripcion y caracteristicas:
+    <p>{{ product.description }}</p>
+    <p>{{ product.weight }}</p>
+    <p>{{ product.dimensions | json }}</p>
+  </div>
+</div>

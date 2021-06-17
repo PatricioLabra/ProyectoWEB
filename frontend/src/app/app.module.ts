@@ -12,6 +12,7 @@ import { FormLoginComponent } from './components/form-login/form-login.component
 import { FieldErrorComponent } from './components/field-error/field-error.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { CartHeaderComponent } from './components/cart-header/cart-header.component';
+import { ProductSectionComponent } from './components/product-section/product-section.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CartHeaderComponent } from './components/cart-header/cart-header.compon
     FormLoginComponent,
     FieldErrorComponent,
     ProductCardComponent,
-    CartHeaderComponent
+    CartHeaderComponent,
+    ProductSectionComponent
   ],
   imports: [
     BrowserModule,
