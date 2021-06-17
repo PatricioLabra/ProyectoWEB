@@ -26,4 +26,8 @@ export class CartSectionComponent extends Cart {
     this.totalPrice = this.products.reduce((total: number, product: ProductCart) => total + product.finalPrice, 0);
     this.totalDiscount = this.products.reduce((total: number, product: ProductCart) => total + (product.price * product.discount), 0);
   };
+
+  buyCart() {
+
+  }
 }
