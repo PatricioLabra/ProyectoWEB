@@ -9,14 +9,16 @@ import { CartService } from '@services/cart.service';
 })
 export class CartSectionComponent {
 
-
   products: Array<ProductCart> = [];
   totalPrice: number = 0;
+  totalDiscount: number = 0;
 
   constructor(private cart: CartService) {
     this.cart.currentDataCart$.subscribe((listProducts: Array<ProductCart>) => {
+      console.log(listProducts);
       this.products = listProducts;
-      this.totalPrice = this.products.reduce((total, producto) => total + producto.finalPrice, 0);
+      this.totalPrice = this.products.reduce((total: number, product: ProductCart) => total + product.finalPrice, 0);
+      this.totalDiscount = this.products.reduce((total: number, product: ProductCart) => total + (product.price * product.discount), 0);
     });
   }
 
