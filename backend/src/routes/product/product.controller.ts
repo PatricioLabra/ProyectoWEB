@@ -182,10 +182,10 @@ export const getFilteredProducts: RequestHandler = async (req, res) => {
 
     try {
         const products = await Product.find(filter).sort({ updated: -1});
-        const productsFiltered = products.map((product: any) => destructureProduct(product))
+        const productsFiltered = products.map((product: any) => destructureProduct(product));
         const quantityFilteredProducts = Object.keys(productsFiltered).length;
 
-        return res.status(200).send({success: true, quantityFilteredProducts: quantityFilteredProducts, productsFiltered});
+        return res.status(200).send({success: true, quantityProducts: quantityFilteredProducts, products: productsFiltered});
 
     } catch (error) {
 
@@ -203,25 +203,26 @@ export const getFilteredProducts: RequestHandler = async (req, res) => {
 export const getSearchProducts: RequestHandler = async (req, res) => {
 
     const keyword = req.params.keyword;
+    let filter:any = {};
 
     //se valida que keyword sea null
     if (!keyword)
         return res.status(400).send({success: false, message: "Error: texto ingresado inválido."+ keyword});
     
-    //se valida que keyword sea igual a una cadena vacía
-    if (keyword == ""){
-        const products = await Product.find().sort({ updated: -1});
-        const productsFound = products.map((product: any) => destructureProduct(product))
-        const quantityProductsFound = Object.keys(productsFound).length;
+    if (keyword != "")
+        filter.$text = {"$search": keyword};
 
-        return res.status(200).send({success: true, quantityProductsFound: quantityProductsFound, productsFound});
+    try {
+        const products = await Product.find(filter).sort({ updated: -1});
+        const productsFiltered = products.map((product: any) => destructureProduct(product));
+        const quantityFilteredProducts = Object.keys(productsFiltered).length;
+
+        return res.status(200).send({success: true, quantityProducts: quantityFilteredProducts, products: productsFiltered});
+
+    } catch (error) {
+
+        return res.status(400).send({sucess: false, message: 'Error: ' + error});
     }
-
-    const products = await Product.find({$text:{$search: keyword }}).sort({ updated: -1});
-    const productsFound = products.map((product: any) => destructureProduct(product))
-    const quantityProductsFound = Object.keys(productsFound).length;
-
-    return res.status(200).send({success: true, quantityProductsFound: quantityProductsFound, productsFound});
 }
 
 /**
