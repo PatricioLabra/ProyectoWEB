@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import Product from './product.model';
 import { Types } from "mongoose"
+import { FileSystemCredentials } from "aws-sdk";
 
 /**
  * Función que maneja la petición de agregar un nuevo producto al sistema, NO SUBE LAS FOTOS
@@ -147,12 +148,81 @@ export const getNewerProducts: RequestHandler = async (req, res) => {
     }
 }
 
+/**
+* Funcion que maneja la peticion productos filtrados, obtiene un JSON con los filtros asignados:
+ * tex_index, category, subcategories, lower_limit  y upper_limit.  
+ * @route Get '/products/filtered'
+ * @param req Request de la peticion, se espera que tenga el formulario filtro
+ * @param res Response, retorna los productos filtrados
+ */
 export const getFilteredProducts: RequestHandler = async (req, res) => {
 
+    const {text_index, category, subcategories, lower_limit, upper_limit} = req.body;
+    let filter:any = {};
+
+ 
+    // se valida que se ingrese un texto y que no esté vacío
+    if ( text_index && text_index != "" )
+        filter.$text = {"$search": text_index};
+    
+    // se valida que se ingrese una categoria y que no esté vacía
+    if ( category && category != "" )
+        filter.category  = category;
+
+    //se valida que se ingrese una subcategoria y que no esté vacía
+    if ( subcategories  && subcategories != "")
+        filter.subcategories =  {"$all":subcategories};
+
+    //se valida que se ingresen ambos limites, que no sean negativos y que lower_limit <= upper_limit
+    if (lower_limit != null && upper_limit != null)
+        if (lower_limit >= 0 && upper_limit >= 0)
+            if ( upper_limit >= lower_limit)
+                filter.price = {"$gt": lower_limit-1 , "$lt": upper_limit+1};
+             
+
+    try {
+        const products = await Product.find(filter).sort({ updated: -1});
+        const productsFiltered = products.map((product: any) => destructureProduct(product));
+        const quantityFilteredProducts = Object.keys(productsFiltered).length;
+
+        return res.status(200).send({success: true, quantityProducts: quantityFilteredProducts, products: productsFiltered});
+
+    } catch (error) {
+
+        return res.status(400).send({sucess: false, message: 'Error: ' + error});
+    }
 }
 
+/**
+* Funcion que maneja la peticion productos buscados con un texto ingresado, obtiene un params = keyword
+ * con la palabra clave a buscar en el sistema y que coincida con los productos, tanto en name, trademark, category o subcategories.
+ * @route Get '/products/:keyword'
+ * @param req Request de la peticion, se espera que tenga el keyword a buscar
+ * @param res Response, retorna los productos que coincidan con la palabra clave ingresada
+ */
 export const getSearchProducts: RequestHandler = async (req, res) => {
 
+    const keyword = req.params.keyword;
+    let filter:any = {};
+
+    //se valida que keyword sea null
+    if (!keyword)
+        return res.status(400).send({success: false, message: "Error: texto ingresado inválido."+ keyword});
+    
+    if (keyword != "")
+        filter.$text = {"$search": keyword};
+
+    try {
+        const products = await Product.find(filter).sort({ updated: -1});
+        const productsFiltered = products.map((product: any) => destructureProduct(product));
+        const quantityFilteredProducts = Object.keys(productsFiltered).length;
+
+        return res.status(200).send({success: true, quantityProducts: quantityFilteredProducts, products: productsFiltered});
+
+    } catch (error) {
+
+        return res.status(400).send({sucess: false, message: 'Error: ' + error});
+    }
 }
 
 /**
