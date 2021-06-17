@@ -13,6 +13,7 @@ import { FieldErrorComponent } from './components/field-error/field-error.compon
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { CartHeaderComponent } from './components/cart-header/cart-header.component';
 import { ProductSectionComponent } from './components/product-section/product-section.component';
+import { CategoryCatalogComponent } from './components/category-catalog/category-catalog.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProductSectionComponent } from './components/product-section/product-se
     FieldErrorComponent,
     ProductCardComponent,
     CartHeaderComponent,
-    ProductSectionComponent
+    ProductSectionComponent,
+    CategoryCatalogComponent
   ],
   imports: [
     BrowserModule,
