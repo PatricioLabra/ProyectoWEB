@@ -43,7 +43,7 @@ export class FormLoginComponent {
     const control = this.profileForm.get(field);
     if (!control) return false;
 
-    return (!control.valid && control.touched) || (control.untouched && this.submitAttempt);
+    return (!control.valid && control.touched) || (control.pristine && this.submitAttempt);
   }
   
   public onSubmit(): void {
@@ -52,31 +52,32 @@ export class FormLoginComponent {
     if (this.profileForm.valid) {
       const profileData: Profile = this.profileForm.getRawValue() as Profile;
 
-      this.auth.signUp(profileData).subscribe(
-        (data: any) => {
-          this.badNick = false;
-          this.badPass = false;
+      this.auth.signUp(profileData).subscribe(this.successLogin, this.handleError);
+    }
+  }
 
-          const { token } = data as any;
-          const nickname = this.profileForm.controls.nickname.value;
+  private successLogin = (data: any) => {
+    this.badNick = false;
+    this.badPass = false;
 
-          this.userInfo.signInUser(nickname, token, this.isAdmin);
-          this.router.navigate(['/']);
-        }, 
-        (error: HttpErrorResponse) => {
-          switch (error.status) {
-            case 404: 
-              this.badNick = true;
-              this.badPass = false;
-              break;
-            case 400:
-              this.badNick = false;
-              this.badPass = true;
-              break;
-            default : console.log(error);
-          }
-        }
-      );
+    const { token } = data as any;
+    const nickname = this.profileForm.controls.nickname.value;
+
+    this.userInfo.signInUser(nickname, token, this.isAdmin);
+    this.router.navigate(['/']);
+  }
+
+  private handleError = (error: HttpErrorResponse) => {
+    switch (error.status) {
+      case 404: 
+        this.badNick = true;
+        this.badPass = false;
+        break;
+      case 400:
+        this.badNick = false;
+        this.badPass = true;
+        break;
+      default : console.log(error);
     }
   }
 }
