@@ -58,9 +58,10 @@ export const getComments: RequestHandler = async (req, res) => {
     if ( !Types.ObjectId.isValid( id_product ) )
         return res.status(400).send({ success:false, message:'Error: el id del producto ingresado no es válido.' });
 
-    //se valida que exista un producto almacenado con sus comentarios
     const product = await Comment.findById(id_product);
     const quantityComments = product.comments.lenght;
+
+    //se valida que exista un producto almacenado con sus comentarios
 
     return res.status(200).send({ success: true, quantityComments, product });
 }
