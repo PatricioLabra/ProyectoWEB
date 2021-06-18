@@ -16,6 +16,8 @@ import { ProductSectionComponent } from './components/product-section/product-se
 import { CategoryCatalogComponent } from './components/category-catalog/category-catalog.component';
 import { HomeComponent } from './components/home/home.component';
 import { CartSectionComponent } from './components/cart-section/cart-section.component';
+import { SearchedProductsSectionComponent } from './components/searched-products-section/searched-products-section.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { CartSectionComponent } from './components/cart-section/cart-section.com
     ProductSectionComponent,
     CategoryCatalogComponent,
     HomeComponent,
-    CartSectionComponent
+    CartSectionComponent,
+    SearchedProductsSectionComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,

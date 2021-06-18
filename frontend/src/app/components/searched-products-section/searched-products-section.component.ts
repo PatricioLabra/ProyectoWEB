@@ -3,23 +3,19 @@ import { Product } from '@models/product.model';
 import { ApiConnectionService } from '@services/api-connection.service';
 
 @Component({
-  selector: 'app-testing',
-  templateUrl: './testing.component.html',
-  styleUrls: ['./testing.component.scss']
+  selector: 'app-searched-products-section',
+  templateUrl: './searched-products-section.component.html',
+  styleUrls: ['./searched-products-section.component.scss']
 })
-export class TestingComponent implements OnInit {
+export class SearchedProductsSectionComponent implements OnInit {
 
   products: Array<Product> = [];
-  movies: Array<Product> = [];
-  music: Array<Product> = [];
 
   constructor(private api: ApiConnectionService) { }
 
   ngOnInit(): void {
     this.api.getNewerProducts(0, 10).subscribe((data: any) => {
       this.products = data.products;
-      this.movies = this.products.filter((product: Product) => product.category == 'Películas');
-      this.music = this.products.filter((product: Product) => product.category == 'Música');
     });
   }
 }
