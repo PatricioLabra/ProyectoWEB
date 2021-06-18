@@ -5,6 +5,7 @@ import { CartSectionComponent } from '@components/cart-section/cart-section.comp
 import { FormLoginComponent } from '@components/form-login/form-login.component';
 import { HomeComponent } from '@components/home/home.component';
 import { ProductSectionComponent } from '@components/product-section/product-section.component';
+import { SearchedProductsSectionComponent } from '@components/searched-products-section/searched-products-section.component';
 import { TestingComponent } from '@components/testing/testing.component';
 
 const routes: Routes = [
@@ -23,6 +24,9 @@ const routes: Routes = [
   {
     path: 'product/:id', component: ProductSectionComponent
   },
+  {
+    path: 'search', component: SearchedProductsSectionComponent
+  }
 ];
 
 @NgModule({
