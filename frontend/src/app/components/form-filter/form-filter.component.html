@@ -1,1 +1,15 @@
+<form>
+  <select >
+    <option *ngFor="let category of CategoryList" [value]="category">{{ category }}</option>
+  </select>
+
+  <div *ngFor="let category of CategoryList; index as i">
+    {{ category }}
+    <p *ngFor="let sub of Subcategories[i]">
+      <input type="checkbox">
+      {{ sub }}
+    </p>
+  </div>
+</form>
+
 <p>form-filter works!</p>

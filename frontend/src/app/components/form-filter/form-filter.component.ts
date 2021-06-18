@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryList, Subcategories } from '@models/category-types';
 
 @Component({
   selector: 'app-form-filter',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormFilterComponent implements OnInit {
 
-  constructor() { }
+  CategoryList = CategoryList;
+  Subcategories = Subcategories;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
