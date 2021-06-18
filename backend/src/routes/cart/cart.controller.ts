@@ -30,11 +30,12 @@ export const addCart: RequestHandler = async (req, res) => {
     const productsFiltered = productCart.map((product: any) => destructureProduct(product));
 
 
-    const newCart = {nickname_buyer, productsFiltered};
+    const newCart = {nickname_buyer, "productCart":productsFiltered};
     const cartSaved = new Cart(newCart);
-    await cartSaved.save;
 
-    return res.status(200).send({ success: true , cart: cartSaved });
+    await cartSaved.save();
+
+    return res.status(200).send({ success: true , cartSaved });
 }
 
 /**
@@ -52,10 +53,12 @@ export const addCart: RequestHandler = async (req, res) => {
         const carts = await Cart.find().sort({ createdAt: -1 }).skip(initialCart).limit(quantityCarts);
         const quantityCartsRegistered: number = await Cart.countDocuments();
 
+        const cartsFiltered = carts.map((cart: any) => destructureCart(cart));
+
         return res.status(200).send({
             success: true,
             quantityCarts: quantityCartsRegistered,
-            carts: carts
+            carts: cartsFiltered
         });
         
     } catch (error) {
@@ -79,15 +82,17 @@ export const addCart: RequestHandler = async (req, res) => {
     if ( !Types.ObjectId.isValid( _id ))
         return res.status(400).send({ success:false, message:'Error: el id ingresado no es válido.' });
 
-    const cartFound = await Cart.find();
+    const cartFound = await Cart.findById( _id );
 
     //se valida la existencia del producto
     if (!cartFound)
         return res.status(404).send({ success: false, message:'Error: el carrito no existe en el sistema.' });
 
+    const cartFiltered = destructureCart(cartFound);
+
     return res.status(200).send({
         success: true, 
-        cart: cartFound
+        cart: cartFiltered
     });
 }
 
@@ -108,4 +113,18 @@ export const addCart: RequestHandler = async (req, res) => {
     };
 
     return productFiltered;
+}
+
+/**
+ * Extrae los atributos publicos del carrito
+ * @param cart carrito a filtrar
+ * @returns Object con los atributosa publicos del carrito ingresado
+ */
+ function destructureCart(cart: any) {
+    const cartFiltered = {
+        nickname_buyer : cart.nickname_buyer,
+        productCart : cart.productCart
+    };
+
+    return cartFiltered;
 }
