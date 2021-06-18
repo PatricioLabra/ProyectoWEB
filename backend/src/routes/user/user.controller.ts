@@ -12,7 +12,7 @@ import { signToken } from "../jwt";
  */
 export const signUp: RequestHandler = async (req, res) => {
 
-	const responseObject: ApiResponse<string> = { success: false };
+	const responseObject: ApiResponse<Object> = { success: false };
 	const { nickname, password, email, rut } = req.body;
 
 	// Se valida si algun atributo no es valido
@@ -34,7 +34,7 @@ export const signUp: RequestHandler = async (req, res) => {
 	await newUser.save()							
 
 	const token = signToken(newUser._id);
-	responseObject.data = token;
+	responseObject.data = { token };
 	responseObject.success = true;
 
 	return res.status(201).send(responseObject);
@@ -59,7 +59,7 @@ export const getUser: RequestHandler = async (req, res) => {
 	const userInfo = destructureUser(userFound);
 
 	responseObject.success = true;
-	responseObject.data = userInfo;
+	responseObject.data = { userInfo };
 
 	return res.status(200).send(responseObject);	
 }
@@ -72,7 +72,7 @@ export const getUser: RequestHandler = async (req, res) => {
  */
 export const signIn: RequestHandler = async (req, res) => {
 
-	const responseObject: ApiResponse<string> = { success: false };
+	const responseObject: ApiResponse<Object> = { success: false };
 	const { nickname, password } = req.body;
 	const user = await User.findOne({ nickname });
 	const passEncrypt = encrypt(nickname, password)
@@ -88,7 +88,7 @@ export const signIn: RequestHandler = async (req, res) => {
 	}
 
 	const token = signToken(user._id);
-	responseObject.data = token;
+	responseObject.data = { token };
 	responseObject.success = true;
 
 	return res.status(201).send(responseObject);
