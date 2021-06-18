@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CartSectionComponent } from '@components/cart-section/cart-section.component';
 
 import { FormLoginComponent } from '@components/form-login/form-login.component';
 import { HomeComponent } from '@components/home/home.component';
@@ -15,6 +16,9 @@ const routes: Routes = [
   },
   {
     path: 'login', component: FormLoginComponent
+  },
+  {
+    path: 'cart', component: CartSectionComponent
   },
   {
     path: 'product/:id', component: ProductSectionComponent

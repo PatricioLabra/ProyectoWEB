@@ -1,46 +1,26 @@
 import { Component } from '@angular/core';
-import { ProductCart } from '@models/product-cart.model';
 import { CartService } from '@services/cart.service';
+import { Cart } from '@models/cart.class';
+import { ProductCart } from '@models/product-cart.model';
 
 @Component({
   selector: 'app-cart-header',
   templateUrl: './cart-header.component.html',
   styleUrls: ['./cart-header.component.scss']
 })
-export class CartHeaderComponent {
+export class CartHeaderComponent extends Cart {
 
-  products: Array<ProductCart> = [];
-  totalPrice: number = 0;
-
-  constructor(private cart: CartService) {
-    this.cart.currentDataCart$.subscribe((listProducts: Array<ProductCart>) => {
-      this.products = listProducts;
-      this.totalPrice = this.products.reduce((total, producto) => total + producto.finalPrice, 0);
-    });
+  constructor(cart: CartService) {
+    super(cart);
+    this.cart.currentDataCart$.subscribe(this.handleCartChange);
   }
 
   /**
-   * Si tiene disponibilidad, incrementa en 1 la cantidad, actualizando el precio final
-   * de ese producto y el precio total, sino no hace nada.
-   * @param index Indice del producto que se va a incrementar
+   * Actualiza los productos del carro, y el precio final
+   * @param listProducts Lista de los productos del carrito
    */
-  incrementProduct(index: number) {
-    this.cart.insertProduct(this.products[index]);
-  }
-
-  /**
-   * Decrementa en 1 la cantidad de un producto, actualizando el precio final de ese producto
-   * y el precio total. Si la cantidad llega a 0, se elimina del carrito.
-   * @param index Indice del producto que se va a decrementar
-   */
-  decrementProduct(index: number) {
-    this.cart.removeProduct(this.products[index]);
-  }
-
-  /**
-   * Elimina todos los elementos del carrito, y establece el precio final en 0
-   */
-  vaciar() {
-    this.cart.emptyCart();
-  }
+  handleCartChange = (listProducts: Array<ProductCart>) => {
+    this.products = listProducts;
+    this.totalPrice = this.products.reduce((total: number, product: ProductCart) => total + product.getFinalPrice(), 0);
+  };
 }
