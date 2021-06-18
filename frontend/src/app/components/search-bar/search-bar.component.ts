@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -7,15 +7,12 @@ import { Router } from '@angular/router';
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss']
 })
-export class SearchBarComponent implements OnInit {
+export class SearchBarComponent {
 
   searchInput: FormControl;
 
   constructor(private _fb: FormBuilder, private router: Router) {
     this.searchInput = this._fb.control('');
-  }
-
-  ngOnInit(): void {
   }
 
   searchProducts() {
