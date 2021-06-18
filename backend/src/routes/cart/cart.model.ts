@@ -7,7 +7,7 @@ const cartSchema = new Schema({
         trim: true,
         required: true
     },
-    products:Schema.Types.Mixed
+    products:[Schema.Types.Mixed]
 },{ 
 versionKey: false,
 timestamps: true 

@@ -32,7 +32,7 @@ export const addCart: RequestHandler = async (req, res) => {
     const cartSaved = new Cart(newCart);
     await cartSaved.save;
 
-    return res.status(200).send({ success: true });
+    return res.status(200).send({ success: true , cart: cartSaved });
 }
 
 /**
