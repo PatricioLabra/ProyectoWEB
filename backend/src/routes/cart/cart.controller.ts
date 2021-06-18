@@ -10,15 +10,15 @@ import { Types } from "mongoose"
  * @param res Response, retorna un true si todo sale bien
  */
 export const addCart: RequestHandler = async (req, res) => {
-    const  { nickname_buyer, products } = req.body;
+    const  { nickname_buyer, productCart } = req.body;
 
     //se valida que exista un nickname ingresado
     if (!nickname_buyer)
         return res.status(404).send({ success: false, message: 'Error: no se ingresó el nombre del comprador.' +  nickname_buyer });
 
     //se valida que existan productos comprados
-    if (products.length == 0)
-        return res.status(404).send({ success: false, message: 'Error: no se ingresó ningun producto en el carrito.' + products })
+    if (productCart.length == 0)
+        return res.status(404).send({ success: false, message: 'Error: no se ingresó ningun producto en el carrito.' + productCart })
     
 
     const userFound = await User.findOne({nickname: nickname_buyer});
@@ -27,8 +27,10 @@ export const addCart: RequestHandler = async (req, res) => {
     if (!userFound)
         return res.status(404).send({ success: false, message: 'Error: el nickname del usuario no existe en el sistema.' })
 
-    const newCart = {nickname_buyer, products};
-    
+    const productsFiltered = productCart.map((product: any) => destructureProduct(product));
+
+
+    const newCart = {nickname_buyer, productsFiltered};
     const cartSaved = new Cart(newCart);
     await cartSaved.save;
 
@@ -47,12 +49,12 @@ export const addCart: RequestHandler = async (req, res) => {
         const initialCart = parseInt(req.params.init);
         const quantityCarts = parseInt(req.params.quantity);
 
-        const carts = await Cart.find().sort({ createdAt: -1}).skip(initialCart).limit(quantityCarts);
+        const carts = await Cart.find().sort({ createdAt: -1 }).skip(initialCart).limit(quantityCarts);
         const quantityCartsRegistered: number = await Cart.countDocuments();
 
         return res.status(200).send({
             success: true,
-            quantityCartsRegistered,
+            quantityCarts: quantityCartsRegistered,
             carts: carts
         });
         
@@ -87,4 +89,23 @@ export const addCart: RequestHandler = async (req, res) => {
         success: true, 
         cart: cartFound
     });
+}
+
+/**
+ * Extrae los atributos escenciales a guardar en la base de datos
+ * @param product Producto a guardar
+ * @returns Object con los atributosa guardar del producto ingresado
+ */
+ function destructureProduct(product: any) {
+    const productFiltered = {
+        id_product: product.id_product,
+        name: product.name, 
+        image_url: product.image_url,
+        price: product.price,
+        discount: product.discount,
+        quantity: product.quantity,
+        stock: product.stock
+    };
+
+    return productFiltered;
 }
