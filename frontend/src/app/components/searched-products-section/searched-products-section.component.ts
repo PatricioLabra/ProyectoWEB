@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from '@models/product.model';
 
 @Component({
@@ -11,7 +12,11 @@ export class SearchedProductsSectionComponent implements OnInit {
 
   products: Array<Product> = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
+    console.log(route.queryParams.subscribe((data: any) => {
+      console.log(data);
+    }));
+  }
 
   ngOnInit(): void {
     this.http.get('http://localhost:4000/products/newer/0/10').subscribe((data: any) => {
