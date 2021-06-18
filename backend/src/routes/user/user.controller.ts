@@ -59,7 +59,7 @@ export const getUser: RequestHandler = async (req, res) => {
 	const userInfo = destructureUser(userFound);
 
 	responseObject.success = true;
-	responseObject.data = { userInfo };
+	responseObject.data = userInfo;
 
 	return res.status(200).send(responseObject);	
 }
