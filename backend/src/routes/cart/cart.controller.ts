@@ -27,6 +27,7 @@ export const addCart: RequestHandler = async (req, res) => {
     if (!userFound)
         return res.status(404).send({ success: false, message: 'Error: el nickname del usuario no existe en el sistema.' })
 
+    //se sacan los datos escenciales a almacenar en la BD
     const productsFiltered = productCart.map((product: any) => destructureProduct(product));
 
 
@@ -53,6 +54,7 @@ export const addCart: RequestHandler = async (req, res) => {
         const carts = await Cart.find().sort({ createdAt: -1 }).skip(initialCart).limit(quantityCarts);
         const quantityCartsRegistered: number = await Cart.countDocuments();
 
+        //se filtran los datos publicos de cada carrito
         const cartsFiltered = carts.map((cart: any) => destructureCart(cart));
 
         return res.status(200).send({
@@ -88,6 +90,7 @@ export const addCart: RequestHandler = async (req, res) => {
     if (!cartFound)
         return res.status(404).send({ success: false, message:'Error: el carrito no existe en el sistema.' });
 
+    //se filtran los datos publicos del carrito
     const cartFiltered = destructureCart(cartFound);
 
     return res.status(200).send({
