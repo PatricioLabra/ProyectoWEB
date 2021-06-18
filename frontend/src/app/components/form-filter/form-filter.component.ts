@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CategoryList, Subcategories } from '@models/category-types';
+import { FilterType } from '@models/filter.model';
 
 @Component({
   selector: 'app-form-filter',
@@ -15,6 +16,9 @@ export class FormFilterComponent {
 
   filterForm: FormGroup;
 
+  @Output()
+  filterSubmit = new EventEmitter<FilterType>();
+
   constructor(private _fb: FormBuilder) {
     this.filterForm = this._fb.group({
       category: [''],
@@ -24,9 +28,11 @@ export class FormFilterComponent {
   }
 
   onSubmit() {
-    const data = this.filterForm.getRawValue();
+    const data: FilterType = this.filterForm.getRawValue();
+    data.subcategories = this.SubcategoriesChecked;
 
-    console.log(data, this.SubcategoriesChecked);
+    console.log(data);
+    this.filterSubmit.emit(data);
   }
 
   /**
