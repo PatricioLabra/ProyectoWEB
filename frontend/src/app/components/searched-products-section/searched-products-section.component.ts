@@ -11,15 +11,23 @@ import { ApiConnectionService } from '@services/api-connection.service';
 export class SearchedProductsSectionComponent implements OnInit {
 
   products: Array<Product> = [];
+  textSearched: string = '';
 
   constructor(private api: ApiConnectionService, private route: ActivatedRoute) {
-    route.queryParams.subscribe((data: any) => {
-      console.log(data);
-    });
   }
 
   ngOnInit(): void {
-    this.api.getNewerProducts(0, 10).subscribe((data: any) => {
+    this.route.queryParams.subscribe((newQueryParams: any) => {
+      this.textSearched = newQueryParams.text;
+
+      this.updateSearchedProducts();
+    });
+
+  }
+
+  updateSearchedProducts() {
+    this.api.getSearchProducts(this.textSearched).subscribe((data: any) => {
+      console.log(data);
       this.products = data.products;
     });
   }

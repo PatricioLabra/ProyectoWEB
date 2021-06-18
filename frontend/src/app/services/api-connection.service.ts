@@ -41,7 +41,7 @@ export class ApiConnectionService {
    */
   getSearchProducts(keyword: string) {
     const url = this.makeUrl(['products', keyword]);
-    this.http.get(url);
+    return this.http.get(url);
   }
 
   /**
