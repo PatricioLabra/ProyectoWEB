@@ -1,5 +1,6 @@
-import { RequestHandler } from "express";
+import { RequestHandler, response } from "express";
 import { createHmac } from "crypto"
+import { ApiResponse } from '../api-response.model';
 import User from './user.model';
 import { signToken } from "../jwt";
 
@@ -11,25 +12,32 @@ import { signToken } from "../jwt";
  */
 export const signUp: RequestHandler = async (req, res) => {
 
+	const responseObject: ApiResponse<string> = { success: false };
 	const { nickname, password, email, rut } = req.body;
 
 	// Se valida si algun atributo no es valido
-	if (!nickname || !password || !email || !rut)
-		return res.status(400).send({ success: false, message: 'Error: datos inválidos' + req.body });	
+	if (!nickname || !password || !email || !rut) {
+		responseObject.message = 'Error: datos inválidos' + req.body;
+		return res.status(400).send(responseObject);	
+	}
 
 	const userFound = await User.findOne({ nickname });
 
 	// Se valida si ya existe un usuario con el nickname ingresado
-	if (userFound)
-		return res.status(301).send({ success: false, message: 'Error: el usuario ya existe en el sistema.' })
+	if (userFound) {
+		responseObject.message = 'Error: el usuario ya existe en el sistema.';
+		return res.status(301).send(responseObject);
+	}
 
 	const newUser = new User(req.body);
 	newUser.password = encrypt(nickname, password);
 	await newUser.save()							
 
 	const token = signToken(newUser._id);
+	responseObject.data = token;
+	responseObject.success = true;
 
-	return res.status(201).send({ success: true, token });
+	return res.status(201).send(responseObject);
 }
 
 /**
@@ -39,17 +47,21 @@ export const signUp: RequestHandler = async (req, res) => {
  * @param res Response, retornara la informacion del usuario si todo sale bien
  */
 export const getUser: RequestHandler = async (req, res) => {
+
+	const responseObject: ApiResponse<Object> = { success: false };
 	const userFound = await  User.findOne({ nickname: req.params.nick });
 
-	if (!userFound)
-		return res.status(404).send({ success: false, message: 'Error: El usuario ingresado no existe en el sistema.' });
+	if (!userFound) {
+		responseObject.message = 'Error: El usuario ingresado no existe en el sistema.';
+		return res.status(404).send(responseObject);
+	}
 
 	const userInfo = destructureUser(userFound);
 
-	return res.status(200).send({
-		success: true, 
-		userInfo
-	});	
+	responseObject.success = true;
+	responseObject.data = userInfo;
+
+	return res.status(200).send(responseObject);	
 }
 
 /**
@@ -59,19 +71,27 @@ export const getUser: RequestHandler = async (req, res) => {
  * @param res Response, retornara el token si todo sale bien
  */
 export const signIn: RequestHandler = async (req, res) => {
+
+	const responseObject: ApiResponse<string> = { success: false };
 	const { nickname, password } = req.body;
 	const user = await User.findOne({ nickname });
 	const passEncrypt = encrypt(nickname, password)
 
-	if (!user)
-		return res.status(404).send({ success: false, message: 'Error: el usuario ingresado no existe en el sistema.' });
+	if (!user) {
+		responseObject.message = 'Error: el usuario ingresado no existe en el sistema.';
+		return res.status(404).send(responseObject);
+	}
 
-	if (user.password !== passEncrypt)
-		return res.status(400).send({ success: false, message: 'Error: la password ingresada no es válida.' });
+	if (user.password !== passEncrypt) {
+		responseObject.message = 'Error: la password ingresada no es válida.';
+		return res.status(400).send(responseObject);
+	}
 
 	const token = signToken(user._id);
+	responseObject.data = token;
+	responseObject.success = true;
 
-	return res.status(200).send({ success: true, token });
+	return res.status(201).send(responseObject);
 }
 
 /**
@@ -83,6 +103,8 @@ export const signIn: RequestHandler = async (req, res) => {
  */
 export const getNewerUsers: RequestHandler = async (req, res) => {
 	
+	const responseObject: ApiResponse<Object> = { success: false };
+
 	try {
 		const initialUser = parseInt(req.params.init);
 		const quantityUsers = parseInt(req.params.quantity);
@@ -93,19 +115,15 @@ export const getNewerUsers: RequestHandler = async (req, res) => {
 		// Se filtran los atributos de los usuarios, para no mostrar mas info de la necesaria
 		const dataFiltered = users.map((user: any) => destructureUser(user));
 
-		return res.status(200).send({
-			succes: true,
-			data: {
-				quantityUsersRegistered,
-				dataFiltered
-			}
-		});
+		responseObject.success = true;
+		responseObject.data = { quantityUsersRegistered, dataFiltered };
+
+		return res.status(200).send(responseObject);
 
 	} catch (error) {
-		return res.status(500).send({
-			succes: false,
-			messaje: 'Error inesperado: ' + error.message
-		});
+
+		responseObject.message = 'Error inesperado: ' + error.message;
+		return res.status(500).send(responseObject);
 	}
 }
 
