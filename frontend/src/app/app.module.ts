@@ -18,6 +18,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CartSectionComponent } from './components/cart-section/cart-section.component';
 import { SearchedProductsSectionComponent } from './components/searched-products-section/searched-products-section.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { FormFilterComponent } from './components/form-filter/form-filter.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     HomeComponent,
     CartSectionComponent,
     SearchedProductsSectionComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    FormFilterComponent
   ],
   imports: [
     BrowserModule,
