@@ -25,6 +25,9 @@ export class SearchedProductsSectionComponent implements OnInit {
 
   }
 
+  /**
+   * Obtiene los productos relacionados con la busqueda
+   */
   updateSearchedProducts() {
     this.api.getSearchProducts(this.textSearched).subscribe((data: any) => {
       console.log(data);
