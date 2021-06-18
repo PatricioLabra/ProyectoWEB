@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '@services/auth.service';
 import { Profile } from '@models/profile.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserInfoService } from '@services/user-info.service';
+import { ApiConnectionService } from '@services/api-connection.service';
 
 @Component({
   selector: 'app-form-login',
@@ -23,7 +23,7 @@ export class FormLoginComponent {
 
   constructor(
     private _fb: FormBuilder,
-    private auth: AuthService,
+    private api: ApiConnectionService,
     private userInfo: UserInfoService,
     private router: Router
   ) {
@@ -52,7 +52,7 @@ export class FormLoginComponent {
     if (this.profileForm.valid) {
       const profileData: Profile = this.profileForm.getRawValue() as Profile;
 
-      this.auth.signUp(profileData).subscribe(this.successLogin, this.handleError);
+      this.api.signIn(profileData).subscribe(this.successLogin, this.handleError);
     }
   }
 

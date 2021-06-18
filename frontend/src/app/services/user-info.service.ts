@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-
 import { UserInfo } from '@models/user-info.model';
-import { AuthService } from './auth.service';
+import { ApiConnectionService } from './api-connection.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,7 @@ export class UserInfoService {
   userInfo: UserInfo;
   token: string;
 
-  constructor(private auth: AuthService) {
+  constructor(private api: ApiConnectionService) {
     this.isLogged = false;
     this.isAdmin = false;
     this.userInfo = { nickname: 'Visitant' };
@@ -26,7 +25,7 @@ export class UserInfoService {
     this.token = token;
     this.userInfo.nickname = nickname;
 
-    this.auth.getUserData(nickname, token).subscribe((data: any) => {
+    this.api.getUserData(nickname, token).subscribe((data: any) => {
       console.log(data);
       this.userInfo = data.userInfo;
     });

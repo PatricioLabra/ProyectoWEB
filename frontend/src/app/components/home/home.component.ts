@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Product } from '@models/product.model';
 import { CategoryTypes } from '@models/category-types';
+import { ApiConnectionService } from '@services/api-connection.service';
 
 @Component({
   selector: 'app-home',
@@ -15,10 +15,10 @@ export class HomeComponent implements OnInit {
   clothes: Array<Product> = [];
   food: Array<Product> = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private api: ApiConnectionService) { }
 
   ngOnInit(): void {
-    this.http.get('http://localhost:4000/products/newer/0/10').subscribe((data: any) => {
+    this.api.getNewerProducts(0, 10).subscribe((data: any) => {
       this.products = data.products;
       this.movies = this.products.filter((product: Product) => product.category == CategoryTypes.MOVIES);
       this.music = this.products.filter((product: Product) => product.category == CategoryTypes.MUSIC);
