@@ -1,4 +1,4 @@
-import { RequestHandler, response } from "express";
+import { RequestHandler } from "express";
 import { createHmac } from "crypto"
 import { ApiResponse } from '../api-response.model';
 import User from './user.model';
