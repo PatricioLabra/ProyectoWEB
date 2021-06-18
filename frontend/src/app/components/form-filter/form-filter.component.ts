@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CategoryList, Subcategories } from '@models/category-types';
 
 @Component({
@@ -6,7 +6,7 @@ import { CategoryList, Subcategories } from '@models/category-types';
   templateUrl: './form-filter.component.html',
   styleUrls: ['./form-filter.component.scss']
 })
-export class FormFilterComponent implements OnInit {
+export class FormFilterComponent {
 
   CategoryList = CategoryList;
   Subcategories = Subcategories;
@@ -14,7 +14,7 @@ export class FormFilterComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit(): void {
-  }
+  filterProducts() {
 
+  }
 }

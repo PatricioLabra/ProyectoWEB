@@ -10,6 +10,14 @@
       {{ sub }}
     </p>
   </div>
+
+  <label for="lowerLimit">Precio minimo</label>
+  <input type="text" name="lowerLimit">
+
+  <label for="upperLimit">Precio maximo</label>
+  <input type="text" name="upperLimit">
+
+  <button (click)="filterProducts()">Filtrar</button>
 </form>
 
 <p>form-filter works!</p>
