@@ -19,6 +19,9 @@ export class SearchBarComponent implements OnInit {
   }
 
   searchProducts() {
-    this.router.navigate(['search']);
+    const input: string = this.searchInput.value;
+
+    if (input != '')
+      this.router.navigate(['search'], { queryParams: { text: input } });
   }
 }
