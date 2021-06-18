@@ -10,11 +10,34 @@ import { Types } from "mongoose"
  */
 export const addComment: RequestHandler = async (req, res) => {
 
+    const { id_product, comments } = req.body;
+
     //se valida que id_product no sea null 
+    if (!id_product)
+        return res.status(400).send({ succes: false, message: 'Error: no se ingresó un id para el producto.' });
+
+    //se valida que el id_product sea válido
+    if ( !Types.ObjectId.isValid( id_product ) )
+        return res.status(400).send({ success:false, message:'Error: el id del producto ingresado no es válido.' });
+
     //se valida que el arreglo de comentarios no esté vacío
-    //se valida que el id_product no este registrado
-        //si lo está, se agrega el comentario_ingresado a los comentarios ya almacenados con el id_producto ingresado en la BD
-        //si no está, se agregan los comentarios del producto con el id_product
+    if (comments.lenght == 0)
+        return res.status(400). send({ succes: false, message: 'Error: no se ingresó ningun comentario o calificacion del producto.'});
+
+    const commentProductFound = await Comment.findById(id_product);
+
+    //si está agregado el producto, solo se le agrega el comentario a dicho producto
+    if (commentProductFound){
+
+        /*falta aquí*/
+    }
+
+    const newComment = {id_product, comments};
+    const commentSaved = new Comment(newComment);
+
+    await commentSaved.save;
+
+    return res.status(200).send({ succes: true });
 }
 
 /**
@@ -24,9 +47,22 @@ export const addComment: RequestHandler = async (req, res) => {
  * @param res Response, retornará la informacion de todos los comentarios + la cantidad de los mismos si todo sale bien
  */
 export const getComments: RequestHandler = async (req, res) => {
+
+    const id_product = req.params.id_product;
+
     //se valida que el id_product no sea null
+    if (!id_product)
+        return res.status(400).send({ success: false, message: 'Error: No se ingresó ningun id de producto.' })
+
     //se valida que el id_product sea objectId
+    if ( !Types.ObjectId.isValid( id_product ) )
+        return res.status(400).send({ success:false, message:'Error: el id del producto ingresado no es válido.' });
+
     //se valida que exista un producto almacenado con sus comentarios
+    const product = await Comment.findById(id_product);
+    const quantityComments = product.comments.lenght;
+
+    return res.status(200).send({ success: true, quantityComments, product });
 }
 
 /**
