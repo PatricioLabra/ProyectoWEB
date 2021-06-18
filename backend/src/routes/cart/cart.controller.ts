@@ -36,7 +36,9 @@ export const addCart: RequestHandler = async (req, res) => {
 
     await cartSaved.save();
 
-    return res.status(200).send({ success: true , cartSaved });
+    const cartFilteredSaved = destructureCart(cartSaved);
+
+    return res.status(200).send({ success: true , cart: cartFilteredSaved});
 }
 
 /**
@@ -112,7 +114,6 @@ export const addCart: RequestHandler = async (req, res) => {
         price: product.price,
         discount: product.discount,
         quantity: product.quantity,
-        stock: product.stock
     };
 
     return productFiltered;
