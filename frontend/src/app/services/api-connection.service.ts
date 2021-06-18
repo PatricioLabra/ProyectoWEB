@@ -16,6 +16,35 @@ export class ApiConnectionService {
   }
 
   /**
+   * Obtiene la informacion de un producto en base a su id
+   * @param id Id del producto
+   */
+  getProduct(id: string) {
+    const url = this.makeUrl(['product', id]);
+    return this.http.get(url);
+  }
+
+  /**
+   * Obtiene los productos mas nuevos, desde el producto 'initialProduct' mas nuevo, obtiene
+   * 'quantityProducts'
+   * @param initialProduct primer producto a traer
+   * @param quantityProducts cantidad de productos a obtener
+   */
+  getNewerProducts(initialProduct: number, quantityProducts: number) {
+    const url = this.makeUrl(['products', 'newer', initialProduct, quantityProducts]);
+    return this.http.get(url);
+  }
+
+  /**
+   * Obtiene los productos que coincidan con el texto ingresado
+   * @param keyword texto de busqueda
+   */
+  getSearchProducts(keyword: string) {
+    const url = this.makeUrl(['products', keyword]);
+    this.http.get(url);
+  }
+
+  /**
    * Valida las credenciales del usuario
    * @param profile perfile con las credenciales del usuario
    */
@@ -41,7 +70,7 @@ export class ApiConnectionService {
    * @param listParams Lista de parametros de la url
    * @returns url de la api con los parametros correspondientes
    */
-  makeUrl(listParams: Array<string>): string {
+  makeUrl(listParams: Array<string | number>): string {
     const params = listParams.join('/');
     const url = `${this.API_URL}/${params}`;
     return url;
