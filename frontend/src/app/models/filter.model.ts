@@ -1,7 +1,7 @@
 export interface FilterType {
-  text: string,
+  text_index: string,
   category: string,
   subcategories: Array<string>,
-  minPrice: number,
-  maxPrice: number
+  lower_limit: number,
+  upper_limit: number
 };

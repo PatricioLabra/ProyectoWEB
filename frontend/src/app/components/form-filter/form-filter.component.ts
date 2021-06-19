@@ -28,8 +28,18 @@ export class FormFilterComponent {
   }
 
   onSubmit() {
-    const data: FilterType = this.filterForm.getRawValue();
-    data.subcategories = this.SubcategoriesChecked;
+    let { category, minPrice, maxPrice } = this.filterForm.getRawValue();
+
+    minPrice = (null == minPrice) ? minPrice : parseInt(minPrice);
+    maxPrice = (null == maxPrice) ? maxPrice : parseInt(maxPrice);
+
+    const data: FilterType = {
+      text_index: '',
+      category,
+      lower_limit: minPrice,
+      upper_limit: maxPrice,
+      subcategories: this.SubcategoriesChecked
+    }
 
     console.log(data);
     this.filterSubmit.emit(data);

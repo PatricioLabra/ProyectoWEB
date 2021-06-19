@@ -39,9 +39,11 @@ export class SearchedProductsSectionComponent implements OnInit {
    * @param filter Filtro que se aplicara a los productos para buscarlos
    */
   filterProducts(filter: FilterType) {
-    filter.text = this.textSearched;
+    filter.text_index = this.textSearched;
+    console.log(filter);
 
     this.api.getFilteredProducts(filter).subscribe((data: any) => {
+      console.log(data);
       this.products = data.products;
     });
   }
