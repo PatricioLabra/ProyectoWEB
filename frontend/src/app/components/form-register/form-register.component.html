@@ -45,7 +45,11 @@
   <label for="">email</label>
   <input formControlName="email" type="email">
 	<app-field-error
-		[displayError]="isFieldInvalid('email')"
+		[displayError]="isFieldInvalid('email') && registerForm.controls.email.errors?.email"
+		[errorMessage]="'email no valido'"
+  ></app-field-error>
+	<app-field-error
+		[displayError]="isFieldInvalid('email') && registerForm.controls.email.errors?.required"
 		[errorMessage]="'email requerido'"
   ></app-field-error>
 

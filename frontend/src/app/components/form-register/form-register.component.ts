@@ -26,7 +26,7 @@ export class FormRegisterComponent {
       address: ['', Validators.required],
       region: ['Arica y Parinacota', Validators.required],
       commune: ['Arica', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       conf_pass: ['', Validators.required]
     });
@@ -51,6 +51,7 @@ export class FormRegisterComponent {
     } else {
       this.isCorrectPass = true;
 
+        console.log(this.registerForm.controls.email.errors);
       if (this.registerForm.valid) {
         console.log('register');
       }
