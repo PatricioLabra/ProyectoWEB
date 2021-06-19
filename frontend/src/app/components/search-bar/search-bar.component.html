@@ -1,3 +1,5 @@
-<input [formControl]="searchInput" type="text">
-<button (click)="searchProducts()">Buscar</button>
-<p>search-bar works!</p>
+<mat-form-field>
+  <mat-label>Buscar</mat-label>
+  <input type="text" matInput [formControl]="searchInput" placeholder="Mascarilla Kakashi">
+</mat-form-field>
+<button (click)="searchProducts()" mat-flat-button color="primary">Buscar</button>
