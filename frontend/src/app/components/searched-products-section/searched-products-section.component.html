@@ -1,0 +1,11 @@
+<div>
+  <ul>
+    <li *ngFor="let product of products">
+      {{ product.name }} - {{ product.category }}
+    </li>
+  </ul>
+</div>
+
+<app-form-filter (filterSubmit)="filterProducts($event)"></app-form-filter>
+
+<p>searched-products-section works!</p>

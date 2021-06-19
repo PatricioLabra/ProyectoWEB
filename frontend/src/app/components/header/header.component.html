@@ -1,0 +1,29 @@
+<div routerLink="/home">Logo</div>
+<div>
+	Categorias
+	<ul>
+		<li *ngFor="let category of CategoryTypes">{{ category }}</li>
+	</ul>
+</div>
+
+<app-search-bar></app-search-bar>
+
+<div *ngIf="isLogged; else noEstaLogueado">
+	<div>
+		{{ nickname }}
+	</div>
+	<div *ngIf="isAdmin; else carrito">
+		Panel admin
+	</div>
+
+	<button (click)="signout()">Cerrar Sesion</button>
+
+	<ng-template #carrito>
+		<app-cart-header></app-cart-header>
+	</ng-template>
+</div>
+
+<ng-template #noEstaLogueado>
+	<button routerLink="/login">Iniciar Sesion</button>
+	<button routerLink="/register">Registrarse</button>
+</ng-template>
