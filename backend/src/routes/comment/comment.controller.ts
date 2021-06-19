@@ -116,15 +116,21 @@ export const getCalificationComments: RequestHandler = async (req, res) => {
         return res.status(404).send({ success: false, message: 'Error: No se encontraron calificaciones del producto ingresado' });
 
     const calification =  gradeAdder(product);
-    const calificationAverage = (calification.totalCalification / calification.quantityCalifications);
 
-    return res.status(200).send({success: true, quantityCalifications: calification.quantityCalifications, Average: calificationAverage });
+    return res.status(200).send({success: true, quantityCalifications: calification.quantityCalifications, Average: calification.averageCalification });
 
 }
 
+/**
+ * Funcion calcula tl total 
+ * @route Get '/califications'
+ * @param req Request de la peticion, no espera nada como parámetro
+ * @param res Response, retornará el promedio de todas las calificaciones + su cantidad si todo sale bien
+ */
 function gradeAdder(product:any){
     let totalCalification = 0;
     let quantityCalifications = 0;
+    let averageCalification = 0;
 
     product.comments.forEach((comment:any) =>{
         totalCalification += comment.calification_author;
@@ -132,6 +138,9 @@ function gradeAdder(product:any){
         if(comment.calification_author != 0)
             quantityCalifications ++;
     });
+    
+    //Se calcula el promedio
+    averageCalification = (totalCalification / quantityCalifications);
 
-    return {totalCalification, quantityCalifications};
+    return {averageCalification, quantityCalifications};
 }
