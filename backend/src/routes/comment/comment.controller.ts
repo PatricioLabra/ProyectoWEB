@@ -49,7 +49,6 @@ export const addComment: RequestHandler = async (req, res) => {
     } catch (error) {
         return res.status(400).send({success: false, message: 'Error: '+ error});
     }
-   
 }
 
 /**
@@ -60,7 +59,9 @@ export const addComment: RequestHandler = async (req, res) => {
  */
 export const getComments: RequestHandler = async (req, res) => {
 
-    const id_product = req.params.id_product;
+    const id_product = req.params.id;
+    const init_comments = req.params.init;
+    const quantity_comments = req.params.quantity;
 
     //se valida que el id_product no sea null
     if (!id_product)
@@ -76,24 +77,28 @@ export const getComments: RequestHandler = async (req, res) => {
     if (!product)
         return res.status(404).send({ success: false, message: 'Error: no se encontró ningun producto comentado con el id ingresado.' });
 
-    const quantityComments = product.comments.lenght;
+    const comments = product.comments;
+    const totalQuantityComments = Object.keys(comments).length;;
 
     //se valida que el producto tenga comentarios
-    if (quantityComments == 0)
-        return res.status(404).send({ success: false, message: 'Error: No se encontraron comentarios del producto buscado.' });
+    if (totalQuantityComments == 0)
+        return res.status(404).send({ success: false, message: 'Error: No se encontraron comentarios del producto.' });
 
-    return res.status(200).send({ success: true, quantityComments, product });
+    //seleccionamos los comentarios a retornar, para no mandar todo
+    const selectComments = commentPicker(comments, init_comments, quantity_comments);
+
+    return res.status(200).send({ success: true, totalQuantityComments, selectComments });
 }
 
 /**
  * Funcion que maneja la petición de las calificaciones de todos los comentarios
- * @route Get '/califications'
+ * @route Get '/califications/:id'
  * @param req Request de la peticion, no espera nada como parámetro
  * @param res Response, retornará el promedio de todas las calificaciones + su cantidad si todo sale bien
  */
 export const getCalificationComments: RequestHandler = async (req, res) => {
     
-    const id_product = req.params.id_product;
+    const id_product = req.params.id;
 
 //se valida que el id_product no sea null
     if (!id_product)
@@ -121,6 +126,23 @@ export const getCalificationComments: RequestHandler = async (req, res) => {
 }
 
 /**
+ * Funcion que selecciona los comentarios de un prtoducto para no retornarlos todos
+ * @param comments Array de comentarios del producto
+ * @param init_comments punto de inicio para seleccionar comentarios
+ * @param quantity_comments cantidad de comentarios a seleccionar
+ * @returns Array con los comentarios seleccionados
+ */
+function commentPicker(comments:any, init_comments:any, quantity_comments:any){
+    let selectComments = [];
+
+    for (let i = init_comments; i < quantity_comments ; i++){
+        selectComments.push(comments[i]);
+    }
+
+    return selectComments;
+}
+
+/**
  * Funcion que calcula el promedio de todas las calificaciones almacenadas en los comentarios de un producto
  * @param product Producto extraido de la base de datos
  * @returns Object con el promedio y la cantidad de calificaciones
@@ -130,15 +152,15 @@ function gradeAdder(product:any){
     let quantityCalifications = 0;
     let averageCalification = 0;
 
-    product.comments.forEach((comment:any) =>{
+    product.comments.forEach((comment:any) => {
         totalCalification += comment.calification_author;
 
-        if(comment.calification_author != 0)
+        if (comment.calification_author != 0)
             quantityCalifications ++;
     });
     
     //Se calcula el promedio
     averageCalification = (totalCalification / quantityCalifications);
 
-    return {averageCalification, quantityCalifications};
+    return { averageCalification, quantityCalifications };
 }
