@@ -63,7 +63,7 @@ export const addComment: RequestHandler = async (req, res) => {
 
 /**
  * Funcion que maneja la petición de los datos todos los comentarios.
- * @route Get '/comments'
+ * @route Get '/comments/:id/:init/:quantity'
  * @param req Request de la peticion, espera init y quantity para seleccionar los comentarios a retornar
  * @param res Response, retornará la informacion de los comentarios seleccionados + la cantidad total de comentarios
  */
