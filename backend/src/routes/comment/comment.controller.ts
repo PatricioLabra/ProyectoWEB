@@ -107,12 +107,31 @@ export const getCalificationComments: RequestHandler = async (req, res) => {
 
     //se valida que esté registrado el producto
     if (!product)
-        return res.status(404).send({ success: false, message: 'Error: no se encontró ningun producto comentado con el id ingresado.' });
+        return res.status(404).send({ success: false, message: 'Error: no se encontró ningun producto calificado con el id ingresado.' });
 
     const quantityComments = product.comments.lenght;
 
     //se valida que el producto tenga comentarios
     if (quantityComments == 0)
-        return res.status(404).send({ success: false, message: 'Error: No se encontraron comentarios del producto buscado.' });
+        return res.status(404).send({ success: false, message: 'Error: No se encontraron calificaciones del producto ingresado' });
 
+    const calification =  gradeAdder(product);
+    const calificationAverage = (calification.totalCalification / calification.quantityCalifications);
+
+    return res.status(200).send({success: true, quantityCalifications: calification.quantityCalifications, Average: calificationAverage });
+
+}
+
+function gradeAdder(product:any){
+    let totalCalification = 0;
+    let quantityCalifications = 0;
+
+    product.comments.forEach((comment:any) =>{
+        totalCalification += comment.calification_author;
+
+        if(comment.calification_author != 0)
+            quantityCalifications ++;
+    });
+
+    return {totalCalification, quantityCalifications};
 }

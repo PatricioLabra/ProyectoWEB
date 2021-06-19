@@ -11,6 +11,6 @@ router.post('/comment', commentCtrl.addComment);
 router.get ('/comments/:id_product', commentCtrl.getComments)
 
 //Obtener el promedio de las calificaciones + su cantidad
-router.get ('comments/califications/:id_product', commentCtrl.getCalificationComments)
+router.get ('/comments/califications/:id_product', commentCtrl.getCalificationComments)
 
 export default router;
