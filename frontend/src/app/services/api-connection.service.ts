@@ -58,8 +58,9 @@ export class ApiConnectionService {
    * Valida las credenciales del usuario
    * @param profile perfile con las credenciales del usuario
    */
-  signIn(profile: Profile) {
-    const url = this.makeUrl(['user', 'signin']);
+  signIn(profile: Profile, isAdmin: boolean = false) {
+    const endpoint = (isAdmin) ? 'admin' : 'user';
+    const url = this.makeUrl([endpoint, 'signin']);
     return this.http.post(url, profile);
   }
 
@@ -68,8 +69,9 @@ export class ApiConnectionService {
    * @param nickname Nickname del usuario
    * @param token Token del usuario
    */
-  getUserData(nickname: string, token: string) {
-    const url = this.makeUrl(['user', nickname]);
+  getUserData(nickname: string, token: string, isAdmin: boolean = false) {
+    const endpoint = (isAdmin) ? 'admin' : 'user';
+    const url = this.makeUrl([endpoint, nickname]);
     this.headers = this.setToken(token);
 
     return this.http.get(url, {headers: this.headers});

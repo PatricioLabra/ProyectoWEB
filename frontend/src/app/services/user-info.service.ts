@@ -25,7 +25,7 @@ export class UserInfoService {
     this.token = token;
     this.userInfo.nickname = nickname;
 
-    this.api.getUserData(nickname, token).subscribe((data: any) => {
+    this.api.getUserData(nickname, token, isAdmin).subscribe((data: any) => {
       console.log(data);
       this.userInfo = data.userInfo;
     });
