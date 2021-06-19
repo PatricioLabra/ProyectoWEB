@@ -27,6 +27,16 @@
 		[errorMessage]="'rut requerido'"
   ></app-field-error>
 
+  <select name="" formControlName="region" (change)="updateCurrentRegion()">
+    <option value="">Region</option>
+    <option *ngFor="let region of Regions" [value]="region.region">{{ region.region }}</option>
+  </select>
+
+  <select name="" formControlName="commune">
+    <option value="">Comunne</option>
+    <option *ngFor="let commune of CurrentRegion.provincias" [value]="commune.name">{{ commune.name }}</option>
+  </select>
+
   <label for="">address</label>
   <input formControlName="address" type="text">
 	<app-field-error

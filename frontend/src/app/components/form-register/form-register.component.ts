@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Region, Regiones } from '@models/communes.model';
 
 @Component({
   selector: 'app-form-register',
@@ -13,6 +14,8 @@ export class FormRegisterComponent {
   submitAttempt: boolean = false;
   isCorrectPass: boolean = true;
   badNick: boolean = false;
+  Regions: Array<Region> = Regiones;
+  CurrentRegion: Region;
 
   constructor(private _fb: FormBuilder) {
     this.registerForm = this._fb.group({
@@ -27,6 +30,8 @@ export class FormRegisterComponent {
       password: ['', Validators.required],
       conf_pass: ['', Validators.required]
     });
+
+    this.CurrentRegion = this.Regions[0];
   }
 
   public isFieldInvalid(field: string) {
@@ -51,6 +56,16 @@ export class FormRegisterComponent {
       }
     } 
     console.log(data);
+  }
+
+  updateCurrentRegion() {
+    const regionName = this.registerForm.controls.region.value;
+    const index = this.Regions.findIndex((region: Region) => region.region == regionName);
+
+    if (index != -1)
+      this.CurrentRegion = this.Regions[index];
+
+    console.log(this.CurrentRegion);
   }
 
   private validPasswords() {
