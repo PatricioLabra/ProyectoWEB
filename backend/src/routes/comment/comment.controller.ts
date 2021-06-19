@@ -22,7 +22,7 @@ export const addComment: RequestHandler = async (req, res) => {
         return res.status(400).send({ success:false, message:'Error: el id del producto ingresado no es válido.' });
 
     const product = await Product.findById({"_id": id_product});
-    
+
     //se valida que el producto a almacenar exista en la base de datos
     if (!product)
         return res.status(404).send({ success:false, message: 'Error: el producto a agregar no esta registrado en la base de datos.'});
@@ -41,7 +41,8 @@ export const addComment: RequestHandler = async (req, res) => {
         if (productFound){
             const lengthCommentsArray = productFound.comments.length;
             productFound.comments[lengthCommentsArray] = comments[0];
-
+            
+            //se actualiza el producto ya agregado
             await Comment.findByIdAndUpdate( productFound._id, productFound );
             
             return res.status(201).send({ success: true });
@@ -109,7 +110,7 @@ export const getCalificationComments: RequestHandler = async (req, res) => {
     
     const id_product = req.params.id;
 
-//se valida que el id_product no sea null
+    //se valida que el id_product no sea null
     if (!id_product)
         return res.status(400).send({ success: false, message: 'Error: No se ingresó ningun id de producto.' });
 
@@ -123,7 +124,7 @@ export const getCalificationComments: RequestHandler = async (req, res) => {
     if (!product)
         return res.status(404).send({ success: false, message: 'Error: no se encontró ningun producto calificado con el id ingresado.' });
 
-    const quantityComments = product.comments.lenght;
+    const quantityComments = Object.keys(product.comments).length;
 
     //se valida que el producto tenga comentarios
     if (quantityComments == 0)
