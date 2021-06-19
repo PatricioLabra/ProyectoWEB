@@ -125,7 +125,8 @@ export const addCart: RequestHandler = async (req, res) => {
  function destructureCart(cart: any) {
     const cartFiltered = {
         nickname_buyer : cart.nickname_buyer,
-        productCart : cart.productCart
+        productCart : cart.productCart,
+        date: cart.createdAt
     };
 
     return cartFiltered;
