@@ -48,7 +48,7 @@ export const getAdmin: RequestHandler = async (req, res) => {
 
 	return res.status(200).send({
 		success:true, 
-		adminInfo
+		userInfo: adminInfo
 	});	
 }
 
