@@ -4,14 +4,20 @@
     <option *ngFor="let category of CategoryList" [value]="category">{{ category }}</option>
   </select>
 
-
-  <div *ngFor="let category of CategoryList; index as i">
-    {{ category }}
-    <p *ngFor="let sub of Subcategories[i]">
-      <input (change)="onChange(sub)" type="checkbox">
-      {{ sub }}
-    </p>
-  </div>
+  <mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel *ngFor="let category of CategoryList; index as i">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ category }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+      <div>
+        <p *ngFor="let sub of Subcategories[i]"><mat-checkbox (change)="onChange(sub)">{{ sub }}</mat-checkbox></p>
+      </div>
+  
+    </mat-expansion-panel>
+  </mat-accordion>
 
   <label for="lowerLimit">Precio minimo</label>
   <input formControlName="minPrice" type="text" name="lowerLimit">
