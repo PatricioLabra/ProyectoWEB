@@ -31,13 +31,23 @@
     </mat-error>
   </mat-form-field>
 
-  <select name="" formControlName="region" (change)="updateCurrentRegion()">
-    <option *ngFor="let region of Regions" [value]="region.region">{{ region.region }}</option>
-  </select>
+  <mat-form-field appearance="fill">
+    <mat-label>Region</mat-label>
+    <mat-select formControlName="region" (selectionChange)="updateCurrentRegion()" name="region_">
+      <mat-option *ngFor="let region of Regions" [value]="region.region">
+        {{ region.region }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  <select name="" formControlName="commune">
-    <option *ngFor="let commune of CurrentRegion.provincias" [value]="commune.name">{{ commune.name }}</option>
-  </select>
+  <mat-form-field appearance="fill">
+    <mat-label>Comuna</mat-label>
+    <mat-select formControlName="commune" name="commune_">
+      <mat-option *ngFor="let commune of CurrentRegion.provincias" [value]="commune.name">
+        {{ commune.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
 	<mat-form-field>
     <mat-label>Direccion</mat-label>
