@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import Comment from './comment.model';
+import Product from '../product/product.model'
 import { Types } from "mongoose"
 
 /**
@@ -20,14 +21,21 @@ export const addComment: RequestHandler = async (req, res) => {
     if ( !Types.ObjectId.isValid( id_product ) )
         return res.status(400).send({ success:false, message:'Error: el id del producto ingresado no es válido.' });
 
+    const product = await Product.findById({"_id": id_product});
+    
+    //se valida que el producto a almacenar exista en la base de datos
+    if (!product)
+        return res.status(404).send({ success:false, message: 'Error: el producto a agregar no esta registrado en la base de datos.'});
+
     //se valida que el arreglo de comentarios no esté vacío
-    if (comments.lenght == 0)
+    if (Object.keys(comments).length == 0)
         return res.status(400). send({ succes: false, message: 'Error: no se ingresó ningun comentario o calificacion del producto.'});
 
+    //se almacena la fecha del comentario
     comments[0].comment_date = Date.now();
 
     try {
-        const productFound = await Comment.findOne({id_product});
+        const productFound = await Comment.findOne({ id_product });
 
         //se valida si hay un producto ya registrado
         if (productFound){
@@ -39,6 +47,7 @@ export const addComment: RequestHandler = async (req, res) => {
             return res.status(201).send({ success: true });
         }
 
+        //al no estar registrado se crea y se agrega
         const newComment = {id_product, comments};
         const commentSaved = new Comment(newComment);
         
@@ -78,13 +87,13 @@ export const getComments: RequestHandler = async (req, res) => {
         return res.status(404).send({ success: false, message: 'Error: no se encontró ningun producto comentado con el id ingresado.' });
 
     const comments = product.comments;
-    const totalQuantityComments = Object.keys(comments).length;;
+    const totalQuantityComments = Object.keys(comments).length;
 
     //se valida que el producto tenga comentarios
     if (totalQuantityComments == 0)
         return res.status(404).send({ success: false, message: 'Error: No se encontraron comentarios del producto.' });
 
-    //seleccionamos los comentarios a retornar, para no mandar todo
+    //seleccionamos los comentarios a retornar
     const selectComments = commentPicker(comments, init_comments, quantity_comments);
 
     return res.status(200).send({ success: true, totalQuantityComments, selectComments });
@@ -126,7 +135,7 @@ export const getCalificationComments: RequestHandler = async (req, res) => {
 }
 
 /**
- * Funcion que selecciona los comentarios de un prtoducto para no retornarlos todos
+ * Funcion que selecciona los comentarios de un producto 
  * @param comments Array de comentarios del producto
  * @param init_comments punto de inicio para seleccionar comentarios
  * @param quantity_comments cantidad de comentarios a seleccionar
