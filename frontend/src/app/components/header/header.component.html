@@ -1,10 +1,9 @@
 <div routerLink="/home">Logo</div>
-<div>
-	Categorias
-	<ul>
-		<li *ngFor="let category of CategoryTypes">{{ category }}</li>
-	</ul>
-</div>
+
+<button mat-button [matMenuTriggerFor]="animals">Categorias</button>
+<mat-menu #animals="matMenu">
+  <button mat-menu-item *ngFor="let category of CategoryTypes">{{ category | titlecase }}</button>
+</mat-menu>
 
 <app-search-bar></app-search-bar>
 

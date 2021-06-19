@@ -7,6 +7,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   exports: [
@@ -18,6 +19,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatCheckboxModule,
     MatIconModule,
     MatTabsModule,
+    MatMenuModule,
   ]
 })
 export class AngularMaterialModule { }
