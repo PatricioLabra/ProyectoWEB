@@ -16,7 +16,7 @@
 		Panel admin
 	</div>
 
-	<button (click)="signout()">Cerrar Sesion</button>
+	<button (click)="signout()" mat-flat-button color="primary">Cerrar Sesion</button>
 
 	<ng-template #carrito>
 		<app-cart-header></app-cart-header>
@@ -24,6 +24,6 @@
 </div>
 
 <ng-template #noEstaLogueado>
-	<button routerLink="/login" mat-flat-button color="primary">Iniciar Sesion</button>
+	<button routerLink="/admin/login" mat-flat-button color="primary">Iniciar Sesion</button>
 	<button routerLink="/register" mat-flat-button color="primary">Registrarse</button>
 </ng-template>
