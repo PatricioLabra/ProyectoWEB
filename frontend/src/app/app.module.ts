@@ -25,6 +25,8 @@ import { ReportUsersComponent } from './components/report-users/report-users.com
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { ReportProductsComponent } from './components/report-products/report-products.component';
 import { CartBoughtCardComponent } from './components/cart-bought-card/cart-bought-card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularMaterialModule } from '@modules/angular-material/angular-material.module';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,8 @@ import { CartBoughtCardComponent } from './components/cart-bought-card/cart-boug
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    AngularMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
