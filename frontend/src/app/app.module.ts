@@ -23,6 +23,7 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
 import { FormRegisterComponent } from './components/form-register/form-register.component';
 import { ReportUsersComponent } from './components/report-users/report-users.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
+import { ReportProductsComponent } from './components/report-products/report-products.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { UserCardComponent } from './components/user-card/user-card.component';
     AdminLoginComponent,
     FormRegisterComponent,
     ReportUsersComponent,
-    UserCardComponent
+    UserCardComponent,
+    ReportProductsComponent
   ],
   imports: [
     BrowserModule,
