@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FilterType } from '@models/filter.model';
 import { Product } from '@models/product.model';
 import { ApiConnectionService } from '@services/api-connection.service';
 
@@ -22,7 +23,6 @@ export class SearchedProductsSectionComponent implements OnInit {
 
       this.updateSearchedProducts();
     });
-
   }
 
   /**
@@ -30,6 +30,19 @@ export class SearchedProductsSectionComponent implements OnInit {
    */
   updateSearchedProducts() {
     this.api.getSearchProducts(this.textSearched).subscribe((data: any) => {
+      this.products = data.products;
+    });
+  }
+
+  /**
+   * Obtiene productos usando el filtro ingresado
+   * @param filter Filtro que se aplicara a los productos para buscarlos
+   */
+  filterProducts(filter: FilterType) {
+    filter.text_index = this.textSearched;
+    console.log(filter);
+
+    this.api.getFilteredProducts(filter).subscribe((data: any) => {
       console.log(data);
       this.products = data.products;
     });

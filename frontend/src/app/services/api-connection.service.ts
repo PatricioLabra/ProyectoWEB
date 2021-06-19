@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { Profile } from '@models/profile.model';
+import { FilterType } from '@models/filter.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,15 @@ export class ApiConnectionService {
   getSearchProducts(keyword: string) {
     const url = this.makeUrl(['products', keyword]);
     return this.http.get(url);
+  }
+
+  /**
+   * Obtiene los productos que coincidan con el filtro ingresado
+   * @param filter Filtro que se aplicara a los productos para buscarlos
+   */
+  getFilteredProducts(filter: FilterType) {
+    const url = this.makeUrl(['products', 'filtered']);
+    return this.http.post(url, filter);
   }
 
   /**
