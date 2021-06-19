@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UserInfoService } from '@services/user-info.service';
-import { CategoryTypesList } from '@models/category-types';
+import { CategoryList } from '@models/category-types';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +10,7 @@ import { CategoryTypesList } from '@models/category-types';
 })
 export class HeaderComponent implements OnInit {
 
-  CategoryTypes = CategoryTypesList;
+  CategoryTypes = CategoryList;
 
   constructor(private userInfo: UserInfoService) { }
 

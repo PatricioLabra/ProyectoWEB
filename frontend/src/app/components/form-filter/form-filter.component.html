@@ -1,0 +1,25 @@
+<form novalidate [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+  <select formControlName="category">
+    <option value="">Categoria</option>
+    <option *ngFor="let category of CategoryList" [value]="category">{{ category }}</option>
+  </select>
+
+
+  <div *ngFor="let category of CategoryList; index as i">
+    {{ category }}
+    <p *ngFor="let sub of Subcategories[i]">
+      <input (change)="onChange(sub)" type="checkbox">
+      {{ sub }}
+    </p>
+  </div>
+
+  <label for="lowerLimit">Precio minimo</label>
+  <input formControlName="minPrice" type="text" name="lowerLimit">
+
+  <label for="upperLimit">Precio maximo</label>
+  <input formControlName="maxPrice" type="text" name="upperLimit">
+
+  <button type="submit">Filtrar</button>
+</form>
+
+<p>form-filter works!</p>

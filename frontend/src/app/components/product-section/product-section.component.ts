@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductCart } from '@models/product-cart.model';
 import { Product } from '@models/product.model';
+import { ApiConnectionService } from '@services/api-connection.service';
 import { CartService } from '@services/cart.service';
 
 @Component({
@@ -18,14 +18,14 @@ export class ProductSectionComponent implements OnInit {
 
   constructor(
     private activeRoute: ActivatedRoute,
-    private http: HttpClient,
+    private api: ApiConnectionService,
     private cart: CartService,
   ) {
     this._id = this.activeRoute.snapshot.params.id;
   }
 
   ngOnInit(): void {
-    this.http.get('http://localhost:4000/product/' + this._id).subscribe((data: any) => {
+    this.api.getProduct(this._id).subscribe((data: any) => {
       this.product = data.product;
       this.productCart = new ProductCart(this.product, 1);
     });
