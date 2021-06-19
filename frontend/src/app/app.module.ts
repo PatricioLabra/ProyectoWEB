@@ -24,6 +24,7 @@ import { FormRegisterComponent } from './components/form-register/form-register.
 import { ReportUsersComponent } from './components/report-users/report-users.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { ReportProductsComponent } from './components/report-products/report-products.component';
+import { CartBoughtCardComponent } from './components/cart-bought-card/cart-bought-card.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,9 @@ import { ReportProductsComponent } from './components/report-products/report-pro
     FormRegisterComponent,
     ReportUsersComponent,
     UserCardComponent,
-    ReportProductsComponent
+    ReportProductsComponent,
+    CartBoughtComponent,
+    CartBoughtCardComponent
   ],
   imports: [
     BrowserModule,
