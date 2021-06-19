@@ -118,14 +118,12 @@ export const getCalificationComments: RequestHandler = async (req, res) => {
     const calification =  gradeAdder(product);
 
     return res.status(200).send({success: true, quantityCalifications: calification.quantityCalifications, Average: calification.averageCalification });
-
 }
 
 /**
- * Funcion calcula tl total 
- * @route Get '/califications'
- * @param req Request de la peticion, no espera nada como parámetro
- * @param res Response, retornará el promedio de todas las calificaciones + su cantidad si todo sale bien
+ * Funcion que calcula el promedio de todas las calificaciones almacenadas en los comentarios de un producto
+ * @param product Producto extraido de la base de datos
+ * @returns Object con el promedio y la cantidad de calificaciones
  */
 function gradeAdder(product:any){
     let totalCalification = 0;
