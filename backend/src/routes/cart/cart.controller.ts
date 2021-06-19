@@ -54,13 +54,15 @@ export const addCart: RequestHandler = async (req, res) => {
         const quantityCarts = parseInt(req.params.quantity);
 
         const carts = await Cart.find().sort({ createdAt: -1 }).skip(initialCart).limit(quantityCarts);
+        const quantityCartsRegistered = await Cart.countDocuments();
 
         //se filtran los datos publicos de cada carrito
         const cartsFiltered = carts.map((cart: any) => destructureCart(cart));
 
         return res.status(200).send({
             success: true,
-            carts: cartsFiltered
+            carts: cartsFiltered,
+            quantityCarts: quantityCartsRegistered
         });
         
     } catch (error) {
