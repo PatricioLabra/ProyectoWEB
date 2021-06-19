@@ -48,7 +48,6 @@ import { CartBoughtCardComponent } from './components/cart-bought-card/cart-boug
     ReportUsersComponent,
     UserCardComponent,
     ReportProductsComponent,
-    CartBoughtComponent,
     CartBoughtCardComponent
   ],
   imports: [

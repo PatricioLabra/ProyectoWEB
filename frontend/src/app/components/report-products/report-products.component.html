@@ -1,4 +1,9 @@
-<p>{{ carts | json }}</p>
-<p>{{ quantityCarts }}</p>
+<div>
+  <p>{{ quantityCarts }}</p>
+
+  <div>
+    <app-cart-bought-card *ngFor="let cart of carts" [cart]="cart"></app-cart-bought-card>
+  </div>
+</div>
 
 <p>report-products works!</p>
