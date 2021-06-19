@@ -64,16 +64,23 @@ export const getComments: RequestHandler = async (req, res) => {
 
     //se valida que el id_product no sea null
     if (!id_product)
-        return res.status(400).send({ success: false, message: 'Error: No se ingresó ningun id de producto.' })
+        return res.status(400).send({ success: false, message: 'Error: No se ingresó ningun id de producto.' });
 
     //se valida que el id_product sea objectId
     if ( !Types.ObjectId.isValid( id_product ) )
         return res.status(400).send({ success:false, message:'Error: el id del producto ingresado no es válido.' });
 
-    const product = await Comment.findById(id_product);
+    const product = await Comment.findOne({id_product});
+
+    //se valida que esté registrado el producto
+    if (!product)
+        return res.status(404).send({ success: false, message: 'Error: no se encontró ningun producto comentado con el id ingresado.' });
+
     const quantityComments = product.comments.lenght;
 
-    //se valida que exista un producto almacenado con sus comentarios
+    //se valida que el producto tenga comentarios
+    if (quantityComments == 0)
+        return res.status(404).send({ success: false, message: 'Error: No se encontraron comentarios del producto buscado.' });
 
     return res.status(200).send({ success: true, quantityComments, product });
 }
@@ -85,8 +92,27 @@ export const getComments: RequestHandler = async (req, res) => {
  * @param res Response, retornará el promedio de todas las calificaciones + su cantidad si todo sale bien
  */
 export const getCalificationComments: RequestHandler = async (req, res) => {
-    //se valida que el id_product no sea null
+    
+    const id_product = req.params.id_product;
+
+//se valida que el id_product no sea null
+    if (!id_product)
+        return res.status(400).send({ success: false, message: 'Error: No se ingresó ningun id de producto.' });
+
     //se valida que el id_product sea objectId
-    //se valida que exista un producto almacenado con sus comentarios
+    if ( !Types.ObjectId.isValid( id_product ) )
+        return res.status(400).send({ success:false, message:'Error: el id del producto ingresado no es válido.' });
+
+    const product = await Comment.findOne({id_product});
+
+    //se valida que esté registrado el producto
+    if (!product)
+        return res.status(404).send({ success: false, message: 'Error: no se encontró ningun producto comentado con el id ingresado.' });
+
+    const quantityComments = product.comments.lenght;
+
+    //se valida que el producto tenga comentarios
+    if (quantityComments == 0)
+        return res.status(404).send({ success: false, message: 'Error: No se encontraron comentarios del producto buscado.' });
 
 }
