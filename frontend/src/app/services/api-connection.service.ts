@@ -17,6 +17,17 @@ export class ApiConnectionService {
   }
 
   /**
+   * Obtiene los carritos comprados mas nuevos, desde el carrito 'initialCart' mas nuevo, obtiene
+   * 'quantityCarts'
+   * @param initialCart primer carrito a traer
+   * @param quantityCarts cantidad de carrito a obtener
+   */
+  getNewerCarts(initialCart: number, quantityCarts: number) {
+    const url = this.makeUrl(['carts', 'newer', initialCart, quantityCarts]);
+    return this.http.get(url);
+  }
+
+  /**
    * Obtiene la informacion de un producto en base a su id
    * @param id Id del producto
    */
@@ -55,12 +66,34 @@ export class ApiConnectionService {
   }
 
   /**
+   * Obtiene los usuarios mas nuevos, desde el usuario 'initialUser' mas nuevo, obtiene
+   * 'quantityUsers'
+   * @param initialUsers primer usuario a traer
+   * @param quantityUsers cantidad de usuarios a obtener
+   */
+  getNewerUsers(initialUser: number, quantityUsers: number) {
+    const url = this.makeUrl(['users', 'newer', initialUser, quantityUsers]);
+    return this.http.get(url);
+  }
+
+  /**
    * Valida las credenciales del usuario
    * @param profile perfile con las credenciales del usuario
    */
-  signIn(profile: Profile) {
-    const url = this.makeUrl(['user', 'signin']);
+  signIn(profile: Profile, isAdmin: boolean = false) {
+    const endpoint = (isAdmin) ? 'admin' : 'user';
+    const url = this.makeUrl([endpoint, 'signin']);
     return this.http.post(url, profile);
+  }
+
+  /**
+   * Valida las credenciales del usuario
+   * @param profile perfile con las credenciales del usuario
+   */
+  signUp(userInfo: any, isAdmin: boolean = false) {
+    const endpoint = (isAdmin) ? 'admin' : 'user';
+    const url = this.makeUrl([endpoint, 'signup']);
+    return this.http.post(url, userInfo);
   }
 
   /**
@@ -68,8 +101,9 @@ export class ApiConnectionService {
    * @param nickname Nickname del usuario
    * @param token Token del usuario
    */
-  getUserData(nickname: string, token: string) {
-    const url = this.makeUrl(['user', nickname]);
+  getUserData(nickname: string, token: string, isAdmin: boolean = false) {
+    const endpoint = (isAdmin) ? 'admin' : 'user';
+    const url = this.makeUrl([endpoint, nickname]);
     this.headers = this.setToken(token);
 
     return this.http.get(url, {headers: this.headers});

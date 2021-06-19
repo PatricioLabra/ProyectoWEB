@@ -52,7 +52,7 @@ export class FormLoginComponent {
     if (this.profileForm.valid) {
       const profileData: Profile = this.profileForm.getRawValue() as Profile;
 
-      this.api.signIn(profileData).subscribe(this.successLogin, this.handleError);
+      this.api.signIn(profileData, this.isAdmin).subscribe(this.successLogin, this.handleError);
     }
   }
 

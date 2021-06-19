@@ -97,7 +97,7 @@ export const getNewerUsers: RequestHandler = async (req, res) => {
 			succes: true,
 			data: {
 				quantityUsersRegistered,
-				dataFiltered
+				users: dataFiltered
 			}
 		});
 

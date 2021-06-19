@@ -19,6 +19,12 @@ import { CartSectionComponent } from './components/cart-section/cart-section.com
 import { SearchedProductsSectionComponent } from './components/searched-products-section/searched-products-section.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { FormFilterComponent } from './components/form-filter/form-filter.component';
+import { AdminLoginComponent } from './components/admin-login/admin-login.component';
+import { FormRegisterComponent } from './components/form-register/form-register.component';
+import { ReportUsersComponent } from './components/report-users/report-users.component';
+import { UserCardComponent } from './components/user-card/user-card.component';
+import { ReportProductsComponent } from './components/report-products/report-products.component';
+import { CartBoughtCardComponent } from './components/cart-bought-card/cart-bought-card.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +42,13 @@ import { FormFilterComponent } from './components/form-filter/form-filter.compon
     CartSectionComponent,
     SearchedProductsSectionComponent,
     SearchBarComponent,
-    FormFilterComponent
+    FormFilterComponent,
+    AdminLoginComponent,
+    FormRegisterComponent,
+    ReportUsersComponent,
+    UserCardComponent,
+    ReportProductsComponent,
+    CartBoughtCardComponent
   ],
   imports: [
     BrowserModule,
