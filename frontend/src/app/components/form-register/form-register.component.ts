@@ -60,7 +60,6 @@ export class FormRegisterComponent {
     } else {
       this.isCorrectPass = true;
 
-        console.log(this.registerForm.controls.email.errors);
       if (this.registerForm.valid) {
         this.api.signUp(data, false).subscribe((data: any) => {
           const token = data.token;
@@ -77,10 +76,10 @@ export class FormRegisterComponent {
     const regionName = this.registerForm.controls.region.value;
     const index = this.Regions.findIndex((region: Region) => region.region == regionName);
 
-    if (index != -1)
+    if (index != -1) {
       this.CurrentRegion = this.Regions[index];
-
-    console.log(this.CurrentRegion);
+      this.registerForm.controls.commune.setValue(this.CurrentRegion.provincias[0].name);
+    }
   }
 
   private validPasswords() {
