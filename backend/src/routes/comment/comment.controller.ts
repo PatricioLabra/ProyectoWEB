@@ -24,20 +24,32 @@ export const addComment: RequestHandler = async (req, res) => {
     if (comments.lenght == 0)
         return res.status(400). send({ succes: false, message: 'Error: no se ingresó ningun comentario o calificacion del producto.'});
 
-    const commentProductFound = await Comment.findById(id_product);
+    comments[0].comment_date = Date.now();
 
-    //si está agregado el producto, solo se le agrega el comentario a dicho producto
-    if (commentProductFound){
+    try {
+        const productFound = await Comment.findOne({id_product});
 
-        /*falta aquí*/
+        //se valida si hay un producto ya registrado
+        if (productFound){
+            const lengthCommentsArray = productFound.comments.length;
+            productFound.comments[lengthCommentsArray] = comments[0];
+
+            await Comment.findByIdAndUpdate( productFound._id, productFound );
+            
+            return res.status(201).send({ success: true });
+        }
+
+        const newComment = {id_product, comments};
+        const commentSaved = new Comment(newComment);
+        
+        await commentSaved.save();
+
+        return res.status(201).send({ succes: true });
+
+    } catch (error) {
+        return res.status(400).send({success: false, message: 'Error: '+ error});
     }
-
-    const newComment = {id_product, comments};
-    const commentSaved = new Comment(newComment);
-
-    await commentSaved.save;
-
-    return res.status(200).send({ succes: true });
+   
 }
 
 /**

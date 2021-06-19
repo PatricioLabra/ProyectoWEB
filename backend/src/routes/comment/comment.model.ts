@@ -5,12 +5,7 @@ const commentSchema = new Schema({
         type: String,
         required: true
     },
-    comments: [{
-        comment_body: String,
-        nickname_autor: String,
-        calification_author: Number,
-        timestamps:true
-    }]  
+    comments: [Schema.Types.Mixed]
 }, {
   versionKey: false,
   timestamps: true
