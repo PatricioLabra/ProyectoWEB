@@ -1,17 +1,21 @@
 <form novalidate [formGroup]="profileForm" (ngSubmit)="onSubmit()">
 	<span>Iniciar Sesion</span>
 
-	<input formControlName="nickname" type="text">
-	<app-field-error
-		[displayError]="isFieldInvalid('nickname')"
-		[errorMessage]="'nickname requerido'">
-	</app-field-error>
+	<mat-form-field>
+    <mat-label>Nickname</mat-label>
+    <input type="text" matInput formControlName="nickname" placeholder="Madara">
+    <mat-error *ngIf="isFieldInvalid('nickname')">
+			Nickname requerido
+    </mat-error>
+  </mat-form-field>
 
-	<input formControlName="password" type="password">
-	<app-field-error
-		[displayError]="isFieldInvalid('password')"
-		[errorMessage]="'password requerido'">
-	</app-field-error>
+	<mat-form-field>
+    <mat-label>Password</mat-label>
+    <input type="password" matInput formControlName="password" placeholder="Uchiha">
+    <mat-error *ngIf="isFieldInvalid('password')">
+			Password requerida
+    </mat-error>
+  </mat-form-field>
 
 	<button type="submit">Iniciar Sesion</button>
 	<app-field-error
@@ -20,6 +24,6 @@
 	</app-field-error>
 	<app-field-error
 		[displayError]="badPass"
-		[errorMessage]="'Contraseña no coincide'">
+		[errorMessage]="'Password incorrecta'">
 	</app-field-error>
 </form>
