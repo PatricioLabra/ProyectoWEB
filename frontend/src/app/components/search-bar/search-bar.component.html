@@ -1,5 +1,7 @@
 <mat-form-field>
   <mat-label>Buscar</mat-label>
-  <input type="text" matInput [formControl]="searchInput" placeholder="Mascarilla Kakashi">
+  <input type="text" matInput (submit)="searchProducts()" [formControl]="searchInput" placeholder="Mascarilla Kakashi">
+  <button color="primary" matSuffix mat-icon-button (click)="searchProducts()">
+    <mat-icon>search</mat-icon>
+  </button>
 </mat-form-field>
-<button (click)="searchProducts()" mat-flat-button color="primary">Buscar</button>
