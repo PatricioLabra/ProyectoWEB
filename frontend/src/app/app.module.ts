@@ -20,6 +20,7 @@ import { SearchedProductsSectionComponent } from './components/searched-products
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { FormFilterComponent } from './components/form-filter/form-filter.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
+import { FormRegisterComponent } from './components/form-register/form-register.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
     SearchedProductsSectionComponent,
     SearchBarComponent,
     FormFilterComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    FormRegisterComponent
   ],
   imports: [
     BrowserModule,
