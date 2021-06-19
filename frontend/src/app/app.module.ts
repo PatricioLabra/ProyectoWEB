@@ -22,6 +22,7 @@ import { FormFilterComponent } from './components/form-filter/form-filter.compon
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { FormRegisterComponent } from './components/form-register/form-register.component';
 import { ReportUsersComponent } from './components/report-users/report-users.component';
+import { UserCardComponent } from './components/user-card/user-card.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ReportUsersComponent } from './components/report-users/report-users.com
     FormFilterComponent,
     AdminLoginComponent,
     FormRegisterComponent,
-    ReportUsersComponent
+    ReportUsersComponent,
+    UserCardComponent
   ],
   imports: [
     BrowserModule,
