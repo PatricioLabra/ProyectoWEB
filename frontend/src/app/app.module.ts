@@ -19,6 +19,7 @@ import { CartSectionComponent } from './components/cart-section/cart-section.com
 import { SearchedProductsSectionComponent } from './components/searched-products-section/searched-products-section.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { FormFilterComponent } from './components/form-filter/form-filter.component';
+import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { FormFilterComponent } from './components/form-filter/form-filter.compon
     CartSectionComponent,
     SearchedProductsSectionComponent,
     SearchBarComponent,
-    FormFilterComponent
+    FormFilterComponent,
+    AdminLoginComponent
   ],
   imports: [
     BrowserModule,
