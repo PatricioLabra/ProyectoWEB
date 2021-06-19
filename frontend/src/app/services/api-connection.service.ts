@@ -55,6 +55,17 @@ export class ApiConnectionService {
   }
 
   /**
+   * Obtiene los usuarios mas nuevos, desde el usuario 'initialUser' mas nuevo, obtiene
+   * 'quantityUsers'
+   * @param initialUsers primer usuario a traer
+   * @param quantityUsers cantidad de usuarios a obtener
+   */
+  getNewerUsers(initialUser: number, quantityUsers: number) {
+    const url = this.makeUrl(['users', 'newer', initialUser, quantityUsers]);
+    return this.http.get(url);
+  }
+
+  /**
    * Valida las credenciales del usuario
    * @param profile perfile con las credenciales del usuario
    */

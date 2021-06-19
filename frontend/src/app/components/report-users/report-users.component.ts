@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserInfo } from '@models/user-info.model';
+import { ApiConnectionService } from '@services/api-connection.service';
 
 @Component({
   selector: 'app-report-users',
@@ -7,7 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportUsersComponent implements OnInit {
 
-  constructor() { }
+  users: Array<UserInfo> = [];
+  quantUsers: number = 0;
+
+  constructor(private api: ApiConnectionService) {
+    this.api.getNewerUsers(0, 10).subscribe((data: any) => {
+      console.log(data);
+    });
+  }
 
   ngOnInit(): void {
   }
