@@ -71,9 +71,10 @@ export class ApiConnectionService {
    * @param initialUsers primer usuario a traer
    * @param quantityUsers cantidad de usuarios a obtener
    */
-  getNewerUsers(initialUser: number, quantityUsers: number) {
+  getNewerUsers(token: string, initialUser: number, quantityUsers: number) {
     const url = this.makeUrl(['users', 'newer', initialUser, quantityUsers]);
-    return this.http.get(url);
+    this.headers = this.setToken(token);
+    return this.http.get(url, { headers: this.headers });
   }
 
   /**

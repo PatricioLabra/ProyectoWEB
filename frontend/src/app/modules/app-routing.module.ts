@@ -6,6 +6,7 @@ import { CartSectionComponent } from '@components/cart-section/cart-section.comp
 import { FormLoginComponent } from '@components/form-login/form-login.component';
 import { FormRegisterComponent } from '@components/form-register/form-register.component';
 import { HomeComponent } from '@components/home/home.component';
+import { PanelAdminComponent } from '@components/panel-admin/panel-admin.component';
 import { ProductSectionComponent } from '@components/product-section/product-section.component';
 import { SearchedProductsSectionComponent } from '@components/searched-products-section/searched-products-section.component';
 import { TestingComponent } from '@components/testing/testing.component';
@@ -25,6 +26,9 @@ const routes: Routes = [
   },
   {
     path: 'admin/login', component: AdminLoginComponent
+  },
+  {
+    path: 'admin/panel', component: PanelAdminComponent
   },
   {
     path: 'cart', component: CartSectionComponent

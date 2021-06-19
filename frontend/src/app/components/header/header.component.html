@@ -1,10 +1,9 @@
 <div routerLink="/home">Logo</div>
-<div>
-	Categorias
-	<ul>
-		<li *ngFor="let category of CategoryTypes">{{ category }}</li>
-	</ul>
-</div>
+
+<button mat-button [matMenuTriggerFor]="animals">Categorias</button>
+<mat-menu #animals="matMenu">
+  <button mat-menu-item *ngFor="let category of CategoryTypes">{{ category | titlecase }}</button>
+</mat-menu>
 
 <app-search-bar></app-search-bar>
 
@@ -13,10 +12,10 @@
 		{{ nickname }}
 	</div>
 	<div *ngIf="isAdmin; else carrito">
-		Panel admin
+		<p routerLink="/admin/panel">Panel Admin</p>
 	</div>
 
-	<button (click)="signout()">Cerrar Sesion</button>
+	<button (click)="signout()" mat-flat-button color="primary">Cerrar Sesion</button>
 
 	<ng-template #carrito>
 		<app-cart-header></app-cart-header>
@@ -24,6 +23,6 @@
 </div>
 
 <ng-template #noEstaLogueado>
-	<button routerLink="/login" mat-flat-button color="primary">Iniciar Sesion</button>
+	<button routerLink="/admin/login" mat-flat-button color="primary">Iniciar Sesion</button>
 	<button routerLink="/register" mat-flat-button color="primary">Registrarse</button>
 </ng-template>
