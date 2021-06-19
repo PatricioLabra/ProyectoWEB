@@ -21,6 +21,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { FormFilterComponent } from './components/form-filter/form-filter.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { FormRegisterComponent } from './components/form-register/form-register.component';
+import { ReportUsersComponent } from './components/report-users/report-users.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { FormRegisterComponent } from './components/form-register/form-register.
     SearchBarComponent,
     FormFilterComponent,
     AdminLoginComponent,
-    FormRegisterComponent
+    FormRegisterComponent,
+    ReportUsersComponent
   ],
   imports: [
     BrowserModule,
