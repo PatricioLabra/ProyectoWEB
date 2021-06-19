@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Region, Regiones } from '@models/communes.model';
+import { ApiConnectionService } from '@services/api-connection.service';
+import { UserInfoService } from '@services/user-info.service';
 
 @Component({
   selector: 'app-form-register',
@@ -17,7 +20,12 @@ export class FormRegisterComponent {
   Regions: Array<Region> = Regiones;
   CurrentRegion: Region;
 
-  constructor(private _fb: FormBuilder) {
+  constructor(
+    private _fb: FormBuilder,
+    private api: ApiConnectionService,
+    private userInfo: UserInfoService,
+    private router: Router
+  ) {
     this.registerForm = this._fb.group({
       names: ['', Validators.required],
       last_name: ['', Validators.required],
@@ -45,6 +53,7 @@ export class FormRegisterComponent {
     this.submitAttempt = true;
 
     const data = this.registerForm.getRawValue();
+    console.log(data);
 
     if (!this.validPasswords()) {
       this.isCorrectPass = false;
@@ -53,10 +62,15 @@ export class FormRegisterComponent {
 
         console.log(this.registerForm.controls.email.errors);
       if (this.registerForm.valid) {
-        console.log('register');
+        this.api.signUp(data, false).subscribe((data: any) => {
+          const token = data.token;
+          const nickname = this.registerForm.controls.nickname.value;
+
+          this.userInfo.signInUser(nickname, token, false);
+          this.router.navigate(['home']);
+        });
       }
     } 
-    console.log(data);
   }
 
   updateCurrentRegion() {
