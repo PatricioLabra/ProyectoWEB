@@ -1,29 +1,38 @@
 <form novalidate [formGroup]="filterForm" (ngSubmit)="onSubmit()">
-  <select formControlName="category">
-    <option value="">Categoria</option>
-    <option *ngFor="let category of CategoryList" [value]="category">{{ category }}</option>
-  </select>
+  <mat-form-field appearance="fill">
+    <mat-label>Categoria</mat-label>
+    <mat-select formControlName="category" name="category_">
+      <mat-option>---</mat-option>
+      <mat-option *ngFor="let category of CategoryList" [value]="category">
+        {{ category }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
   <mat-accordion class="example-headers-align" multi>
     <mat-expansion-panel *ngFor="let category of CategoryList; index as i">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{ category }}
+          {{ category | titlecase }}
         </mat-panel-title>
       </mat-expansion-panel-header>
   
       <div>
-        <p *ngFor="let sub of Subcategories[i]"><mat-checkbox (change)="onChange(sub)">{{ sub }}</mat-checkbox></p>
+        <p *ngFor="let sub of Subcategories[i]"><mat-checkbox (change)="onChange(sub)" color="primary">{{ sub }}</mat-checkbox></p>
       </div>
   
     </mat-expansion-panel>
   </mat-accordion>
 
-  <label for="lowerLimit">Precio minimo</label>
-  <input formControlName="minPrice" type="text" name="lowerLimit">
+  <mat-form-field>
+    <mat-label>Precio minimo</mat-label>
+    <input type="number" matInput formControlName="minPrice" placeholder="1600">
+  </mat-form-field>
 
-  <label for="upperLimit">Precio maximo</label>
-  <input formControlName="maxPrice" type="text" name="upperLimit">
+  <mat-form-field>
+    <mat-label>Precio maximo</mat-label>
+    <input type="number" matInput formControlName="maxPrice" placeholder="32000">
+  </mat-form-field>
 
   <button type="submit">Filtrar</button>
 </form>
