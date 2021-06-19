@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartBought } from '@models/cart-bought.model';
+import { ApiConnectionService } from '@services/api-connection.service';
 
 @Component({
   selector: 'app-report-products',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportProductsComponent implements OnInit {
 
-  constructor() { }
+  carts: Array<CartBought> = [];
+  quantityCarts: number = 0;
+
+  constructor(private api: ApiConnectionService) {
+  }
 
   ngOnInit(): void {
+    this.api.getNewerCarts(0, 10).subscribe((res: any) => {
+      this.carts = res.carts;
+      this.quantityCarts = res.quantityCarts;
+      console.log(res);
+    });
   }
 
 }

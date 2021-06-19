@@ -17,6 +17,17 @@ export class ApiConnectionService {
   }
 
   /**
+   * Obtiene los carritos comprados mas nuevos, desde el carrito 'initialCart' mas nuevo, obtiene
+   * 'quantityCarts'
+   * @param initialCart primer carrito a traer
+   * @param quantityCarts cantidad de carrito a obtener
+   */
+  getNewerCarts(initialCart: number, quantityCarts: number) {
+    const url = this.makeUrl(['carts', 'newer', initialCart, quantityCarts]);
+    return this.http.get(url);
+  }
+
+  /**
    * Obtiene la informacion de un producto en base a su id
    * @param id Id del producto
    */
