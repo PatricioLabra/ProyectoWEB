@@ -1,0 +1,9 @@
+<div>
+  <p>{{ cart.nickname_buyer }}</p>
+  <p>{{ cart.date }}</p>
+
+  <div>
+    <p *ngFor="let product of cart.productCart">{{ product.name }}</p>
+  </div>
+</div>
+
