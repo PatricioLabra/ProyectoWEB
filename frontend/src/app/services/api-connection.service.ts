@@ -65,6 +65,16 @@ export class ApiConnectionService {
   }
 
   /**
+   * Valida las credenciales del usuario
+   * @param profile perfile con las credenciales del usuario
+   */
+  signUp(userInfo: any, isAdmin: boolean = false) {
+    const endpoint = (isAdmin) ? 'admin' : 'user';
+    const url = this.makeUrl([endpoint, 'signup']);
+    return this.http.post(url, userInfo);
+  }
+
+  /**
    * Obtiene los datos del usuario
    * @param nickname Nickname del usuario
    * @param token Token del usuario
