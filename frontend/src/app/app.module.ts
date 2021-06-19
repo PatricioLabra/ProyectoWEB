@@ -27,6 +27,7 @@ import { ReportProductsComponent } from './components/report-products/report-pro
 import { CartBoughtCardComponent } from './components/cart-bought-card/cart-bought-card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from '@modules/angular-material/angular-material.module';
+import { PanelAdminComponent } from './components/panel-admin/panel-admin.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { AngularMaterialModule } from '@modules/angular-material/angular-materia
     ReportUsersComponent,
     UserCardComponent,
     ReportProductsComponent,
-    CartBoughtCardComponent
+    CartBoughtCardComponent,
+    PanelAdminComponent
   ],
   imports: [
     BrowserModule,
