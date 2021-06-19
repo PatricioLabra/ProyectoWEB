@@ -24,8 +24,8 @@ export class FormRegisterComponent {
       nickname: ['', Validators.required],
       rut: ['', Validators.required],
       address: ['', Validators.required],
-      region: ['', Validators.required],
-      commune: ['', Validators.required],
+      region: ['Arica y Parinacota', Validators.required],
+      commune: ['Arica', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
       conf_pass: ['', Validators.required]
