@@ -16,14 +16,15 @@ $borderLightHeader: #bb90ff;
     align-items:center;
     height: 4vh;
     background: $backgroundColorHeader;
-    font-family: consolas;
     color: $textColor;
     overflow: hidden;
     box-shadow: 0 5px 20px $borderLightHeader, 0 5px 20px $borderLightHeader, 0 5px 20px $borderLightHeader;
     border-radius: 10px;
-    opacity: 0.90;
+ 
 
     .buttonCategory{
+  
+
         @include neonButton($textColor, $backgroundColorButtons);
 
         span {

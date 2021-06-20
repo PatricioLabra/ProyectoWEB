@@ -5,6 +5,12 @@ body {
     margin: 0; 
     font-family: Roboto, 
     "Helvetica Neue", sans-serif; 
-    background: black;
+    background: white;
     color: white;
+    background: url('./assets/img/Fondo 3.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
 }

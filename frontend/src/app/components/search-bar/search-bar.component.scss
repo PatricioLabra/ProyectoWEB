@@ -6,14 +6,10 @@ $shadowColor: #4e4e4d91;
 
 /*COMPONENT SEARCH - BAR*/
 .searchBar{
-    background: $backgroundColorSearchBar;
-    opacity: 90%;
+    background-color: $backgroundColorSearchBar;
     width: auto;
     height: auto;
     border-radius: 5px;
-    box-shadow: 0 0 10px $shadowColor, 0 0 40px $shadowColor, 0 0 80px $shadowColor
-
-
 }
 .searchText{
     margin: 10%;
