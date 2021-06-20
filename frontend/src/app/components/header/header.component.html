@@ -1,9 +1,17 @@
 <div class = header>
 <div routerLink="/home">Logo</div>
 
-<button mat-button [matMenuTriggerFor]="animals">Categorias</button>
+<button class = buttonCategory mat-button [matMenuTriggerFor]="animals">
+	<span id = "span9"></span>
+	<span id = "span10"></span>
+	<span id = "span11"></span>
+	<span id = "span12"></span>
+	<div id = categoryText>Categorias</div> 
+</button>
 <mat-menu #animals="matMenu">
-  <button mat-menu-item *ngFor="let category of CategoryTypes">{{ category | titlecase }}</button>
+  <button class = categories mat-menu-item *ngFor="let category of CategoryTypes">
+	  <div id = categoriesText>{{ category | titlecase }}</div> 
+	</button>
 </mat-menu>
 
 <app-search-bar></app-search-bar>
@@ -29,14 +37,14 @@
 		<span id = "span2"></span>
 		<span id = "span3"></span>
 		<span id = "span4"></span>
-		Iniciar Sesion
+		<div id = loginInText>Iniciar Sesion</div> 
 	</button>
 	<button class = buttonRegister routerLink="/register" mat-flat-button color="primary">
 		<span id = "span5"></span>
 		<span id = "span6"></span>
 		<span id = "span7"></span>
 		<span id = "span8"></span>
-		Registrarse
+		<div id = registerText>Registrarse</div>	
 	</button>
 </ng-template>
 </div>

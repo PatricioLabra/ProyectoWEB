@@ -14,21 +14,39 @@
 
 
 .header{   
-    margin : 0;
-    padding: 0;
+    margin : 2%;
+    padding: 2%;
     display: flex;
     justify-content:space-around;
     align-items:center;
-    height: 13vh;
-    background: black;
+    height: 4vh;
+    background: #424242;
     font-family: consolas;
     color: white;
+    overflow: hidden;
+    box-shadow: 0 0 5px #424242, 0 0 5px #424242, 0 0 5px #424242;
+    border-radius: 10px;
+    opacity: 0.90;
+    
 }
 
 /*
 *  N° - BUTTON LOGININ 
 * ---------------------------------------------------------------------------------------------------------------------------
 */
+#loginInText{
+    color: #fff;
+    text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #f09,
+      0 0 82px #f09,
+      0 0 92px #f09,
+      0 0 102px #f09,
+      0 0 151px #f09;
+    animation: flicker 1.5s infinite 
+}
 .buttonLoginIn{
     position: relative;
     display: inline-block;
@@ -39,8 +57,9 @@
     text-decoration: none;
     overflow: hidden;
     transition: 0.2s;
-    background-color:#45305f;
+    background-color:#5b5b5b;
 }
+
 .buttonLoginIn:hover{
     background: #a945c7;
     box-shadow: 0 0 10px #a945c7, 0 0 40px #a945c7, 0 0 80px #a945c7;
@@ -108,6 +127,19 @@
 *  N° - BUTTON REGISTER
 * ---------------------------------------------------------------------------------------------------------------------------
 */
+#registerText{
+    color: #fff;
+    text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #f09,
+      0 0 82px #f09,
+      0 0 92px #f09,
+      0 0 102px #f09,
+      0 0 151px #f09;
+    animation: flicker 1.5s infinite 
+}
 .buttonRegister{
     position: relative;
     display: inline-block;
@@ -118,7 +150,7 @@
     text-decoration: none;
     overflow: hidden;
     transition: 0.2s;
-    background-color:#45305f;
+    background-color:#5b5b5b;
 }
 
 .buttonRegister:hover{
@@ -183,4 +215,159 @@
     bottom: 100%;
     transition: 1s;
     transition-delay: 0.75s;
+}
+
+
+/*
+*  N° - BUTTON CATEGORY
+* ---------------------------------------------------------------------------------------------------------------------------
+*/
+#categoryText{
+    color: #fff;
+    text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #f09,
+      0 0 82px #f09,
+      0 0 92px #f09,
+      0 0 102px #f09,
+      0 0 151px #f09;
+    animation: flicker 1.5s infinite 
+}
+
+.buttonCategory{
+    position: relative;
+    display: inline-block;
+    padding: 5px 12px;
+    color: white;
+    letter-spacing: 4px;
+    font-size: 12px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: 0.2s;
+    background-color:#5b5b5b;
+}
+
+.buttonCategory:hover{
+    background: #a945c7;
+    box-shadow: 0 0 10px #a945c7, 0 0 40px #a945c7, 0 0 80px #a945c7;
+    transition-delay: 1s;
+}
+.buttonCategory span{ 
+    position: absolute;
+    display: block;
+}
+#span9{
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear - gradient(90deg, transparent, #a945c7);
+}
+
+.buttonCategory:hover #span9{
+    left: 100%;
+    transition: 1s;
+}
+#span11{
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear - gradient(270deg, transparent, #a945c7);
+}
+
+.buttonCategory:hover #span11{
+    right: 100%;
+    transition: 1s;
+    transition-delay: 0.5s;
+}
+
+#span10{
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear - gradient(180deg, transparent, #a945c7);
+}
+
+.buttonCategory:hover #span10{
+    top: 100%;
+    transition: 1s;
+    transition-delay: 0.25s;
+}
+
+#span12{
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear - gradient(360deg, transparent, #a945c7);
+}
+
+.buttonCategory:hover #span12{
+    bottom: 100%;
+    transition: 1s;
+    transition-delay: 0.75s;
+}
+/*
+*  N°.1 - BUTTON CATEGORY -> categories
+* ---------------------------------------------------------------------------------------------------------------------------
+*/
+#categoriesText{
+    color: #fff;
+    text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #f09,
+      0 0 82px #f09,
+      0 0 92px #f09,
+      0 0 102px #f09,
+      0 0 151px #f09;
+    animation: flicker 1.5s infinite 
+}
+.categories{
+    position: relative;
+    color: white;
+    font-size: 12px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: 0.2s;
+    background:#5b5b5b; 
+    border: 0.5px solid white;
+    
+}
+.categories:hover{
+    background: #a945c7;
+    box-shadow: 0 0 10px #a945c7, 0 0 40px #a945c7, 0 0 80px #a945c7;
+}
+
+
+
+
+
+
+/*
+* @KEYFRAMES
+*/
+/* Flickering animation */
+@keyframes flicker {
+    
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+  
+        text-shadow:
+        0 0 4px #fff,
+        0 0 11px #fff,
+        0 0 19px #fff,
+        0 0 40px #f09,
+        0 0 80px #f09,
+        0 0 90px #f09,
+        0 0 100px #f09,
+        0 0 150px #f09;
+    }
+    20%, 24%, 55% {        
+        text-shadow: none;
+    }  
 }
