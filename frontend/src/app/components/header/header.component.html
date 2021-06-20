@@ -1,21 +1,41 @@
+<div class = header>
 <div routerLink="/home">Logo</div>
 
-<button mat-button [matMenuTriggerFor]="animals">Categorias</button>
-<mat-menu #animals="matMenu">
-  <button mat-menu-item *ngFor="let category of CategoryTypes">{{ category | titlecase }}</button>
+<button class = buttonCategory mat-button [matMenuTriggerFor]="animals">
+	<span class = "span1"></span>
+	<span class = "span2"></span>
+	<span class = "span3"></span>
+	<span class = "span4"></span>
+	<div class = categoryText>Categorias</div> 
+</button>
+
+<mat-menu   #animals="matMenu">
+
+  	<button class = categories mat-menu-item *ngFor="let category of CategoryTypes">
+	  <div class = categoriesText>{{ category | titlecase }}</div> 
+  	</button>
+
 </mat-menu>
 
 <app-search-bar></app-search-bar>
 
 <div *ngIf="isLogged; else noEstaLogueado">
-	<div>
+	<button class = buttonSignOut (click)="signout()" mat-flat-button color="primary">
+		<span class = "span5"></span>
+		<span class = "span6"></span>
+		<span class = "span7"></span>
+		<span class = "span8"></span>
+		<div class = signoutText>Cerrar Sesion</div>
+	</button>
+
+	<div class = nickname>
 		{{ nickname }}
 	</div>
 	<div *ngIf="isAdmin; else carrito">
-		<p routerLink="/admin/panel">Panel Admin</p>
+		<p class = panelAdmin routerLink="/admin/panel">Panel Admin</p>
 	</div>
 
-	<button (click)="signout()" mat-flat-button color="primary">Cerrar Sesion</button>
+
 
 	<ng-template #carrito>
 		<app-cart-header></app-cart-header>
@@ -23,6 +43,19 @@
 </div>
 
 <ng-template #noEstaLogueado>
-	<button routerLink="/admin/login" mat-flat-button color="primary">Iniciar Sesion</button>
-	<button routerLink="/register" mat-flat-button color="primary">Registrarse</button>
+	<button class = buttonLoginIn routerLink="/admin/login" mat-flat-button color="primary">
+		<span class = "span9"></span>
+		<span class = "span10"></span>
+		<span class = "span11"></span>
+		<span class = "span12"></span>
+		<div class = loginInText>Iniciar Sesion</div> 
+	</button>
+	<button class = buttonRegister routerLink="/register" mat-flat-button color="primary">
+		<span class = "span13"></span>
+		<span class = "span14"></span>
+		<span class = "span15"></span>
+		<span class = "span16"></span>
+		<div class = registerText>Registrarse</div>	
+	</button>
 </ng-template>
+</div>
