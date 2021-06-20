@@ -1,18 +1,13 @@
-/* 
-*  ÍNDICE HEADER SCSS
-*   
-*  1.0 - Reset
-*  2.0 - Fonts
-*  3.0 - Globals
-*  4.0 - Color Palette
-*  5.0 - Header
-*  6.0 - Body
-*    6.1 - Sliders
-*    6.2 - Imagery
-*  7.0 - Footer
-*/
+@import 'styles/mixins';
+
+/*VARIABLES*/
+$backgroundColorHeader: #424242;
+$backgroundColorButtons:#5b5b5b;
+$textColor: white;
+$lightColor: #a945c7;
 
 
+/*COMPONENTE HEADER*/
 .header{   
     margin : 2%;
     padding: 2%;
@@ -20,314 +15,175 @@
     justify-content:space-around;
     align-items:center;
     height: 4vh;
-    background: #424242;
+    background: $backgroundColorHeader;
     font-family: consolas;
-    color: white;
+    color: $textColor;
     overflow: hidden;
-    box-shadow: 0 0 5px #424242, 0 0 5px #424242, 0 0 5px #424242;
+    box-shadow: 0 0 5px $backgroundColorHeader, 0 0 5px $backgroundColorHeader, 0 0 5px $backgroundColorHeader;
     border-radius: 10px;
     opacity: 0.90;
-    
+
+    .buttonCategory{
+        @include neonButton($textColor, $backgroundColorButtons);
+
+        span {
+            @include buttonSpans;
+        }
+        .span1{
+            @include spanConfiguration(0, none, -100%, none, 100%, 2px, 90deg, $lightColor);
+        }
+        .span2{
+            @include spanConfiguration(-100%, none, none, 0, 2px, 100%, 180deg, $lightColor);
+        }
+        .span3{
+            @include spanConfiguration(none, 0, none, -100%, 100%, 2px, 270deg, $lightColor);
+        }
+        .span4{
+            @include spanConfiguration(none, -100%, 0, none, 2px, 100%, 360deg, $lightColor);
+        }
+        .categoryText{
+            @include neonButtonText;
+        }
+    }
+
+    .buttonCategory:hover{
+        @include neonButtonHover($lightColor);
+
+        .span1{
+            @include buttonHoverSpan(none, none, 100%, none, none);
+        }
+        .span2{
+            @include buttonHoverSpan(100%, none, none, none, 0.25s);
+        }
+        .span3{
+            @include buttonHoverSpan(none, none, none, 100%, 0.5s);
+        }
+        .span4{
+            @include buttonHoverSpan(none, 100%, none, none, 0.75s);
+        }
+    }
+
+    .buttonSignOut{
+        @include neonButton($textColor, $backgroundColorButtons);
+
+        span {
+            @include buttonSpans;
+        }
+        .span5{
+            @include spanConfiguration(0, none, -100%, none, 100%, 2px, 90deg, $lightColor);
+        }
+        .span6{
+            @include spanConfiguration(-100%, none, none, 0, 2px, 100%, 180deg, $lightColor);
+        }
+        .span7{
+            @include spanConfiguration(none, 0, none, -100%, 100%, 2px, 270deg, $lightColor);
+        }
+        .span8{
+            @include spanConfiguration(none, -100%, 0, none, 2px, 100%, 360deg, $lightColor);
+        }
+        .signoutText{
+            @include neonButtonText;
+        }
+    }
+
+    .buttonSignOut:hover{
+        @include neonButtonHover($lightColor);
+
+        .span5{
+            @include buttonHoverSpan(none, none, 100%, none, none);
+        }
+        .span6{
+            @include buttonHoverSpan(100%, none, none, none, 0.25s);
+        }
+        .span7{
+            @include buttonHoverSpan(none, none, none, 100%, 0.5s);
+        }
+        .span8{
+            @include buttonHoverSpan(none, 100%, none, none, 0.75s);
+        }
+    }
+
+    .buttonLoginIn{
+        @include neonButton($textColor, $backgroundColorButtons);
+
+        span {
+            @include buttonSpans;
+        }
+        .span9{
+            @include spanConfiguration(0, none, -100%, none, 100%, 2px, 90deg, $lightColor);
+        }
+        .span10{
+            @include spanConfiguration(-100%, none, none, 0, 2px, 100%, 180deg, $lightColor);
+        }
+        .span11{
+            @include spanConfiguration(none, 0, none, -100%, 100%, 2px, 270deg, $lightColor);
+        }
+        .span12{
+            @include spanConfiguration(none, -100%, 0, none, 2px, 100%, 360deg, $lightColor);
+        }
+        .loginInText{
+            @include neonButtonText;
+        }
+    }
+
+    .buttonLoginIn:hover{
+        @include neonButtonHover($lightColor);
+
+        .span9{
+            @include buttonHoverSpan(none, none, 100%, none, none);
+        }
+        .span10{
+            @include buttonHoverSpan(100%, none, none, none, 0.25s);
+        }
+        .span11{
+            @include buttonHoverSpan(none, none, none, 100%, 0.5s);
+        }
+        .span12{
+            @include buttonHoverSpan(none, 100%, none, none, 0.75s);
+        }
+    }
+
+    .buttonRegister {
+        @include neonButton($textColor, $backgroundColorButtons);
+
+        span {
+            @include buttonSpans;
+        }
+        .span13{
+            @include spanConfiguration(0, none, -100%, none, 100%, 2px, 90deg, $lightColor);
+        }
+        .span14{
+            @include spanConfiguration(-100%, none, none, 0, 2px, 100%, 180deg, $lightColor);
+        }
+        .span15{
+            @include spanConfiguration(none, 0, none, -100%, 100%, 2px, 270deg, $lightColor);
+        }
+        .span16{
+            @include spanConfiguration(none, -100%, 0, none, 2px, 100%, 360deg, $lightColor);
+        }
+        .registerText{
+            @include neonButtonText;
+        }
+    }
+
+    .buttonRegister:hover{
+        @include neonButtonHover($lightColor);
+
+        .span13{
+            @include buttonHoverSpan(none, none, 100%, none, none);
+        }
+        .span14{
+            @include buttonHoverSpan(100%, none, none, none, 0.25s);
+        }
+        .span15{
+            @include buttonHoverSpan(none, none, none, 100%, 0.5s);
+        }
+        .span16{
+            @include buttonHoverSpan(none, 100%, none, none, 0.75s);
+        }
+    }  
 }
 
-/*
-*  N° - BUTTON LOGININ 
-* ---------------------------------------------------------------------------------------------------------------------------
-*/
-#loginInText{
-    color: #fff;
-    text-shadow:
-      0 0 7px #fff,
-      0 0 10px #fff,
-      0 0 21px #fff,
-      0 0 42px #f09,
-      0 0 82px #f09,
-      0 0 92px #f09,
-      0 0 102px #f09,
-      0 0 151px #f09;
-    animation: flicker 1.5s infinite 
-}
-.buttonLoginIn{
-    position: relative;
-    display: inline-block;
-    padding: 5px 12px;
-    color: white;
-    letter-spacing: 4px;
-    font-size: 12px;
-    text-decoration: none;
-    overflow: hidden;
-    transition: 0.2s;
-    background-color:#5b5b5b;
-}
-
-.buttonLoginIn:hover{
-    background: #a945c7;
-    box-shadow: 0 0 10px #a945c7, 0 0 40px #a945c7, 0 0 80px #a945c7;
-    transition-delay: 1s;
-}
-.buttonLoginIn span{ 
-    position: absolute;
-    display: block;
-}
-#span1{
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear - gradient(90deg, transparent, #a945c7);
-}
-
-.buttonLoginIn:hover #span1{
-    left: 100%;
-    transition: 1s;
-}
-#span3{
-    bottom: 0;
-    right: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear - gradient(270deg, transparent, #a945c7);
-}
-
-.buttonLoginIn:hover #span3{
-    right: 100%;
-    transition: 1s;
-    transition-delay: 0.5s;
-}
-
-#span2{
-    top: -100%;
-    right: 0;
-    width: 2px;
-    height: 100%;
-    background: linear - gradient(180deg, transparent, #a945c7);
-}
-
-.buttonLoginIn:hover #span2{
-    top: 100%;
-    transition: 1s;
-    transition-delay: 0.25s;
-}
-
-#span4{
-    bottom: -100%;
-    left: 0;
-    width: 2px;
-    height: 100%;
-    background: linear - gradient(360deg, transparent, #a945c7);
-}
-
-.buttonLoginIn:hover #span4{
-    bottom: 100%;
-    transition: 1s;
-    transition-delay: 0.75s;
-}
-
-/*
-*  N° - BUTTON REGISTER
-* ---------------------------------------------------------------------------------------------------------------------------
-*/
-#registerText{
-    color: #fff;
-    text-shadow:
-      0 0 7px #fff,
-      0 0 10px #fff,
-      0 0 21px #fff,
-      0 0 42px #f09,
-      0 0 82px #f09,
-      0 0 92px #f09,
-      0 0 102px #f09,
-      0 0 151px #f09;
-    animation: flicker 1.5s infinite 
-}
-.buttonRegister{
-    position: relative;
-    display: inline-block;
-    padding: 5px 12px;
-    color: white;
-    letter-spacing: 4px;
-    font-size: 12px;
-    text-decoration: none;
-    overflow: hidden;
-    transition: 0.2s;
-    background-color:#5b5b5b;
-}
-
-.buttonRegister:hover{
-    background: #a945c7;
-    box-shadow: 0 0 10px #a945c7, 0 0 40px #a945c7, 0 0 80px #a945c7;
-    transition-delay: 1s;
-}
-
-.buttonRegister span{ 
-    position: absolute;
-    display: block;
-}
-#span5{
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear - gradient(90deg, transparent, #a945c7);
-}
-
-.buttonRegister:hover #span5{
-    left: 100%;
-    transition: 1s;
-}
-#span7{
-    bottom: 0;
-    right: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear - gradient(270deg, transparent, #a945c7);
-}
-
-.buttonRegister:hover #span7{
-    right: 100%;
-    transition: 1s;
-    transition-delay: 0.5s;
-}
-
-#span6{
-    top: -100%;
-    right: 0;
-    width: 2px;
-    height: 100%;
-    background: linear - gradient(180deg, transparent, #a945c7);
-}
-
-.buttonRegister:hover #span6{
-    top: 100%;
-    transition: 1s;
-    transition-delay: 0.25s;
-}
-
-#span8{
-    bottom: -100%;
-    left: 0;
-    width: 2px;
-    height: 100%;
-    background: linear - gradient(360deg, transparent, #a945c7);
-}
-
-.buttonRegister:hover #span8{
-    bottom: 100%;
-    transition: 1s;
-    transition-delay: 0.75s;
-}
-
-
-/*
-*  N° - BUTTON CATEGORY
-* ---------------------------------------------------------------------------------------------------------------------------
-*/
-#categoryText{
-    color: #fff;
-    text-shadow:
-      0 0 7px #fff,
-      0 0 10px #fff,
-      0 0 21px #fff,
-      0 0 42px #f09,
-      0 0 82px #f09,
-      0 0 92px #f09,
-      0 0 102px #f09,
-      0 0 151px #f09;
-    animation: flicker 1.5s infinite 
-}
-
-.buttonCategory{
-    position: relative;
-    display: inline-block;
-    padding: 5px 12px;
-    color: white;
-    letter-spacing: 4px;
-    font-size: 12px;
-    text-decoration: none;
-    overflow: hidden;
-    transition: 0.2s;
-    background-color:#5b5b5b;
-}
-
-.buttonCategory:hover{
-    background: #a945c7;
-    box-shadow: 0 0 10px #a945c7, 0 0 40px #a945c7, 0 0 80px #a945c7;
-    transition-delay: 1s;
-}
-.buttonCategory span{ 
-    position: absolute;
-    display: block;
-}
-#span9{
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear - gradient(90deg, transparent, #a945c7);
-}
-
-.buttonCategory:hover #span9{
-    left: 100%;
-    transition: 1s;
-}
-#span11{
-    bottom: 0;
-    right: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear - gradient(270deg, transparent, #a945c7);
-}
-
-.buttonCategory:hover #span11{
-    right: 100%;
-    transition: 1s;
-    transition-delay: 0.5s;
-}
-
-#span10{
-    top: -100%;
-    right: 0;
-    width: 2px;
-    height: 100%;
-    background: linear - gradient(180deg, transparent, #a945c7);
-}
-
-.buttonCategory:hover #span10{
-    top: 100%;
-    transition: 1s;
-    transition-delay: 0.25s;
-}
-
-#span12{
-    bottom: -100%;
-    left: 0;
-    width: 2px;
-    height: 100%;
-    background: linear - gradient(360deg, transparent, #a945c7);
-}
-
-.buttonCategory:hover #span12{
-    bottom: 100%;
-    transition: 1s;
-    transition-delay: 0.75s;
-}
-/*
-*  N°.1 - BUTTON CATEGORY -> categories
-* ---------------------------------------------------------------------------------------------------------------------------
-*/
-#categoriesText{
-    color: #fff;
-    text-shadow:
-      0 0 7px #fff,
-      0 0 10px #fff,
-      0 0 21px #fff,
-      0 0 42px #f09,
-      0 0 82px #f09,
-      0 0 92px #f09,
-      0 0 102px #f09,
-      0 0 151px #f09;
-    animation: flicker 1.5s infinite 
-}
 .categories{
     position: relative;
     color: white;
@@ -337,37 +193,13 @@
     transition: 0.2s;
     background:#5b5b5b; 
     border: 0.5px solid white;
-    
+    .categoryText{
+        @include neonButtonText;
+    }
+
 }
+
 .categories:hover{
     background: #a945c7;
     box-shadow: 0 0 10px #a945c7, 0 0 40px #a945c7, 0 0 80px #a945c7;
-}
-
-
-
-
-
-
-/*
-* @KEYFRAMES
-*/
-/* Flickering animation */
-@keyframes flicker {
-    
-    0%, 18%, 22%, 25%, 53%, 57%, 100% {
-  
-        text-shadow:
-        0 0 4px #fff,
-        0 0 11px #fff,
-        0 0 19px #fff,
-        0 0 40px #f09,
-        0 0 80px #f09,
-        0 0 90px #f09,
-        0 0 100px #f09,
-        0 0 150px #f09;
-    }
-    20%, 24%, 55% {        
-        text-shadow: none;
-    }  
 }

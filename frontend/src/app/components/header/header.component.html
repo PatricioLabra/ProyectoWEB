@@ -2,29 +2,40 @@
 <div routerLink="/home">Logo</div>
 
 <button class = buttonCategory mat-button [matMenuTriggerFor]="animals">
-	<span id = "span9"></span>
-	<span id = "span10"></span>
-	<span id = "span11"></span>
-	<span id = "span12"></span>
-	<div id = categoryText>Categorias</div> 
+	<span class = "span1"></span>
+	<span class = "span2"></span>
+	<span class = "span3"></span>
+	<span class = "span4"></span>
+	<div class = categoryText>Categorias</div> 
 </button>
-<mat-menu #animals="matMenu">
-  <button class = categories mat-menu-item *ngFor="let category of CategoryTypes">
-	  <div id = categoriesText>{{ category | titlecase }}</div> 
-	</button>
+
+<mat-menu   #animals="matMenu">
+
+  	<button class = categories mat-menu-item *ngFor="let category of CategoryTypes">
+	  <div class = categoriesText>{{ category | titlecase }}</div> 
+  	</button>
+
 </mat-menu>
 
 <app-search-bar></app-search-bar>
 
 <div *ngIf="isLogged; else noEstaLogueado">
-	<div>
+	<button class = buttonSignOut (click)="signout()" mat-flat-button color="primary">
+		<span class = "span5"></span>
+		<span class = "span6"></span>
+		<span class = "span7"></span>
+		<span class = "span8"></span>
+		<div class = signoutText>Cerrar Sesion</div>
+	</button>
+	
+	<div class = nickname>
 		{{ nickname }}
 	</div>
 	<div *ngIf="isAdmin; else carrito">
-		<p routerLink="/admin/panel">Panel Admin</p>
+		<p class = panelAdmin routerLink="/admin/panel">Panel Admin</p>
 	</div>
 
-	<button (click)="signout()" mat-flat-button color="primary">Cerrar Sesion</button>
+
 
 	<ng-template #carrito>
 		<app-cart-header></app-cart-header>
@@ -33,18 +44,18 @@
 
 <ng-template #noEstaLogueado>
 	<button class = buttonLoginIn routerLink="/admin/login" mat-flat-button color="primary">
-		<span id = "span1"></span>
-		<span id = "span2"></span>
-		<span id = "span3"></span>
-		<span id = "span4"></span>
-		<div id = loginInText>Iniciar Sesion</div> 
+		<span class = "span9"></span>
+		<span class = "span10"></span>
+		<span class = "span11"></span>
+		<span class = "span12"></span>
+		<div class = loginInText>Iniciar Sesion</div> 
 	</button>
 	<button class = buttonRegister routerLink="/register" mat-flat-button color="primary">
-		<span id = "span5"></span>
-		<span id = "span6"></span>
-		<span id = "span7"></span>
-		<span id = "span8"></span>
-		<div id = registerText>Registrarse</div>	
+		<span class = "span13"></span>
+		<span class = "span14"></span>
+		<span class = "span15"></span>
+		<span class = "span16"></span>
+		<div class = registerText>Registrarse</div>	
 	</button>
 </ng-template>
 </div>
