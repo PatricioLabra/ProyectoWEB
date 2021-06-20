@@ -1,3 +1,4 @@
+<div class = header>
 <div routerLink="/home">Logo</div>
 
 <button mat-button [matMenuTriggerFor]="animals">Categorias</button>
@@ -23,6 +24,19 @@
 </div>
 
 <ng-template #noEstaLogueado>
-	<button routerLink="/admin/login" mat-flat-button color="primary">Iniciar Sesion</button>
-	<button routerLink="/register" mat-flat-button color="primary">Registrarse</button>
+	<button class = buttonLoginIn routerLink="/admin/login" mat-flat-button color="primary">
+		<span id = "span1"></span>
+		<span id = "span2"></span>
+		<span id = "span3"></span>
+		<span id = "span4"></span>
+		Iniciar Sesion
+	</button>
+	<button class = buttonRegister routerLink="/register" mat-flat-button color="primary">
+		<span id = "span5"></span>
+		<span id = "span6"></span>
+		<span id = "span7"></span>
+		<span id = "span8"></span>
+		Registrarse
+	</button>
 </ng-template>
+</div>
