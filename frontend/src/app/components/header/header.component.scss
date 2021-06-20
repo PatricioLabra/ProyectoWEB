@@ -5,7 +5,7 @@ $backgroundColorHeader: #424242;
 $backgroundColorButtons:#5b5b5b;
 $textColor: white;
 $lightColor: #a945c7;
-
+$borderLightHeader: #bb90ff;
 
 /*COMPONENTE HEADER*/
 .header{   
@@ -19,7 +19,7 @@ $lightColor: #a945c7;
     font-family: consolas;
     color: $textColor;
     overflow: hidden;
-    box-shadow: 0 0 5px $backgroundColorHeader, 0 0 5px $backgroundColorHeader, 0 0 5px $backgroundColorHeader;
+    box-shadow: 0 5px 20px $borderLightHeader, 0 5px 20px $borderLightHeader, 0 5px 20px $borderLightHeader;
     border-radius: 10px;
     opacity: 0.90;
 
