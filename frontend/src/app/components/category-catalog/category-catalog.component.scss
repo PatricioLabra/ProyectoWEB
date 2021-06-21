@@ -1,0 +1,27 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 20px;
+
+  .products-wrapper {
+    display: flex;
+    overflow-x: scroll;
+    background-color: #23063e;
+    border-radius: 10px;
+    width: 100%;
+    min-height: 250px;
+    justify-content: space-evenly;
+  }
+
+  .category {
+    background-color: #673ab7;
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0px;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-bottom: 1%;
+  }
+}
