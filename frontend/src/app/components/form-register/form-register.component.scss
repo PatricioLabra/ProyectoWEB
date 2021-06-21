@@ -1,0 +1,66 @@
+@import '../../../styles/mixinsNeonButtons';
+$lightColor: #a945c7;
+
+.registerForm{
+    box-shadow: 0 0 30px $lightColor;
+    border: 1px solid;
+    border-radius: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 3%;
+    margin-top: 4%;
+    padding:2%;
+    width: 35%;
+    height: 70%;
+    justify-content:auto;
+
+    mat-form-field{
+        background-color: #ffffff09;
+        margin-bottom: 4%;
+    }
+    mat-label{
+        font-size: 17px;
+        color: white;
+        text-shadow: 0px 0px 20px $lightColor;
+    }
+
+    .buttonRegistred{
+        margin-top: 3%;
+        @include neonButton(white, transparent);
+        @include neonButtonText;
+
+        span {
+            @include buttonSpans;
+        }
+        .span1{
+            @include spanConfiguration(0, none, -100%, none, 100%, 2px, 90deg, $lightColor);
+        }
+        .span2{
+            @include spanConfiguration(-100%, none, none, 0, 2px, 100%, 180deg, $lightColor);
+        }
+        .span3{
+            @include spanConfiguration(none, 0, none, -100%, 100%, 2px, 270deg, $lightColor);
+        }
+        .span4{
+            @include spanConfiguration(none, -100%, 0, none, 2px, 100%, 360deg, $lightColor);
+        }
+    }
+
+    .buttonRegistred:hover{
+        @include neonButtonHover($lightColor);
+
+        .span1{
+            @include buttonHoverSpan(none, none, 100%, none, none);
+        }
+        .span2{
+            @include buttonHoverSpan(100%, none, none, none, 0.25s);
+        }
+        .span3{
+            @include buttonHoverSpan(none, none, none, 100%, 0.5s);
+        }
+        .span4{
+            @include buttonHoverSpan(none, 100%, none, none, 0.75s);
+        }
+    }
+}
