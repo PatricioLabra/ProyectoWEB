@@ -175,13 +175,15 @@ export const getFilteredProducts: RequestHandler = async (req, res) => {
     if ( subcategories  && subcategories != "")
         filter.subcategories =  {"$all":subcategories};
 
-    filter.price = {};
-    //se valida que se ingresen ambos limites, que no sean negativos y que lower_limit <= upper_limit
-    if (lower_limit != null && lower_limit > 0)
-        filter.price.$gt = lower_limit - 1;
+    if (lower_limit != null || upper_limit != null) {
+        filter.price = {};
+        //se valida que se ingresen ambos limites, que no sean negativos y que lower_limit <= upper_limit
+        if (lower_limit != null && lower_limit > 0)
+            filter.price.$gt = lower_limit - 1;
 
-    if (upper_limit != null && upper_limit > 0)
-        filter.price.$lt = upper_limit - 1;
+        if (upper_limit != null && upper_limit > 0)
+            filter.price.$lt = upper_limit - 1;
+    }
 
     try {
         const products = await Product.find(filter).sort({ updatedAt: -1}).skip(init).limit(quantity);

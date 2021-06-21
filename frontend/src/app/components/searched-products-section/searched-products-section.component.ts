@@ -38,6 +38,7 @@ export class SearchedProductsSectionComponent implements OnInit {
       console.log(this.currentQuantity);
       this.products = data.products;
       this.quantityProducts = data.quantityProducts;
+      this.currentSkip = 0;
     });
   }
 

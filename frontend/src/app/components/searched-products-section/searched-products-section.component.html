@@ -7,7 +7,7 @@
     </mat-grid-tile>
   </mat-grid-list>
 
-  <div class="custom-paginator">
+  <div class="custom-paginator" *ngIf="quantityProducts">
     <p>{{ currentSkip + 1 }} - 
       {{ quantityProducts < (currentSkip + currentQuantity) ? quantityProducts : currentSkip + currentQuantity }} 
       of {{ quantityProducts }}</p>
