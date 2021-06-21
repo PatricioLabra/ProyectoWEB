@@ -28,6 +28,7 @@ import { CartBoughtCardComponent } from './components/cart-bought-card/cart-boug
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from '@modules/angular-material/angular-material.module';
 import { PanelAdminComponent } from './components/panel-admin/panel-admin.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { PanelAdminComponent } from './components/panel-admin/panel-admin.compon
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
