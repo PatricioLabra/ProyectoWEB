@@ -5,8 +5,12 @@
         <img [src]="product.images_urls[0]" alt="Random first slide" class="image-carousel">
       </div>
       <div class="carousel-caption">
-        <h3>{{ product.name }}</h3>
-        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        <h3 class="title-product">{{ product.name }}</h3>
+        <p class="price-info">
+          <span [class.price-discounted]="product.discount">$ {{ product.price }}</span>
+          <span *ngIf="product.discount" class="discount">-{{ product.discount * 100 }}% OFF</span>
+          <span *ngIf="product.discount">${{ product.price * (1 - product.discount) }}</span>
+        </p>
       </div>
     </ng-template>
   </ngb-carousel>
