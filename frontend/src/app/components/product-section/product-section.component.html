@@ -28,7 +28,7 @@
   </div>
 
   <div class="categories-wrapper">
-    <p>{{ product.category }}</p>
+    <p>Categoria: {{ product.category }}</p>
     <mat-chip-list [selectable]="false">
       <mat-chip *ngFor="let sub of product.subcategories" [disableRipple]="true">
         {{ sub }}
@@ -36,10 +36,23 @@
     </mat-chip-list>
   </div>
 
-  <div class="description">
-    Descripcion y caracteristicas:
-    <p>{{ product.description }}</p>
-    <p>Peso: {{ product.weight }}</p>
-    <p *ngIf="product.dimensions">Dimensiones: {{ product.dimensions | json }}</p>
-  </div>
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Descripcion y caracteristicas">
+      <div class="description-features">
+        <div class="description">
+          <p>Descripcion: {{ product.description }}</p>
+        </div>
+        <div *ngIf="product.dimensions" class="dimensions">
+          <p>Peso: {{ product.weight }}</p>
+          <p>Alto:  {{ product.dimensions.height_cm }}</p>
+          <p>Ancho: {{ product.dimensions.width_cm }}</p>
+          <p>Largo: {{ product.dimensions.length_cm }}</p>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Comentarios" class="label">
+      Comentarios
+    </mat-tab>
+  </mat-tab-group>
+
 </div>
