@@ -56,3 +56,19 @@
   align-items: center;
   justify-content: center;
 }
+
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 1rem;
+  color: black;
+}
+.full {
+  color: rgb(207, 135, 0);
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: rgb(207, 135, 0);
+}
