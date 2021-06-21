@@ -1,3 +1,8 @@
 :host {
   display: flex;
+
+  .custom-grid-layout {
+    width: 100vw;
+    height: 100vh;
+  }
 }
