@@ -1,11 +1,14 @@
 .content {
   display: flex;
   flex-direction: column;
+  margin: 30px 20px;
 
   .products-wrapper {
     display: flex;
     overflow-x: scroll;
     background-color: #23063e;
+    border-radius: 10px;
+    width: 100%;
   }
 
   .category {
@@ -17,6 +20,6 @@
     padding: 10px 0px;
     border: 1px solid white;
     border-radius: 5px;
-    margin: 0px 0px 1% 1%;
+    margin-bottom: 1%;
   }
 }
