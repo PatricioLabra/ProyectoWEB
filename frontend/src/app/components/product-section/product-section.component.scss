@@ -35,6 +35,13 @@
         width: 50%;
       }
 
+      .prices-wrapper {
+
+        .price.discounted {
+          text-decoration: line-through;
+        }
+      }
+
       .button {
         width: 30px;
         margin-right: 10px;
