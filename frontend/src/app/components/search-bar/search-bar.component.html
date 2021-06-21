@@ -1,7 +1,7 @@
-  <mat-form-field class="searchBar">
+<mat-form-field class="searchBar">
   <mat-label class = searchText>Buscar</mat-label>
   <input type="text" matInput (submit)="searchProducts()" [formControl]="searchInput" placeholder="Mascarilla Kakashi">
-  <button color="primary" matSuffix mat-icon-button (click)="searchProducts()">
+  <button class = buttonSearch color="primary" matSuffix mat-icon-button (click)="searchProducts()">
     <mat-icon class = searchIcon>search</mat-icon>
   </button>
 </mat-form-field>
