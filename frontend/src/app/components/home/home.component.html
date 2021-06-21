@@ -1,6 +1,15 @@
-<div>
-  carousel
-  {{ products | json }}
+<div class="carousel">
+  <ngb-carousel *ngIf="products.length > 0">
+    <ng-template ngbSlide *ngFor="let product of products">
+      <div class="picsum-img-wrapper image-wrapper">
+        <img [src]="product.images_urls[0]" alt="Random first slide" class="image-carousel">
+      </div>
+      <div class="carousel-caption">
+        <h3>{{ product.name }}</h3>
+        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+      </div>
+    </ng-template>
+  </ngb-carousel>
 </div>
 
 <div>

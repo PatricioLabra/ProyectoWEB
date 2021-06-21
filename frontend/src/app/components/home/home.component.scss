@@ -1,0 +1,24 @@
+.carousel {
+  min-height: 70vh;
+}
+
+.image-carousel {
+  height: 60vh;
+  margin: 0px auto;
+}
+
+.image-wrapper {
+  display: flex;
+}
+
+::ng-deep .carousel-inner {
+  overflow: visible;
+}
+
+.carousel-caption {
+  background-color: #0b0422;
+  width: 40%;
+  margin: 0px auto;
+  border-radius: 10px;
+  bottom: -10vh;
+}
