@@ -151,13 +151,15 @@ export const getNewerProducts: RequestHandler = async (req, res) => {
 /**
 * Funcion que maneja la peticion productos filtrados, obtiene un JSON con los filtros asignados:
  * tex_index, category, subcategories, lower_limit  y upper_limit.  
- * @route Get '/products/filtered'
+ * @route Get '/products/filtered/:init/:quantity'
  * @param req Request de la peticion, se espera que tenga el formulario filtro
  * @param res Response, retorna los productos filtrados
  */
 export const getFilteredProducts: RequestHandler = async (req, res) => {
 
     const {text_index, category, subcategories, lower_limit, upper_limit} = req.body;
+    const init: number = parseInt(req.params.init);
+    const quantity: number = parseInt(req.params.quantity);
     let filter:any = {};
 
  
@@ -182,11 +184,15 @@ export const getFilteredProducts: RequestHandler = async (req, res) => {
         filter.price.$lt = upper_limit - 1;
 
     try {
-        const products = await Product.find(filter).sort({ updatedAt: -1});
+        const products = await Product.find(filter).sort({ updatedAt: -1}).skip(init).limit(quantity);
+        const quantityRegisteredProducts = await Product.countDocuments();
         const productsFiltered = products.map((product: any) => destructureProduct(product));
-        const quantityFilteredProducts = Object.keys(productsFiltered).length;
+        const quantityFilteredProducts = await Product.find(filter).countDocuments();
 
-        return res.status(200).send({success: true, quantityProducts: quantityFilteredProducts, products: productsFiltered});
+        return res.status(200).send({
+            success: true, quantityProducts: quantityFilteredProducts, products: productsFiltered,
+            quantityRegistered: quantityRegisteredProducts
+        });
 
     } catch (error) {
 
@@ -197,13 +203,15 @@ export const getFilteredProducts: RequestHandler = async (req, res) => {
 /**
 * Funcion que maneja la peticion productos buscados con un texto ingresado, obtiene un params = keyword
  * con la palabra clave a buscar en el sistema y que coincida con los productos, tanto en name, trademark, category o subcategories.
- * @route Get '/products/:keyword'
+ * @route Get '/products/:keyword/:init/:quantity'
  * @param req Request de la peticion, se espera que tenga el keyword a buscar
  * @param res Response, retorna los productos que coincidan con la palabra clave ingresada
  */
 export const getSearchProducts: RequestHandler = async (req, res) => {
 
     const keyword = req.params.keyword;
+    const init: number = parseInt(req.params.init);
+    const quantity: number = parseInt(req.params.quantity);
     let filter:any = {};
 
     //se valida que keyword sea null
@@ -214,11 +222,15 @@ export const getSearchProducts: RequestHandler = async (req, res) => {
         filter.$text = {"$search": keyword};
 
     try {
-        const products = await Product.find(filter).sort({ updated: -1});
+        const products = await Product.find(filter).sort({ updatedAt: -1}).skip(init).limit(quantity);
+        const quantityRegisteredProducts = await Product.countDocuments();
         const productsFiltered = products.map((product: any) => destructureProduct(product));
-        const quantityFilteredProducts = Object.keys(productsFiltered).length;
+        const quantityFilteredProducts = await Product.find(filter).countDocuments();
 
-        return res.status(200).send({success: true, quantityProducts: quantityFilteredProducts, products: productsFiltered});
+        return res.status(200).send({
+            success: true, quantityProducts: quantityFilteredProducts, products: productsFiltered, 
+            quantityRegistered: quantityRegisteredProducts
+        });
 
     } catch (error) {
 

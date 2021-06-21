@@ -10,6 +10,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   exports: [
@@ -24,6 +25,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatMenuModule,
     MatChipsModule,
     MatGridListModule,
+    MatPaginatorModule,
   ]
 })
 export class AngularMaterialModule { }

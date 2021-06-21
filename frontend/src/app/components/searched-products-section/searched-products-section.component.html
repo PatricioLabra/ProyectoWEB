@@ -5,3 +5,19 @@
     <app-product-card [product]="product"></app-product-card>
   </mat-grid-tile>
 </mat-grid-list>
+
+<div>
+  <p>{{ currentSkip + 1 }} - 
+    {{ quantityProducts < (currentSkip + currentQuantity) ? quantityProducts : currentSkip + currentQuantity }} 
+    of {{ quantityProducts }}</p>
+  <button (click)="nextPage()">adelante</button>
+  <button (click)="prevPage()">atras</button>
+</div>
+
+<mat-paginator 
+  [length]="quantityProducts"
+  [pageSize]="currentQuantity"
+  [pageSizeOptions]="[10, 15, 20]"
+  (page)="pageEvent = $event"
+>
+</mat-paginator>
