@@ -1,3 +1,5 @@
+<app-form-filter (filterSubmit)="filterProducts($event)"></app-form-filter>
+
 <div>
   <ul>
     <li *ngFor="let product of products">
@@ -6,6 +8,4 @@
   </ul>
 </div>
 
-<app-form-filter (filterSubmit)="filterProducts($event)"></app-form-filter>
 
-<p>searched-products-section works!</p>
