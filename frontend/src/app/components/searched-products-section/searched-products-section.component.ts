@@ -1,6 +1,4 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { FilterType } from '@models/filter.model';
 import { Product } from '@models/product.model';
@@ -16,9 +14,8 @@ export class SearchedProductsSectionComponent implements OnInit {
   products: Array<Product> = [];
   textSearched: string = '';
   currentSkip: number = 0;
-  currentQuantity: number = 4;
+  currentQuantity: number = 9;
   quantityProducts: number = 0;
-  pageEvent: PageEvent = new PageEvent();
 
   constructor(private api: ApiConnectionService, private route: ActivatedRoute) {
   }
