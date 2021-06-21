@@ -9,6 +9,7 @@
 
 .image-wrapper {
   display: flex;
+  cursor: pointer;
 }
 
 ::ng-deep .carousel-inner {
@@ -27,6 +28,7 @@
 
   .title-product {
     font-size: 30px;
+    cursor: pointer;
   }
 
   .price-info {

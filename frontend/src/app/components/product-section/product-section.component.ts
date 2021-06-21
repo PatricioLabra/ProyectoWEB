@@ -15,6 +15,7 @@ export class ProductSectionComponent implements OnInit {
   _id: string;
   product: Product = new Product();
   productCart: ProductCart = new ProductCart(this.product);
+  isLoaded: boolean = false;
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -28,6 +29,7 @@ export class ProductSectionComponent implements OnInit {
     this.api.getProduct(this._id).subscribe((data: any) => {
       this.product = data.product;
       this.productCart = new ProductCart(this.product, 1);
+      this.isLoaded = true;
     });
   }
 

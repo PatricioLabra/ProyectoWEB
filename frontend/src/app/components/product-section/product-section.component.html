@@ -1,22 +1,58 @@
-<div>
-  <img [src]="product.images_urls[0]" alt="Image Product" style="width: 300px; height: 300px;">
-  <p>{{ product.trademark }}</p>
-  <p>{{ product.name }}</p>
-  <p>{{ product.calification }}</p>
-  <p>{{ product.description }}</p>
-  <p>{{ product.price }}</p>
-  <p>{{ product.discount }}</p>
-  <p>{{ product.price * (1 - product.discount) }}</p>
-  <p>{{ product.stock }}</p>
-  <button (click)="insertCart()">+</button>
-  <button (click)="removeCart()">-</button>
-  <p>{{ product.category }}</p>
-  <p>{{ product.subcategories }}</p>
+<div class="content" *ngIf="isLoaded">
+  <div class="info-wrapper">
+    <img [src]="product.images_urls[0]" alt="Image Product" class="image-product">
 
-  <div>
-    Descripcion y caracteristicas:
-    <p>{{ product.description }}</p>
-    <p>{{ product.weight }}</p>
-    <p>{{ product.dimensions | json }}</p>
+    <div class="info-product">
+      <div class="name-wrapper">
+        <p class="name-product">{{ product.name }}</p>
+        <p>{{ product.trademark }}</p>
+      </div>
+
+
+      <p>Calificacion: {{ product.calification }}</p>
+      <p class="description">Descripcion: {{ product.description }}</p>
+
+      <div class="prices-wrapper">
+        <p>{{ (product.stock) ? 'Disponible' : 'No Disponible' }}</p>
+        <p [class.price.discounted]="product.discount">$ {{ product.price }}</p>
+        <p *ngIf="product.discount">-{{ product.discount * 100}}%</p>
+        <p *ngIf="product.discount">$ {{ product.price * (1 - product.discount) }}</p>
+      </div>
+
+      <div>
+        <button class="button" (click)="insertCart()" mat-flat-button color="primary">+</button>
+        <button class="button" (click)="removeCart()" mat-flat-button color="primary">-</button>
+      </div>
+
+    </div>
   </div>
+
+  <div class="categories-wrapper">
+    <p>Categoria: {{ product.category }}</p>
+    <mat-chip-list [selectable]="false">
+      <mat-chip *ngFor="let sub of product.subcategories" [disableRipple]="true">
+        {{ sub }}
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Descripcion y caracteristicas">
+      <div class="description-features">
+        <div class="description">
+          <p>Descripcion: {{ product.description }}</p>
+        </div>
+        <div *ngIf="product.dimensions" class="dimensions">
+          <p>Peso: {{ product.weight }}</p>
+          <p>Alto:  {{ product.dimensions.height_cm }}</p>
+          <p>Ancho: {{ product.dimensions.width_cm }}</p>
+          <p>Largo: {{ product.dimensions.length_cm }}</p>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Comentarios" class="label">
+      Comentarios
+    </mat-tab>
+  </mat-tab-group>
+
 </div>

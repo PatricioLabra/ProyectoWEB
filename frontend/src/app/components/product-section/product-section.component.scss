@@ -1,0 +1,78 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  background-color: #23063e;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+
+  .info-wrapper {
+    display: flex;
+    height: 80vh;
+
+    .image-product {
+      width: 30%;
+      height: fit-content;
+      margin: auto 0px;
+    }
+
+    .info-product {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      margin: 0px 40px;
+      padding: 20px;
+      width: 50%;
+      height: auto;
+
+      .name-product {
+        font-size: 35px;
+        text-transform: uppercase;
+      }
+
+      .description {
+        font-size: 15px;
+        width: 50%;
+      }
+
+      .prices-wrapper {
+
+        .price.discounted {
+          text-decoration: line-through;
+        }
+      }
+
+      .button {
+        width: 30px;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .categories-wrapper {
+    margin: 30px 0px;
+  }
+
+  .description-features {
+    display: flex;
+
+    .description {
+      width: 50%;
+    }
+
+    .dimensions {
+      display: flex;
+      width: 50%;
+      justify-content: space-evenly;
+
+      p {
+        margin: 0px;
+      }
+    }
+  }
+
+}
+
+::ng-deep .mat-tab-label .mat-tab-label-content {
+  color: white !important;
+}
