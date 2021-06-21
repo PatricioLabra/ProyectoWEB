@@ -1,8 +1,8 @@
-@import 'styles/mixins';
+@import 'src/styles/mixinsNeonButtons';
 
 /*VARIABLES*/
-$backgroundColorHeader: #424242;
-$backgroundColorButtons:#5b5b5b;
+$backgroundColorHeader:transparent;
+$backgroundColorButtons:transparent;
 $textColor: white;
 $lightColor: #a945c7;
 $borderLightHeader: #bb90ff;
@@ -18,13 +18,8 @@ $borderLightHeader: #bb90ff;
     background: $backgroundColorHeader;
     color: $textColor;
     overflow: hidden;
-    box-shadow: 0 5px 20px $borderLightHeader, 0 5px 20px $borderLightHeader, 0 5px 20px $borderLightHeader;
-    border-radius: 10px;
- 
 
     .buttonCategory{
-  
-
         @include neonButton($textColor, $backgroundColorButtons);
 
         span {
@@ -66,6 +61,7 @@ $borderLightHeader: #bb90ff;
 
     .buttonSignOut{
         @include neonButton($textColor, $backgroundColorButtons);
+        justify-content:right;
 
         span {
             @include buttonSpans;

@@ -1,22 +1,30 @@
+@import 'src/styles/mixinsNeonButtons';
+
 /*VARIABLES*/
-$backgroundColorSearchBar: white;
-$textColor: black;
-$iconColor:black;
+$backgroundColorSearchBar: rgba(255, 255, 255, 0.041);
+$textColor: white;
+$iconColor:white;
 $shadowColor: #4e4e4d91;
+$lightColor: #a945c7;
 
 /*COMPONENT SEARCH - BAR*/
 .searchBar{
     background-color: $backgroundColorSearchBar;
-    width: auto;
+    width:100%;
     height: auto;
     border-radius: 5px;
-}
-.searchText{
-    margin: 10%;
-    color: $textColor;
-}
+    font-weight: 500;
+    align-items:center;
 
-.searchIcon{
-    color: $iconColor;
-    margin: 5%;
+    .searchText{
+        margin: 10%;
+        color: $textColor;
+    }
+    .buttonSearch:hover{
+        @include neonButtonHover($lightColor);
+    }
+    .searchIcon{
+        color: $iconColor;
+        margin: 5%;
+    }
 }

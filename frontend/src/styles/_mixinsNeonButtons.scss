@@ -13,7 +13,7 @@
 
 @mixin neonButtonHover ($lightColor){
     background: $lightColor;
-    box-shadow: 0 0 10px $lightColor, 0 0 40px $lightColor, 0 0 80px $lightColor;
+    box-shadow: 0 0 5px $lightColor, 0 0 10px $lightColor, 0 0 20px $lightColor;
     transition-delay: 1s;
 }
 
@@ -38,7 +38,7 @@
     left: $left;
     right: $right;
     transition: 1s;
-    transition-delay: $transition-delay
+    transition-delay: $transition-delay;
 }
 
 @mixin neonButtonText {
