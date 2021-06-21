@@ -12,6 +12,8 @@
 
     .image-product {
       width: 30%;
+      height: fit-content;
+      margin: auto 0px;
     }
 
     .info-product {
@@ -19,7 +21,6 @@
       flex-direction: column;
       justify-content: space-evenly;
       margin: 0px 40px;
-      border: 3px solid #0b0422;
       padding: 20px;
       width: 50%;
       height: auto;

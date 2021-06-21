@@ -14,9 +14,9 @@
 
       <div class="prices-wrapper">
         <p>{{ (product.stock) ? 'Disponible' : 'No Disponible' }}</p>
-        <p>$ {{ product.price }}</p>
-        <p>-{{ product.discount * 100}}%</p>
-        <p>$ {{ product.price * (1 - product.discount) }}</p>
+        <p [class.price.discounted]="product.discount">$ {{ product.price }}</p>
+        <p *ngIf="product.discount">-{{ product.discount * 100}}%</p>
+        <p *ngIf="product.discount">$ {{ product.price * (1 - product.discount) }}</p>
       </div>
 
       <div>
