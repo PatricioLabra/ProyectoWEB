@@ -1,16 +1,16 @@
-<div style="display: flex; flex-direction: column; width: 150px;">
-	<div [routerLink]="['/product', product._id]">
-		{{ product.name }}
-
+<div class="product-wrapper">
+	<div class="title-image-wrapper" [routerLink]="['/product', product._id]">
+		<span class="title">{{ product.name }}</span>
+		<span *ngIf="product.discount" class="discount">-{{ product.discount * 100 }} %</span>
 		<img [src]="product.images_urls[0]" alt="No Image" style="width: 120px; height: 120px;">
 	</div>
 
-	{{ product.price }}
+	<span>{{ product.calification }} stars</span>
 
-	<span *ngIf="product.discount">{{ product.discount }}</span>
-	
-	<span *ngIf="product.discount">{{ product.price * (1 - product.discount) }}</span>
-	{{ product.calification }}
+	<div class="prices-wrapper">
+		<span class="price" [class.price-discounted]="product.discount">${{ product.price }}</span>
+		<span *ngIf="product.discount" class="price">${{ product.price * (1 - product.discount) }}</span>
+	</div>
 
-	<button (click)="insertCart()">Agregar</button>
+	<button mat-flat-button color="primary" class="button" (click)="insertCart()">Agregar</button>
 </div>
