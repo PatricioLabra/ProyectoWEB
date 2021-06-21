@@ -1,7 +1,7 @@
-<div>
-  {{ categoryName }}
+<div class="content">
+  <span class="category">{{ categoryName }}</span>
+  <div class="products-wrapper">
+    <app-product-card *ngFor="let product of products" [product]="product"></app-product-card>
+  </div>
 </div>
 
-<div class="products-wrapper">
-  <app-product-card *ngFor="let product of products" [product]="product"></app-product-card>
-</div>
