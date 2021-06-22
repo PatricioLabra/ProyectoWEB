@@ -1,0 +1,22 @@
+.content {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 15px;
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 10px;
+
+  .products {
+    min-width: 40%;
+
+    .product-wrapper {
+      display: flex;
+      justify-content: space-between;
+
+      .image-product {
+        width: 50px;
+      }
+    }
+  }
+}
