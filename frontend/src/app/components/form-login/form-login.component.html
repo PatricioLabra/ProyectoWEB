@@ -1,4 +1,3 @@
-
 <div class = form>
 	<form novalidate [formGroup]="profileForm" (ngSubmit)="onSubmit()">
 		<div class = logInText>
@@ -9,7 +8,7 @@
 			<div class = nickname>
 				<mat-form-field>
 					<mat-label >Nickname</mat-label>
-					<input type="text" matInput formControlName="nickname" placeholder="Madara">
+					<input type="text" matInput formControlName="nickname" placeholder="Madara" autocomplete="off">
 					<mat-error *ngIf="isFieldInvalid('nickname')">
 							Nickname requerido
 					</mat-error>
@@ -19,7 +18,7 @@
 			<div class="password">
 				<mat-form-field>
 				<mat-label>Password</mat-label>
-				<input type="password" matInput formControlName="password" placeholder="Uchiha">
+				<input type="password" matInput formControlName="password" placeholder="Uchiha" autocomplete="off">
 				<mat-error *ngIf="isFieldInvalid('password')">
 						Password requerida
 				</mat-error>

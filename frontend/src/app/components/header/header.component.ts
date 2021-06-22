@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { MatDialog } from '@angular/material/dialog';
+import { CartHeaderComponent } from '@components/cart-header/cart-header.component';
 import { UserInfoService } from '@services/user-info.service';
 import { CategoryList } from '@models/category-types';
 
@@ -12,7 +13,7 @@ export class HeaderComponent implements OnInit {
 
   CategoryTypes = CategoryList;
 
-  constructor(private userInfo: UserInfoService) { }
+  constructor(private userInfo: UserInfoService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -29,8 +30,15 @@ export class HeaderComponent implements OnInit {
     return this.userInfo.userInfo.nickname;
   }
 
-  // Just for debug, remove later
+  public openDialog() {
+    this.dialog.open(CartHeaderComponent, {
+      width: '50vw',
+      maxHeight: '90vh',
+      data: null,   // The data is get from service
+    });
+  }
+
   signout() {
-    this.userInfo.isLogged = false;
+
   }
 }

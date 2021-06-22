@@ -95,3 +95,6 @@ $lightColor: #a945c7;
         }
     }
 
+::ng-deep .mat-input-element::placeholder {
+    color: white;
+}

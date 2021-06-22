@@ -9,11 +9,10 @@ import { HomeComponent } from '@components/home/home.component';
 import { PanelAdminComponent } from '@components/panel-admin/panel-admin.component';
 import { ProductSectionComponent } from '@components/product-section/product-section.component';
 import { SearchedProductsSectionComponent } from '@components/searched-products-section/searched-products-section.component';
-import { TestingComponent } from '@components/testing/testing.component';
 
 const routes: Routes = [
   {
-    path: '', component: TestingComponent
+    path: '', component: HomeComponent
   },
   {
     path: 'home', component: HomeComponent
