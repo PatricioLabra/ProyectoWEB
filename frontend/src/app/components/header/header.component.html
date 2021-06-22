@@ -35,15 +35,14 @@
 		<p class = panelAdmin routerLink="/admin/panel">Panel Admin</p>
 	</div>
 
-
-
 	<ng-template #carrito>
 		<app-cart-header></app-cart-header>
 	</ng-template>
 </div>
+		<p (click)="openDialog()">Carrito</p>
 
 <ng-template #noEstaLogueado>
-	<button class = buttonLoginIn routerLink="/admin/login" mat-flat-button color="primary">
+	<button class = buttonLoginIn routerLink="/login" mat-flat-button color="primary">
 		<span class = "span9"></span>
 		<span class = "span10"></span>
 		<span class = "span11"></span>

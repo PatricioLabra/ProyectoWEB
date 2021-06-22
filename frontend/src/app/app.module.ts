@@ -51,7 +51,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReportUsersComponent,
     ReportProductsComponent,
     CartBoughtCardComponent,
-    PanelAdminComponent
+    PanelAdminComponent,
   ],
   imports: [
     BrowserModule,
