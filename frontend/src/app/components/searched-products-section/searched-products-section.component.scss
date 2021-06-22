@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+
+  .products {
+
+    .custom-grid-layout {
+      width: 70vw;
+      height: 70vh;
+    }
+
+    .custom-paginator {
+      display: flex;
+      position: absolute;
+      right: 10px;
+    }
+  }
+}
+
+::ng-deep .mat-input-element {
+  color: black;
+}

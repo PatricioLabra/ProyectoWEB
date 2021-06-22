@@ -1,11 +1,18 @@
-<div>
-  <ul>
-    <li *ngFor="let product of products">
-      {{ product.name }} - {{ product.category }}
-    </li>
-  </ul>
-</div>
-
 <app-form-filter (filterSubmit)="filterProducts($event)"></app-form-filter>
 
-<p>searched-products-section works!</p>
+<div class="products">
+  <mat-grid-list cols="3" class="custom-grid-layout">
+    <mat-grid-tile *ngFor="let product of products">
+      <app-product-card [product]="product"></app-product-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <div class="custom-paginator" *ngIf="quantityProducts">
+    <p>{{ currentSkip + 1 }} - 
+      {{ quantityProducts < (currentSkip + currentQuantity) ? quantityProducts : currentSkip + currentQuantity }} 
+      of {{ quantityProducts }}</p>
+    <button (click)="prevPage()">atras</button>
+    <button (click)="nextPage()">adelante</button>
+  </div>
+</div>
+

@@ -13,6 +13,9 @@ export class SearchedProductsSectionComponent implements OnInit {
 
   products: Array<Product> = [];
   textSearched: string = '';
+  currentSkip: number = 0;
+  currentQuantity: number = 9;
+  quantityProducts: number = 0;
 
   constructor(private api: ApiConnectionService, private route: ActivatedRoute) {
   }
@@ -29,8 +32,13 @@ export class SearchedProductsSectionComponent implements OnInit {
    * Obtiene los productos relacionados con la busqueda
    */
   updateSearchedProducts() {
-    this.api.getSearchProducts(this.textSearched).subscribe((data: any) => {
+    this.api.getSearchProducts(this.textSearched, this.currentSkip, this.currentQuantity).subscribe((data: any) => {
+      console.log(data);
+      console.log(this.currentSkip);
+      console.log(this.currentQuantity);
       this.products = data.products;
+      this.quantityProducts = data.quantityProducts;
+      this.currentSkip = 0;
     });
   }
 
@@ -42,9 +50,24 @@ export class SearchedProductsSectionComponent implements OnInit {
     filter.text_index = this.textSearched;
     console.log(filter);
 
-    this.api.getFilteredProducts(filter).subscribe((data: any) => {
+    this.api.getFilteredProducts(filter, this.currentSkip, this.currentQuantity).subscribe((data: any) => {
       console.log(data);
       this.products = data.products;
+      this.quantityProducts = data.quantityProducts;
     });
+  }
+
+  nextPage() {
+    if ((this.currentSkip + this.currentQuantity) < this.quantityProducts) {
+      this.currentSkip += this.currentQuantity;
+      this.updateSearchedProducts();
+    }
+  }
+
+  prevPage() {
+    if ((this.currentSkip - this.currentQuantity) >= 0) {
+      this.currentSkip -= this.currentQuantity;
+      this.updateSearchedProducts();
+    }
   }
 }

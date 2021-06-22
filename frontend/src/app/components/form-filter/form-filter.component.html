@@ -1,5 +1,5 @@
-<form novalidate [formGroup]="filterForm" (ngSubmit)="onSubmit()">
-  <mat-form-field appearance="fill">
+<form novalidate [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="form-filter">
+  <mat-form-field appearance="fill" class="category">
     <mat-label>Categoria</mat-label>
     <mat-select formControlName="category" name="category_">
       <mat-option>---</mat-option>
@@ -9,7 +9,8 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-accordion class="example-headers-align" multi>
+  <mat-accordion class="subcategories" multi>
+    <p>Subcategoria</p>
     <mat-expansion-panel *ngFor="let category of CategoryList; index as i">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -20,21 +21,18 @@
       <div>
         <p *ngFor="let sub of Subcategories[i]"><mat-checkbox (change)="onChange(sub)" color="primary">{{ sub }}</mat-checkbox></p>
       </div>
-  
     </mat-expansion-panel>
   </mat-accordion>
 
-  <mat-form-field>
+  <mat-form-field class="price-range">
     <mat-label>Precio minimo</mat-label>
     <input type="number" matInput formControlName="minPrice" placeholder="1600">
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field class="price-range">
     <mat-label>Precio maximo</mat-label>
     <input type="number" matInput formControlName="maxPrice" placeholder="32000">
   </mat-form-field>
 
-  <button type="submit" mat-flat-button color="primary">Filtrar</button>
+  <button type="submit" mat-flat-button color="primary" class="button-filter">Filtrar</button>
 </form>
-
-<p>form-filter works!</p>

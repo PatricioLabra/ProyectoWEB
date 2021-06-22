@@ -50,18 +50,24 @@ export class ApiConnectionService {
   /**
    * Obtiene los productos que coincidan con el texto ingresado
    * @param keyword texto de busqueda
+   * @param initialProduct primer producto a traer
+   * @param quantityProducts cantidad de productos a obtener
    */
-  getSearchProducts(keyword: string) {
-    const url = this.makeUrl(['products', keyword]);
+  getSearchProducts(keyword: string, initialProduct: number, quantityProducts: number) {
+    const url = this.makeUrl(['products', keyword, initialProduct, quantityProducts]);
     return this.http.get(url);
   }
 
   /**
    * Obtiene los productos que coincidan con el filtro ingresado
    * @param filter Filtro que se aplicara a los productos para buscarlos
+   * @param initialProduct primer producto a traer
+   * @param initialProduct primer producto a traer
+   * @param quantityProducts cantidad de productos a obtener
+   * @param quantityProducts cantidad de productos a obtener
    */
-  getFilteredProducts(filter: FilterType) {
-    const url = this.makeUrl(['products', 'filtered']);
+  getFilteredProducts(filter: FilterType, initialProduct: number, quantityProducts: number) {
+    const url = this.makeUrl(['products', 'filtered', initialProduct, quantityProducts]);
     return this.http.post(url, filter);
   }
 
