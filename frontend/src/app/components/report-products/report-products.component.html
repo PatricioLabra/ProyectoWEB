@@ -1,9 +1,7 @@
-<div>
-  <p>{{ quantityCarts }}</p>
+<div class="content">
+  <p class="quantity">Cantidad de carritos comprados: {{ quantityCarts }}</p>
 
-  <div>
+  <div class="carts">
     <app-cart-bought-card *ngFor="let cart of carts" [cart]="cart"></app-cart-bought-card>
   </div>
 </div>
-
-<p>report-products works!</p>

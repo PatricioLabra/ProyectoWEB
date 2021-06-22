@@ -12,6 +12,7 @@ export class ReportUsersComponent {
 
   users: Array<UserInfo> = [];
   quantUsers: number = 0;
+  displayedColumns: string[] = ['nickname', 'nombres', 'apellidos', 'rut', 'email', 'direccion'];
 
   constructor(private api: ApiConnectionService, private userInfo: UserInfoService) {
     this.api.getNewerUsers(this.userInfo.token, 0, 10).subscribe((res: any) => {
