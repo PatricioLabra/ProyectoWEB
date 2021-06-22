@@ -22,7 +22,6 @@ import { FormFilterComponent } from './components/form-filter/form-filter.compon
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { FormRegisterComponent } from './components/form-register/form-register.component';
 import { ReportUsersComponent } from './components/report-users/report-users.component';
-import { UserCardComponent } from './components/user-card/user-card.component';
 import { ReportProductsComponent } from './components/report-products/report-products.component';
 import { CartBoughtCardComponent } from './components/cart-bought-card/cart-bought-card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -50,7 +49,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AdminLoginComponent,
     FormRegisterComponent,
     ReportUsersComponent,
-    UserCardComponent,
     ReportProductsComponent,
     CartBoughtCardComponent,
     PanelAdminComponent
