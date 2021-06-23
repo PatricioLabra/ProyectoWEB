@@ -112,7 +112,7 @@ export const getCalificationComments: RequestHandler = async (req, res) => {
     if (!product)
         return res.status(404).send({ success: false, message: 'Error: no se encontró ningun producto calificado con el id ingresado.' });
 
-    const quantityComments = Object.keys(product.comments).length;
+    const quantityComments = product.comments.length;
 
     //se valida que el producto tenga comentarios
     if (quantityComments == 0)
