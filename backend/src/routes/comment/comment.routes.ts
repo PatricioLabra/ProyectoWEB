@@ -7,7 +7,7 @@ const router = Router();
 router.post('/comment', commentCtrl.addComment);
 
 //Obtener los comentarios de un producto
-router.get ('/comment/:id/:init/:quantity', commentCtrl.getComments)
+router.get ('/comment/:id', commentCtrl.getComments)
 
 //Obtener el promedio de las calificaciones + su cantidad
 router.get ('/comment/califications/:id', commentCtrl.getCalificationComments)
