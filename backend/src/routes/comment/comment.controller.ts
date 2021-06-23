@@ -11,7 +11,7 @@ import { Types } from "mongoose"
  */
 export const addComment: RequestHandler = async (req, res) => {
 
-    const { id_product, comments } = req.body;
+    const { id_product, comment } = req.body;
 
     //se valida que id_product no sea null 
     if (!id_product)
@@ -21,40 +21,37 @@ export const addComment: RequestHandler = async (req, res) => {
     if ( !Types.ObjectId.isValid( id_product ) )
         return res.status(400).send({ success:false, message:'Error: el id del producto ingresado no es válido.' });
 
-    const product = await Product.findById({"_id": id_product});
+    const product = await Product.findById(id_product);
 
     //se valida que el producto a almacenar exista en la base de datos
     if (!product)
         return res.status(404).send({ success:false, message: 'Error: el producto a agregar no esta registrado en la base de datos.'});
 
-    //se valida que el arreglo de comentarios no esté vacío
-    if (Object.keys(comments).length == 0)
+    //se valida que existan comentarios
+    if (!comment)
         return res.status(400). send({ succes: false, message: 'Error: no se ingresó ningun comentario o calificacion del producto.'});
 
     //se almacena la fecha del comentario
-    comments[0].comment_date = Date.now();
-
+    comment.comment_date = new Date();
+    
     try {
         const productFound = await Comment.findOne({ id_product });
 
         //se valida si hay un producto ya registrado
         if (productFound){
-            const lengthCommentsArray = productFound.comments.length;
-            productFound.comments[lengthCommentsArray] = comments[0];
-            
-            //se actualiza el producto ya agregado
-            await Comment.findByIdAndUpdate( productFound._id, productFound );
-            
-            return res.status(201).send({ success: true });
+            // Se ingresa el comentario al array de comentarios
+            await Comment.updateOne({ id_product }, { $push: { comments: comment } });
+
+            return res.status(200).send({ success: true });
         }
 
         //al no estar registrado se crea y se agrega
-        const newComment = {id_product, comments};
+        const newComment = { id_product, comments: [comment]};
         const commentSaved = new Comment(newComment);
         
         await commentSaved.save();
 
-        return res.status(201).send({ succes: true });
+        return res.status(200).send({ succes: true });
 
     } catch (error) {
         return res.status(400).send({success: false, message: 'Error: '+ error});
