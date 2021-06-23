@@ -1,0 +1,108 @@
+@import "../../../styles/mixinsNeonButtons";
+
+$textColor: white; 
+$backgroundColorButtons: transparent;
+
+.cart{
+    margin-bottom: 3%;
+    width: 48%;
+    margin-left :auto;
+    margin-right : auto;
+
+    ul{
+        margin-top: 3%;
+        list-style-type: none;
+    }
+
+    .product{
+        padding: 2%;
+        box-shadow: 0 0 20px #640df0;
+        margin-right: 8%;
+        margin-bottom: 3%;
+        justify-content: center;
+        text-shadow: 0 0 20px #f09;
+        border-radius: 5px;
+
+        .image-product{
+            height: 20vh;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .description{
+            width: 80%;
+            display: inline-block;
+
+            .name{
+            margin-left: 3%;
+            font-weight: 500;
+            }
+            .price{
+                display: inline-block;
+                margin-left: 3%;
+            }
+            .discount{
+                display: inline-block;
+                margin-left: 3%;
+            }
+            .quantity{
+                display: inline-block;
+                margin-left: 3%;
+            }
+            .finalPrice{
+                display: inline-block;
+                margin-left: 3%;
+            }
+        }
+
+        .buttonsProduct{
+            margin-top: 1%;
+            display:block;
+            margin-left: 5vh;
+
+            button{
+                background:$backgroundColorButtons;
+                color: $textColor;
+                box-shadow: 0 0 20px #640df0;
+                margin-right: 0.5%;
+            }
+        }
+    }
+
+    .total{
+        margin-right: auto;
+        text-align:center;
+        text-shadow: 0 0 20px #f09;
+    }
+
+    .buttons{
+        padding: 2%;
+        justify-content: center;
+        text-align: center;
+
+        .buttonVaciar{
+            border: 2px solid white;
+            box-shadow: 0 0 20px rgb(235, 75, 26);
+            border-radius: 5px;
+
+            @include neonButton($textColor, $backgroundColorButtons);
+            @include neonButtonText;
+        }
+        .buttonVaciar:hover{
+            @include neonButtonHover(red);
+        }
+    
+        .buttonPagar{
+            border: 2px solid white;
+            margin-left :2%;
+            box-shadow: 0 0 20px rgb(26, 235, 96);
+            border-radius: 5px;
+
+            @include neonButton($textColor, $backgroundColorButtons);
+            @include neonButtonText;
+        }
+        .buttonPagar:hover{
+            @include neonButtonHover(green);
+        }
+    }    
+}

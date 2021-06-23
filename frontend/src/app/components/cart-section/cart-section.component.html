@@ -1,19 +1,31 @@
-<ul>
-  <li *ngFor="let product of products; index as i">
-    <img [src]="product.image_url" alt="Image Product" style="width: 100px; height: 100px;">
-    <p>{{ product.name }}</p>
-    <p>{{ product.price }}</p>
-    <p>{{ product.discount }}</p>
-    <p>{{ product.quantity }}</p>
-    <p>{{ product.finalPrice }}</p>
-    <button [disabled]="product.stock <= product.quantity" (click)="incrementProduct(i)">+</button>
-    <button (click)="decrementProduct(i)">-</button>
-  </li>
-</ul>
+<div class = cart>
+  <ul>
+      <li class =product *ngFor="let product of products; index as i">
+          <img class = image-product [src]="product.image_url" alt="Image Product" style="width: 100px; height: 100px;">
+          
+          <div class = description>
+            <p class = name>{{ product.name }}</p>
+            <p class = price>Precio: {{ product.price }}</p>
+            <p class = discount>Descuento: {{ product.discount *100 }}%</p>
+            <p class = quantity>Cantidad: {{ product.quantity }}</p>
+            <p class = finalPrice>Precio Final: {{ product.finalPrice }}</p>
+            <br>
+          </div>
 
-<div>
-  <p>{{ totalPrice }}</p>
-  <p>{{ totalDiscount }}</p>
-  <button (click)="emptyCart()">Vaciar carrito</button>
-  <button (click)="buyCart()">Pagar</button>
+            <div class = buttonsProduct>
+              <button [disabled]="product.stock <= product.quantity" (click)="incrementProduct(i)">+</button>
+              <button (click)="decrementProduct(i)">-</button>
+            </div>
+      </li>
+  </ul>
+  
+  <div class = total>
+    <p>Total: {{ totalPrice }}</p>
+    <p>Descuento: {{ totalDiscount }}</p>
+  </div>
+
+  <div class = buttons>
+    <button  class = buttonVaciar (click)="emptyCart()">Vaciar carrito</button>
+    <button  class = buttonPagar (click)="buyCart()">Pagar</button>
+  </div>  
 </div>
