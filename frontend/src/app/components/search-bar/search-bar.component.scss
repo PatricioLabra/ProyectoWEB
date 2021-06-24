@@ -16,6 +16,10 @@ $lightColor: #a945c7;
     font-weight: 500;
     align-items:center;
 
+    .input-text {
+        color: white;
+    }
+
     .searchText{
         margin: 10%;
         color: $textColor;
@@ -27,4 +31,10 @@ $lightColor: #a945c7;
         color: $iconColor;
         margin: 5%;
     }
+
+    ::ng-deep .mat-form-field-wrapper {
+        padding-bottom: 0px;
+        color: white;
+    }
 }
+

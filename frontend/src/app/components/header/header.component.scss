@@ -17,7 +17,6 @@ $borderLightHeader: #bb90ff;
     height: 4vh;
     background: $backgroundColorHeader;
     color: $textColor;
-    overflow: hidden;
 
     .buttonCategory{
         @include neonButton($textColor, $backgroundColorButtons);
