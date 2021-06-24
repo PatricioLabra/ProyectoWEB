@@ -1,116 +1,117 @@
-@import url(//fonts.googleapis.com/css?family=Vibur);
 
 @mixin squares-common ($height, $width){
-    height: $height;
-    width: $width;
-    margin: auto;
-    position: absolute;
-    left: 0;
-    right: -1;
-    top: 0;
-    bottom:0;
-    box-shadow: 0 0 0 0.1vw cyan, 0 0 1vw 0 cyan, inset 0 0 0.5vw 0 cyan;
+  height: $height;
+  width: $width;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: -1;
+  top: 0;
+  bottom:0;
+  box-shadow: 0 0 0 0.1vw cyan, 0 0 1vw 0 cyan, inset 0 0 0.5vw 0 cyan;
 }
 
 @mixin square-one {
-    animation: squareOne 8s .99s ease infinite;
+  animation: squareOne 8s .99s ease infinite;
 }
 
 @mixin square-two {
-    animation: squareTwo 8s .99s ease infinite;
+  animation: squareTwo 8s .99s ease infinite;
 }
 
 @mixin back($font-size,$line-height ){
-    color: #FB4264;
-    margin-left: 5%;
-    font-size: $font-size;
-    line-height: $line-height;
-    text-shadow: 0 0 3vw #F40A35;
-    animation: neon 1s ease infinite;
-    -moz-animation: neon 1s ease infinite;
-    -webkit-animation: neon 1s ease infinite;
-    animation: neon 1s ease infinite;
-    -moz-animation: neon 1s ease infinite;
-    -webkit-animation: neon 1s ease infinite;
+  color: #FB4264;
+  margin-left: 5%;
+  font-family: neon;
+  font-size: $font-size;
+  line-height: $line-height;
+  text-shadow: 0 0 3vw #F40A35;
+  animation: backs 1s ease infinite;
+  -moz-animation: backs 1s ease infinite;
+  -webkit-animation: backs 1s ease infinite;
+  animation: backs 1s ease infinite;
+  -moz-animation: backs 1s ease infinite;
+  -webkit-animation: backs 1s ease infinite;
 }
 
 @mixin toThe($font-size, $line-height){
-    line-height: $line-height;
-    font-family: neon;
-    color: hsl(313, 100%, 50%);
-    font-size:$font-size;
-    text-shadow: 0 0 5vw hsl(313, 100%, 50%);
-    animation: the 3s linear infinite;
-    -moz-animation: the 5s linear infinite;
-    -webkit-animation: the 5s linear infinite;
-    -o-animation: the 5s linear infinite;
+  line-height: $line-height;
+  font-family: neon;
+  color: hsl(313, 100%, 50%);
+  font-size:$font-size;
+  text-shadow: 0 0 5vw hsl(313, 100%, 50%);
+  animation: the 3s linear infinite;
+  -moz-animation: the 3s linear infinite;
+  -webkit-animation: the 3s linear infinite;
+  -o-animation: the 3s linear infinite;
 }
 
 @mixin noventa ($font-size, $line-height){
-    line-height: $line-height;
-    font-family: neon;
-    color: #426DFB;
-    font-size: $font-size;
-    text-shadow: 0 0 3vw #2356FF;
-    font-family: neon;
-    color: #426DFB;
-    text-shadow: 0 0 3vw #2356FF;
-    animation: flux 2s linear infinite;
-    -moz-animation: flux 2s linear infinite;
-    -webkit-animation: flux 2s linear infinite;
-    -o-animation: flux 2s linear infinite;
+  line-height: $line-height;
+  font-family: neon;
+  color: #426DFB;
+  font-size: $font-size;
+  text-shadow: 0 0 3vw #2356FF;
+  font-family: backs;
+  color: #426DFB;
+  text-shadow: 0 0 3vw #2356FF;
+  animation: noventas 2s linear infinite;
+  -moz-animation: noventas 2s linear infinite;
+  -webkit-animation: noventas 2s linear infinite;
+  -o-animation: noventas 2s linear infinite;
 }
 
-@keyframes neon {
-    0%,
-    100% {
-      text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
-      color: #FED128;
-    }
-    50% {
-      text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
-      color: #806914;
-    }
+@keyframes backs {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
+    color: #FED128;
   }
-  @keyframes flux {
-    0%,
-    100% {
-      text-shadow: 0 0 1vw #1041FF, 0 0 3vw #1041FF, 0 0 10vw #1041FF, 0 0 10vw #1041FF, 0 0 .4vw #8BFDFE, .5vw .5vw .1vw #147280;
-      color: #28D7FE;
-    }
-    50% {
-      text-shadow: 0 0 .5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180, 0 0 5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
-      color: #146C80;
-    }
+  50% {
+    text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
+    color: #806914;
   }
-  
-  @keyframes the {
-    0%,
-    100% {
-      text-shadow: 0 0 1vw hsl(313, 91%, 37%), 0 0 3vw hsl(313, 91%, 37%), 0 0 10vw hsl(313, 91%, 37%), 0 0 10vw hsl(313, 91%, 37%), 0 0 .4vw hsl(313, 91%, 37%), .5vw .5vw .1vw #ff00c8;
-      color: #ff00c8;
-    }
-    50% {
-      text-shadow: 0 0 .5vw hsl(313, 91%, 37%), 0 0 1.5vw hsl(313, 91%, 37%), 0 0 5vw hsl(313, 91%, 37%), 0 0 5vw hsl(313, 91%, 37%), 0 0 .2vw hsl(313, 91%, 37%), .5vw .5vw .1vw #ff00c8;
-      color: #ff00c8;
-    }
-  }
-  @keyframes  squareOne{
-    from{
-        transform: rotate(0deg);
-    }
-    to{
-        transform: rotate(-180deg);
-    }
 }
 
+@keyframes noventas {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #1041FF, 0 0 3vw #1041FF, 0 0 10vw #1041FF, 0 0 10vw #1041FF, 0 0 .4vw #8BFDFE, .5vw .5vw .1vw #147280;
+    color: #28D7FE;
+  }
+  50% {
+    text-shadow: 0 0 .5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180, 0 0 5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
+    color: #146C80;
+  }
+}
 
-@keyframes  squareTwo{
-    from{
-        transform: rotate(0deg);
-    }
-    to{
-        transform: rotate(180deg);
-    }
+@keyframes the {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw hsl(313, 91%, 37%), 0 0 3vw hsl(313, 91%, 37%), 0 0 10vw hsl(313, 91%, 37%), 0 0 10vw hsl(313, 91%, 37%), 0 0 .4vw hsl(313, 91%, 37%), .5vw .5vw .1vw #ff00c8;
+    color: #ff00c8;
+  }
+  50% {
+    text-shadow: 0 0 .5vw hsl(313, 91%, 37%), 0 0 1.5vw hsl(313, 91%, 37%), 0 0 5vw hsl(313, 91%, 37%), 0 0 5vw hsl(313, 91%, 37%), 0 0 .2vw hsl(313, 91%, 37%), .5vw .5vw .1vw #ff00c8;
+    color: #ff00c8;
+  }
+}
+
+@keyframes squareOne{
+  from{
+      transform: rotate(0deg);
+  }
+  to{
+      transform: rotate(-180deg);
+  }
+}
+
+@keyframes squareTwo{
+  from{
+      transform: rotate(0deg);
+  }
+  to{
+      transform: rotate(180deg);
+  }
 }
 

@@ -22,8 +22,6 @@
     color: #fff;
     text-shadow: 0 0 2px #a945c7, 0 0 5px #a945c7, 0 0 5px #a945c7;
 
-
-    
     .sectionFooter{
         width:100%;
         display: flex;
@@ -86,5 +84,4 @@
     .noventa{
         @include noventa(1.5vw, 1vw);
     }
-
 }

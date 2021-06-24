@@ -1,11 +1,6 @@
 @import 'src/styles/mixinsNeonButtons';
 @import 'src/styles/mixinsLogo';
 
-@font-face {
-    font-family: neon;
-    src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
-  }
-
 /*VARIABLES*/
 $backgroundColorHeader:transparent;
 $backgroundColorButtons:transparent;
@@ -26,8 +21,6 @@ $borderLightHeader: #bb90ff;
     background: $backgroundColorHeader;
     color: $textColor;
     overflow: hidden;
-
-
 
     .buttonCategory{
         @include neonButton($textColor, $backgroundColorButtons);
@@ -238,5 +231,4 @@ $borderLightHeader: #bb90ff;
     .noventa{
         @include noventa(3vw,3vw);
     }
-
 }
