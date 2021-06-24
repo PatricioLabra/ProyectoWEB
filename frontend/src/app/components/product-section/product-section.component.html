@@ -8,8 +8,14 @@
         <p>{{ product.trademark }}</p>
       </div>
 
-
-      <p>Calificacion: {{ product.calification }}</p>
+      <div>
+        <span class="calification">{{ product.calification }}</span>
+        <ngb-rating [rate]="product.calification" [readonly]="true" [max]="5">
+          <ng-template let-fill="fill">
+            <span class="star" [class.filled]="fill === 100">&#9733;</span>
+          </ng-template>
+        </ngb-rating>
+      </div>
       <p class="description">Descripcion: {{ product.description }}</p>
 
       <div class="prices-wrapper">
@@ -39,10 +45,10 @@
   <mat-tab-group mat-align-tabs="center">
     <mat-tab label="Descripcion y caracteristicas">
       <div class="description-features">
-        <div class="description">
+        <div class="description background-description">
           <p>Descripcion: {{ product.description }}</p>
         </div>
-        <div *ngIf="product.dimensions" class="dimensions">
+        <div *ngIf="product.dimensions" class="dimensions background-description">
           <p>Peso: {{ product.weight }}</p>
           <p>Alto:  {{ product.dimensions.height_cm }}</p>
           <p>Ancho: {{ product.dimensions.width_cm }}</p>
@@ -56,7 +62,12 @@
           <div class="comment-info background-comment">
             <p class="comment-date">{{ comment.comment_date | date }}</p>
             <p>{{ comment.nickname_author }}</p>
-            <p>{{ comment.calification_author }} ***</p>
+            
+            <ngb-rating [rate]="comment.calification_author" [readonly]="true" [max]="5">
+              <ng-template let-fill="fill">
+                <span class="star" [class.filled]="fill === 100">&#9733;</span>
+              </ng-template>
+            </ngb-rating>
           </div>
 
           <div class="comment-body background-comment">

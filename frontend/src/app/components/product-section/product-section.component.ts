@@ -53,7 +53,6 @@ export class ProductSectionComponent implements OnInit {
 
     this.api.addCommentProduct(this._id, commentToSubmit).subscribe((res: any) => {
       this.comments = res.comments.filter((comment: Comment) => comment.comment_body);
-      console.log(this.comments);
     });
   }
 }
