@@ -1,5 +1,17 @@
 @import 'src/styles/mixinsNeonButtons';
 
+@mixin configInput{
+    box-shadow: 0 0 5px $lightColor;
+    margin-bottom: 3%;
+    background-color:rgba(77, 7, 124, 0.363);
+    margin-top: 5%;
+    font-size: 20px;
+    padding-left: 5%;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 $lightColor: #a945c7;
 
     .form{
@@ -16,7 +28,9 @@ $lightColor: #a945c7;
         text-align: center;
         justify-content: center;
         text-align: center;
-    
+        display:table;
+        margin-bottom: 2%;
+
         .logInText{
             font-size: 20px;
             color: #fff;
@@ -33,25 +47,19 @@ $lightColor: #a945c7;
     
         .inputLogIn{
             margin-top: 5%;
-            
+
             .nickname{
-                margin-top: 8%;
-                font-size: 20px;
+                @include configInput;
+  
                 mat-label{
                      color: White;
                 }
-                input{
-                    color: white;
-                }
             }
             .password{
-                margin-top: 5%;
-                font-size: 20px;
+                @include configInput;
+
                 mat-label{
                     color: White;
-               }
-               input{
-                   color: white;
                }
             }
         }
