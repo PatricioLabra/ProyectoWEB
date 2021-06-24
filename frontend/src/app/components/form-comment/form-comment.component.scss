@@ -48,10 +48,6 @@ textarea {
   resize: none;
 }
 
-::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-  padding-bottom: 0px !important;
-}
-
 ::ng-deep textarea.mat-input-element::placeholder {
   color: white;
   opacity: 0.3;
