@@ -35,7 +35,7 @@ export class ProductSectionComponent implements OnInit {
     });
 
     this.api.getCommentsProduct(this._id).subscribe((res: any) => {
-      this.comments = res.comments;
+      this.comments = res.comments.filter((comment: Comment) => comment.comment_body);
     });
   }
 
@@ -47,5 +47,13 @@ export class ProductSectionComponent implements OnInit {
   removeCart(): void {
     this.cart.removeProduct(this.productCart);
     console.log(this.productCart);
+  }
+
+  submitComment(commentToSubmit: any) {
+
+    this.api.addCommentProduct(this._id, commentToSubmit).subscribe((res: any) => {
+      this.comments = res.comments.filter((comment: Comment) => comment.comment_body);
+      console.log(this.comments);
+    });
   }
 }

@@ -67,7 +67,7 @@
 
       <div class="form-wrapper">
         <p>Ingresa un comentario!!</p>
-        <app-form-comment></app-form-comment>
+        <app-form-comment (onCommentSubmit)="submitComment($event)"></app-form-comment>
       </div>
     </mat-tab>
   </mat-tab-group>

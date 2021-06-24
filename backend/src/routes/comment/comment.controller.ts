@@ -42,7 +42,7 @@ export const addComment: RequestHandler = async (req, res) => {
             // Se ingresa el comentario al array de comentarios
             await Comment.updateOne({ id_product }, { $push: { comments: comment } });
 
-            return res.status(200).send({ success: true });
+            return res.status(200).send({ success: true , comments: [...productFound.comments, comment] });
         }
 
         //al no estar registrado se crea y se agrega
@@ -51,7 +51,7 @@ export const addComment: RequestHandler = async (req, res) => {
         
         await commentSaved.save();
 
-        return res.status(200).send({ succes: true });
+        return res.status(200).send({ succes: true , comments: [comment]});
 
     } catch (error) {
         return res.status(400).send({success: false, message: 'Error: '+ error});

@@ -1,1 +1,25 @@
-<p>form-comment works!</p>
+<form [formGroup]="commentForm" (ngSubmit)="onSubmit()" class="comment-form">
+  <div class="info-comment background-comment">
+    <p class="nickname">{{ currentUser.userInfo.nickname }}</p>
+    <p class="calification">Calification: </p>
+    <ngb-rating formControlName="rating" [max]="5">
+      <ng-template let-fill="fill">
+        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+      </ng-template>
+    </ngb-rating>
+  </div>
+
+  <div class="comment-wrapper background-comment">
+    <mat-form-field class="text-comment">
+      <mat-label>
+        {{ currentUser.isLogged ? 'Comenta!' : 'Inicia sesion para comentar (¡aunque aun puedes calificar!)' }}
+      </mat-label>
+      <textarea [readonly]="!currentUser.isLogged" formControlName="comment" matInput placeholder="Me gusto el producto"></textarea>
+    </mat-form-field>
+
+    <button mat-flat-button color="primary" class="button">
+      {{ currentUser.isLogged ? 'Enviar comentario' : 'Enviar valoracion' }}
+    </button>
+  </div>
+
+</form>

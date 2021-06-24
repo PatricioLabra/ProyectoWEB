@@ -28,6 +28,17 @@ export class ApiConnectionService {
   }
 
   /**
+   * Ingresa un nuevo comentario a un producto
+   * @param id_product Id del producto a ingresar el comentario
+   * @param comment comentario a ingresar
+   */
+  addCommentProduct(id_product: string, comment: any) {
+    const url = this.makeUrl(['comment']);
+    const commentToSubmit = { id_product, comment };
+    return this.http.post(url, commentToSubmit);
+  }
+
+  /**
    * Obtiene los comentarios de un producto
    * @param id_product Id del producto al que se quiere obtener los comentarios
    */
