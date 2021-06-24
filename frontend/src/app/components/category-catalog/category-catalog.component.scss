@@ -6,7 +6,7 @@
   .products-wrapper {
     display: flex;
     overflow-x: scroll;
-    background-color: #23063e;
+    background-color: #23063e91;
     border-radius: 10px;
     width: 100%;
     min-height: 250px;
@@ -14,7 +14,9 @@
   }
 
   .category {
-    background-color: #673ab7;
+    background-color: #23063e91;
+    box-shadow:0 0 10px rgb(131, 43, 231);
+    text-shadow:0 0 15px rgb(159, 91, 236);
     width: 10%;
     display: flex;
     justify-content: center;
