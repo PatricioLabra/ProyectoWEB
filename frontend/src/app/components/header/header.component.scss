@@ -18,6 +18,10 @@ $borderLightHeader: #bb90ff;
     background: $backgroundColorHeader;
     color: $textColor;
 
+    .search-bar {
+        width: 25%;
+    }
+
     .buttonCategory{
         @include neonButton($textColor, $backgroundColorButtons);
 

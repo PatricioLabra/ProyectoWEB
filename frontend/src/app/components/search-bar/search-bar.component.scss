@@ -35,6 +35,16 @@ $lightColor: #a945c7;
     ::ng-deep .mat-form-field-wrapper {
         padding-bottom: 0px;
         color: white;
+        font-size: 15px;
+
+        .mat-form-field-flex {
+            .mat-form-field-infix {
+                input::placeholder {
+                    color: white;
+                    opacity: 0.4;
+                }
+            }
+        }
     }
 }
 
