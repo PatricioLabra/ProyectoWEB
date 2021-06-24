@@ -4,6 +4,7 @@ import { ProductCart } from '@models/product-cart.model';
 import { Product } from '@models/product.model';
 import { ApiConnectionService } from '@services/api-connection.service';
 import { CartService } from '@services/cart.service';
+import { Comment } from '@models/comment.model';
 
 @Component({
   selector: 'app-product-section',
@@ -14,6 +15,7 @@ export class ProductSectionComponent implements OnInit {
 
   _id: string;
   product: Product = new Product();
+  comments: Array<Comment> = [];
   productCart: ProductCart = new ProductCart(this.product);
   isLoaded: boolean = false;
 
@@ -30,6 +32,10 @@ export class ProductSectionComponent implements OnInit {
       this.product = data.product;
       this.productCart = new ProductCart(this.product, 1);
       this.isLoaded = true;
+    });
+
+    this.api.getCommentsProduct(this._id).subscribe((res: any) => {
+      this.comments = res.comments;
     });
   }
 

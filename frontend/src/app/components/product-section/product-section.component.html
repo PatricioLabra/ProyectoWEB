@@ -51,7 +51,20 @@
       </div>
     </mat-tab>
     <mat-tab label="Comentarios" class="label">
-      Comentarios
+      <p>Comentarios</p>
+      <div class="comments">
+        <div class="comment" *ngFor="let comment of comments">
+          <div class="comment-info background-comment">
+            <p class="comment-date">{{ comment.comment_date | date }}</p>
+            <p>{{ comment.nickname_author }}</p>
+            <p>{{ comment.calification_author }} ***</p>
+          </div>
+
+          <div class="comment-body background-comment">
+            {{ comment.comment_body }}
+          </div>
+        </div>
+      </div>
     </mat-tab>
   </mat-tab-group>
 

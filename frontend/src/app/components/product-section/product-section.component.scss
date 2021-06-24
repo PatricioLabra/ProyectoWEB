@@ -73,6 +73,40 @@
 
 }
 
+.comments {
+  display: flex;
+  flex-direction: column;
+
+  .comment {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid white;
+    border-radius: 15px;
+    margin: 10px;
+
+    .background-comment {
+      background-color: #0b0422;
+      padding: 10px;
+      border-radius: 10px;
+      margin: 15px;
+    }
+
+    .comment-info {
+      width: 30%;
+
+      .comment-date {
+        font-size: 10px;
+        color: gray;
+        margin: 0px;
+      }
+    }
+
+    .comment-body {
+      width: 65%;
+    }
+  }
+}
+
 ::ng-deep .mat-tab-label .mat-tab-label-content {
   color: white !important;
 }
