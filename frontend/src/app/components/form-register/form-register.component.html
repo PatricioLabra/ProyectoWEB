@@ -1,92 +1,101 @@
 <div class = "registerForm">
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <mat-form-field>
-      <mat-label class="nickname">Nickname</mat-label>
-      <input type="text" matInput formControlName="nickname" placeholder="Madara">
-      <mat-error *ngIf="isFieldInvalid('nickname')">
-        Nickname requerido
-      </mat-error>
-    </mat-form-field>
+    <div class = sectionOne>
+      <mat-form-field class="nickname">
+        <mat-label>Nickname</mat-label>
+        <input type="text" matInput formControlName="nickname" placeholder="Madara">
+        <mat-error *ngIf="isFieldInvalid('nickname')">
+          Nickname requerido
+        </mat-error>
+      </mat-form-field>
+    
+      <mat-form-field class="nombres">
+        <mat-label>Nombres</mat-label>
+        <input type="text" matInput formControlName="names" placeholder="Neji">
+        <mat-error *ngIf="isFieldInvalid('names')">
+          Nombres requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
   
-    <mat-form-field>
-      <mat-label class="nombres">Nombres</mat-label>
-      <input type="text" matInput formControlName="names" placeholder="Neji">
-      <mat-error *ngIf="isFieldInvalid('names')">
-        Nombres requerido
-      </mat-error>
-    </mat-form-field>
-  
-    <mat-form-field>
-      <mat-label class = apellidos>Apellidos</mat-label>
-      <input type="text" matInput formControlName="last_name" placeholder="Hyuga">
-      <mat-error *ngIf="isFieldInvalid('last_name')">
-        Apellidos requerido
-      </mat-error>
-    </mat-form-field>
-  
-    <mat-form-field>
-      <mat-label class = rut>Rut</mat-label>
-      <input type="text" matInput formControlName="rut">
-      <mat-error *ngIf="isFieldInvalid('rut')">
-        Rut requerido
-      </mat-error>
-    </mat-form-field>
-  
-    <mat-form-field appearance="fill">
-      <mat-label class = region>Region</mat-label>
-      <mat-select formControlName="region" (selectionChange)="updateCurrentRegion()" name="region_">
-        <mat-option *ngFor="let region of Regions" [value]="region.region">
-          {{ region.region }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  
-    <mat-form-field appearance="fill">
-      <mat-label class = comuna>Comuna</mat-label>
-      <mat-select id = option formControlName="commune" name="commune_">
-        <mat-option   *ngFor="let commune of CurrentRegion.provincias" [value]="commune.name">
-          <div >
-            {{ commune.name }}
-          </div>
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  
-    <mat-form-field>
-      <mat-label class = direccion>Direccion</mat-label>
-      <input type="text" matInput formControlName="address">
-      <mat-error *ngIf="isFieldInvalid('address')">
-        Direccion requerido
-      </mat-error>
-    </mat-form-field>
-  
-    <mat-form-field>
-      <mat-label class = email >Email</mat-label>
-      <input type="text" matInput formControlName="email">
-      <mat-error *ngIf="isFieldInvalid('email') && registerForm.controls.email.errors?.required">
-        Email requerido
-      </mat-error>
-      <mat-error *ngIf="isFieldInvalid('email') && registerForm.controls.email.errors?.email">
-        Email no valido
-      </mat-error>
-    </mat-form-field>
-  
-    <mat-form-field>
-      <mat-label class = password>Password</mat-label>
-      <input type="password" matInput formControlName="password">
-      <mat-error *ngIf="isFieldInvalid('password')">
-        Password requerida
-      </mat-error>
-    </mat-form-field>
-  
-    <mat-form-field>
-      <mat-label class = confirmPassword>Confirmar Password</mat-label>
-      <input type="password" matInput formControlName="conf_pass">
-      <mat-error *ngIf="isFieldInvalid('conf_pass')">
-        Password requerida
-      </mat-error>
-    </mat-form-field>
-  
+    <div class = sectionTwo>
+      <mat-form-field class = apellidos>
+        <mat-label>Apellidos</mat-label>
+        <input type="text" matInput formControlName="last_name" placeholder="Hyuga">
+        <mat-error *ngIf="isFieldInvalid('last_name')">
+          Apellidos requerido
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class = rut>
+        <mat-label>Rut</mat-label>
+        <input type="text" matInput formControlName="rut">
+        <mat-error *ngIf="isFieldInvalid('rut')">
+          Rut requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+    
+    <div class = sectionThree>
+      <mat-form-field class = region appearance="fill">
+        <mat-label>Region</mat-label>
+        <mat-select formControlName="region" (selectionChange)="updateCurrentRegion()" name="region_">
+          <mat-option *ngFor="let region of Regions" [value]="region.region">
+            <div class = regionObj>{{ region.region }}</div>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    
+      <mat-form-field class = comuna appearance="fill">
+        <mat-label>Comuna</mat-label>
+        <mat-select id = option formControlName="commune" name="commune_">
+          <mat-option   *ngFor="let commune of CurrentRegion.provincias" [value]="commune.name">
+            <div >
+              {{ commune.name }}
+            </div>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>
+    
+    <div class = sectionFour>
+      <mat-form-field class = direccion>
+        <mat-label>Direccion</mat-label>
+        <input type="text" matInput formControlName="address">
+        <mat-error *ngIf="isFieldInvalid('address')">
+          Direccion requerido
+        </mat-error>
+      </mat-form-field>
+    
+      <mat-form-field class = email>
+        <mat-label>Email</mat-label>
+        <input type="text" matInput formControlName="email">
+        <mat-error *ngIf="isFieldInvalid('email') && registerForm.controls.email.errors?.required">
+          Email requerido
+        </mat-error>
+        <mat-error *ngIf="isFieldInvalid('email') && registerForm.controls.email.errors?.email">
+          Email no valido
+        </mat-error>
+      </mat-form-field>  
+    </div>
+    
+    <div class = sectionFive>
+      <mat-form-field class = password>
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password">
+        <mat-error *ngIf="isFieldInvalid('password')">
+          Password requerida
+        </mat-error>
+      </mat-form-field>
+    
+      <mat-form-field class = confirmPassword>
+        <mat-label>Confirmar Password</mat-label>
+        <input type="password" matInput formControlName="conf_pass">
+        <mat-error *ngIf="isFieldInvalid('conf_pass')">
+          Password requerida
+        </mat-error>
+      </mat-form-field>
+    </div>
+
     <app-field-error
       [displayError]="!isCorrectPass"
       [errorMessage]="'no coinciden'"

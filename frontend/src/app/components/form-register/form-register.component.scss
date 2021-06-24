@@ -1,6 +1,13 @@
 @import '../../../styles/mixinsNeonButtons';
 $lightColor: #a945c7;
 
+@mixin configInput{
+    display: inline-block;
+    box-shadow: 0 0 5px $lightColor;
+    margin-bottom: 3%;
+    background-color:rgba(77, 7, 124, 0.363);
+}
+
 .registerForm{
     box-shadow: 0 0 30px $lightColor;
     border: 1px solid;
@@ -10,22 +17,83 @@ $lightColor: #a945c7;
     text-align: center;
     margin-bottom: 3%;
     margin-top: 4%;
-    padding:2%;
-    width: 35%;
-    height: 70%;
-    justify-content:auto;
-
-    mat-form-field{
-        background-color: #ffffff09;
-        margin-bottom: 4%;
-    }
+    width: 30%;
+    padding: 2%;
+    display:table;
+    color: #fff;
+ 
     mat-label{
         font-size: 17px;
         color: white;
-        text-shadow: 0px 0px 20px $lightColor;
+        display: block;
+        text-shadow:
+        0 0 7px #fff,
+        0 0 42px rgb(10, 0, 6);
+        padding-left:8%;
     }
 
+    .sectionOne{
+        display: flex;
+        justify-content: space-around;
+        .nickname {
+            @include configInput;
+        }
+        .nombres{
+            @include configInput;
+        }
+    }
+
+    .sectionTwo{
+        display: flex;
+        justify-content: space-around;
+        .apellidos{
+            @include configInput;
+        }
+        .rut{
+            @include configInput;
+        }
+    }
+    
+    .sectionThree{
+        display: flex;
+        justify-content: space-around;
+
+        .region{
+            @include configInput;
+            width: 41%;
+        }
+        .comuna{
+            @include configInput;
+            width: 41%;
+        }
+    }
+    
+    .sectionFour{
+        display: flex;
+        justify-content: space-around;
+
+        .direccion{
+            @include configInput;
+        }
+        .email{
+            @include configInput;
+        }
+    }
+    
+    .sectionFive{
+        display: flex;
+        justify-content: space-around;
+
+        .password{
+            @include configInput;
+        }
+        .confirmPassword{
+            @include configInput;
+        }
+    }
+    
     .buttonRegistred{
+        display: block;
         margin-top: 3%;
         @include neonButton(white, transparent);
         @include neonButtonText;
