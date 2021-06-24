@@ -18,6 +18,7 @@ export class ProductSectionComponent implements OnInit {
   comments: Array<Comment> = [];
   productCart: ProductCart = new ProductCart(this.product);
   isLoaded: boolean = false;
+  currentImageURL: string = '';
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -30,6 +31,7 @@ export class ProductSectionComponent implements OnInit {
   ngOnInit(): void {
     this.api.getProduct(this._id).subscribe((data: any) => {
       this.product = data.product;
+      this.currentImageURL = this.product.images_urls[0];
       this.productCart = new ProductCart(this.product, 1);
       this.isLoaded = true;
     });
@@ -47,6 +49,10 @@ export class ProductSectionComponent implements OnInit {
   removeCart(): void {
     this.cart.removeProduct(this.productCart);
     console.log(this.productCart);
+  }
+
+  changeImage(indexImage: number) {
+    this.currentImageURL = this.product.images_urls[indexImage];
   }
 
   submitComment(commentToSubmit: any) {
