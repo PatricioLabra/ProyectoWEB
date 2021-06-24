@@ -1,6 +1,15 @@
 <div class="content" *ngIf="isLoaded">
   <div class="info-wrapper">
-    <img [src]="product.images_urls[0]" alt="Image Product" class="image-product">
+    <div class="image-picker">
+      <img
+        *ngFor="let image_url of product.images_urls; index as i"
+        [src]="image_url"
+        (click)="changeImage(i)"
+        class="images"
+        [class.selected-image]="image_url == currentImageURL"
+      >
+    </div>
+    <img [src]="currentImageURL" alt="Image Product" class="image-product">
 
     <div class="info-product">
       <div class="name-wrapper">
