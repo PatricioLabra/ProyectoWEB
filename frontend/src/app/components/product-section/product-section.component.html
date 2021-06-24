@@ -51,7 +51,6 @@
       </div>
     </mat-tab>
     <mat-tab label="Comentarios" class="label">
-      <p>Comentarios</p>
       <div class="comments">
         <div class="comment" *ngFor="let comment of comments">
           <div class="comment-info background-comment">
@@ -64,6 +63,11 @@
             {{ comment.comment_body }}
           </div>
         </div>
+      </div>
+
+      <div class="form-wrapper">
+        <p>Ingresa un comentario!!</p>
+        <app-form-comment></app-form-comment>
       </div>
     </mat-tab>
   </mat-tab-group>

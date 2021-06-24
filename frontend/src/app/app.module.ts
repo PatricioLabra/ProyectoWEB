@@ -28,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from '@modules/angular-material/angular-material.module';
 import { PanelAdminComponent } from './components/panel-admin/panel-admin.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormCommentComponent } from './components/form-comment/form-comment.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReportProductsComponent,
     CartBoughtCardComponent,
     PanelAdminComponent,
+    FormCommentComponent,
   ],
   imports: [
     BrowserModule,

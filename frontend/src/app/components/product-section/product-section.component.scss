@@ -107,6 +107,16 @@
   }
 }
 
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  p {
+    font-size: 20px;
+    margin: 50px auto 10px;
+  }
+}
+
 ::ng-deep .mat-tab-label .mat-tab-label-content {
   color: white !important;
 }
