@@ -28,6 +28,15 @@ export class ApiConnectionService {
   }
 
   /**
+   * Obtiene los comentarios de un producto
+   * @param id_product Id del producto al que se quiere obtener los comentarios
+   */
+  getCommentsProduct(id_product: string) {
+    const url = this.makeUrl(['comment', id_product]);
+    return this.http.get(url);
+  }
+
+  /**
    * Obtiene la informacion de un producto en base a su id
    * @param id Id del producto
    */
