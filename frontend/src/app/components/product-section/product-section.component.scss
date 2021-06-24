@@ -35,6 +35,11 @@
         width: 50%;
       }
 
+      .calification {
+        font-size: 20px;
+        margin: 10px;
+      }
+
       .prices-wrapper {
 
         .price.discounted {
@@ -56,6 +61,13 @@
   .description-features {
     display: flex;
 
+    .background-description {
+      background-color: #0b0422;
+      margin: 10px;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
     .description {
       width: 50%;
     }
@@ -64,6 +76,7 @@
       display: flex;
       width: 50%;
       justify-content: space-evenly;
+      align-items: center;
 
       p {
         margin: 0px;
@@ -71,6 +84,62 @@
     }
   }
 
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+
+  .comment {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #aaa;
+    border-radius: 15px;
+    margin: 10px;
+
+    .background-comment {
+      background-color: #0b0422;
+      padding: 10px;
+      border-radius: 10px;
+      margin: 15px;
+    }
+
+    .comment-info {
+      width: 30%;
+
+      .comment-date {
+        font-size: 10px;
+        color: gray;
+        margin: 0px;
+      }
+    }
+
+    .comment-body {
+      width: 65%;
+    }
+  }
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  p {
+    font-size: 20px;
+    margin: 50px auto 10px;
+    color: #ddd;
+  }
+}
+
+.star {
+  font-size: 1.5rem;
+  color: #cf8700;
+  opacity: 0.1;
+}
+
+.filled {
+  color: #cf8700;
+  opacity: 1;
 }
 
 ::ng-deep .mat-tab-label .mat-tab-label-content {

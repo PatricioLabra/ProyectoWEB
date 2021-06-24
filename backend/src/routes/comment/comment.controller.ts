@@ -11,7 +11,7 @@ import { Types } from "mongoose"
  */
 export const addComment: RequestHandler = async (req, res) => {
 
-    const { id_product, comments } = req.body;
+    const { id_product, comment } = req.body;
 
     //se valida que id_product no sea null 
     if (!id_product)
@@ -21,40 +21,37 @@ export const addComment: RequestHandler = async (req, res) => {
     if ( !Types.ObjectId.isValid( id_product ) )
         return res.status(400).send({ success:false, message:'Error: el id del producto ingresado no es válido.' });
 
-    const product = await Product.findById({"_id": id_product});
+    const product = await Product.findById(id_product);
 
     //se valida que el producto a almacenar exista en la base de datos
     if (!product)
-        return res.status(404).send({ success:false, message: 'Error: el producto a agregar no esta registrado en la base de datos.'});
+        return res.status(404).send({ success:false, message: 'Error: el producto no esta registrado en la base de datos.'});
 
-    //se valida que el arreglo de comentarios no esté vacío
-    if (Object.keys(comments).length == 0)
+    //se valida que se haya enviado el comentario
+    if (!comment)
         return res.status(400). send({ succes: false, message: 'Error: no se ingresó ningun comentario o calificacion del producto.'});
 
     //se almacena la fecha del comentario
-    comments[0].comment_date = Date.now();
-
+    comment.comment_date = new Date();
+    
     try {
         const productFound = await Comment.findOne({ id_product });
 
         //se valida si hay un producto ya registrado
         if (productFound){
-            const lengthCommentsArray = productFound.comments.length;
-            productFound.comments[lengthCommentsArray] = comments[0];
-            
-            //se actualiza el producto ya agregado
-            await Comment.findByIdAndUpdate( productFound._id, productFound );
-            
-            return res.status(201).send({ success: true });
+            // Se ingresa el comentario al array de comentarios
+            await Comment.updateOne({ id_product }, { $push: { comments: comment } });
+
+            return res.status(200).send({ success: true , comments: [...productFound.comments, comment] });
         }
 
         //al no estar registrado se crea y se agrega
-        const newComment = {id_product, comments};
+        const newComment = { id_product, comments: [comment]};
         const commentSaved = new Comment(newComment);
         
         await commentSaved.save();
 
-        return res.status(201).send({ succes: true });
+        return res.status(200).send({ succes: true , comments: [comment]});
 
     } catch (error) {
         return res.status(400).send({success: false, message: 'Error: '+ error});
@@ -63,15 +60,13 @@ export const addComment: RequestHandler = async (req, res) => {
 
 /**
  * Funcion que maneja la petición de los datos todos los comentarios.
- * @route Get '/comments/:id/:init/:quantity'
+ * @route Get '/comment/:id'
  * @param req Request de la peticion, espera init y quantity para seleccionar los comentarios a retornar
  * @param res Response, retornará la informacion de los comentarios seleccionados + la cantidad total de comentarios
  */
 export const getComments: RequestHandler = async (req, res) => {
 
     const id_product = req.params.id;
-    const init_comments = req.params.init;
-    const quantity_comments = req.params.quantity;
 
     //se valida que el id_product no sea null
     if (!id_product)
@@ -81,23 +76,16 @@ export const getComments: RequestHandler = async (req, res) => {
     if ( !Types.ObjectId.isValid( id_product ) )
         return res.status(400).send({ success:false, message:'Error: el id del producto ingresado no es válido.' });
 
-    const product = await Comment.findOne({id_product});
+    const product = await Comment.findOne({ id_product });
 
     //se valida que esté registrado el producto
     if (!product)
-        return res.status(404).send({ success: false, message: 'Error: no se encontró ningun producto comentado con el id ingresado.' });
+        return res.status(200).send({ success: true, totalComments: 0, comments: []});
 
     const comments = product.comments;
-    const totalQuantityComments = Object.keys(comments).length;
+    const totalComments = comments.length;
 
-    //se valida que el producto tenga comentarios
-    if (totalQuantityComments == 0)
-        return res.status(404).send({ success: false, message: 'Error: No se encontraron comentarios del producto.' });
-
-    //seleccionamos los comentarios a retornar
-    const selectComments = commentPicker(comments, init_comments, quantity_comments);
-
-    return res.status(200).send({ success: true, totalQuantityComments, selectComments });
+    return res.status(200).send({ success: true, totalComments, comments });
 }
 
 /**
@@ -124,7 +112,7 @@ export const getCalificationComments: RequestHandler = async (req, res) => {
     if (!product)
         return res.status(404).send({ success: false, message: 'Error: no se encontró ningun producto calificado con el id ingresado.' });
 
-    const quantityComments = Object.keys(product.comments).length;
+    const quantityComments = product.comments.length;
 
     //se valida que el producto tenga comentarios
     if (quantityComments == 0)
@@ -133,23 +121,6 @@ export const getCalificationComments: RequestHandler = async (req, res) => {
     const calification =  gradeAdder(product);
 
     return res.status(200).send({success: true, quantityCalifications: calification.quantityCalifications, Average: calification.averageCalification });
-}
-
-/**
- * Funcion que selecciona los comentarios de un producto 
- * @param comments Array de comentarios del producto
- * @param init_comments punto de inicio para seleccionar comentarios
- * @param quantity_comments cantidad de comentarios a seleccionar
- * @returns Array con los comentarios seleccionados
- */
-function commentPicker(comments:any, init_comments:any, quantity_comments:any){
-    let selectComments = [];
-
-    for (let i = init_comments; i < quantity_comments ; i++){
-        selectComments.push(comments[i]);
-    }
-
-    return selectComments;
 }
 
 /**

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Optional } from '@angular/core';
 import { CartService } from '@services/cart.service';
 import { Cart } from '@models/cart.class';
 import { ProductCart } from '@models/product-cart.model';
@@ -15,8 +15,8 @@ export class CartHeaderComponent extends Cart {
   constructor(
     cart: CartService,
     private router: Router,
-    public dialogRef: MatDialogRef<CartHeaderComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: null
+    @Optional() public dialogRef: MatDialogRef<CartHeaderComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: null
   ) {
     super(cart);
     this.cart.currentDataCart$.subscribe(this.handleCartChange);
