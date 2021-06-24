@@ -28,10 +28,12 @@
       <p class="description">Descripcion: {{ product.description }}</p>
 
       <div class="prices-wrapper">
-        <p>{{ (product.stock) ? 'Disponible' : 'No Disponible' }}</p>
-        <p [class.price.discounted]="product.discount">$ {{ product.price }}</p>
-        <p *ngIf="product.discount">-{{ product.discount * 100}}%</p>
-        <p *ngIf="product.discount">$ {{ product.price * (1 - product.discount) }}</p>
+        <p class="stock" [class.no-stock]="product.stock == 0">
+          {{ (product.stock) ? '¡Disponible!' : 'No Disponible :(' }}
+        </p>
+        <p class="price" *ngIf="product.discount">$ {{ product.price * (1 - product.discount) }}</p>
+        <p *ngIf="product.discount" class="discount">-{{ product.discount * 100}}% OFF</p>
+        <p class="price" [class.price-discounted]="product.discount">$ {{ product.price }}</p>
       </div>
 
       <div>

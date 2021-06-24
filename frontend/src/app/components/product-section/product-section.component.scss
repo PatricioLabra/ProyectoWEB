@@ -67,9 +67,41 @@
       }
 
       .prices-wrapper {
+        font-size: 20px;
+        color: orange;
 
-        .price.discounted {
+        .price {
+          background-color: #ffff0029;
+          width: fit-content;
+          padding: 10px;
+          border-radius: 5px;
+          color: gold;
+        }
+
+        .discount {
+          font-size: 18px;
+          color: #d21e1ee0;
+        }
+
+        .price-discounted {
           text-decoration: line-through;
+          color: gray;
+          font-size: 15px;
+          background-color: transparent;
+          width: fit-content;
+        }
+
+        .stock {
+          color: green;
+          margin: 0px 0px 30px;
+          background-color: rgba(0, 255, 0, 0.1);
+          width: fit-content;
+          padding: 10px;
+          border-radius: 5px;
+        }
+
+        .no-stock {
+          color: red;
         }
       }
 
