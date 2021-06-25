@@ -14,6 +14,15 @@ $lightColor: #a945c7;
   padding-bottom: 10px;
   border-radius: 10px;
   box-shadow: 0 0 5px $lightColor;
+  transition: 0.5s ease;
+}
+
+.product-wrapper:hover{
+  transform: scale(1.05);
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+  box-shadow: 0 0 30px rgb(252, 252, 34);
+  animation:  1.5s infinite 
+  
 }
 
 .title-image-wrapper {
@@ -26,6 +35,7 @@ $lightColor: #a945c7;
 }
 
 .title {
+  font-weight: 500;
   margin-bottom: 5px;
   text-shadow: 0 0 20px rgb(234, 0, 255);
 }
