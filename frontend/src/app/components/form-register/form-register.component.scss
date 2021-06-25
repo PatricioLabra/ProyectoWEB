@@ -1,13 +1,6 @@
 @import '../../../styles/mixinsNeonButtons';
 $lightColor: #a945c7;
 
-@mixin configInput{
-    display: inline-block;
-    box-shadow: 0 0 5px $lightColor;
-    margin-bottom: 3%;
-    background-color:rgba(77, 7, 124, 0.363);
-}
-
 .registerForm{
     box-shadow: 0 0 30px $lightColor;
     border: 1px solid;
@@ -32,63 +25,24 @@ $lightColor: #a945c7;
         padding-left:8%;
     }
 
-    .sectionOne{
-        display: flex;
-        justify-content: space-around;
-        .nickname {
-            @include configInput;
-        }
-        .nombres{
-            @include configInput;
-        }
-    }
-
-    .sectionTwo{
-        display: flex;
-        justify-content: space-around;
-        .apellidos{
-            @include configInput;
-        }
-        .rut{
-            @include configInput;
-        }
-    }
-    
-    .sectionThree{
-        display: flex;
+    .section{
         justify-content: space-around;
 
-        .region{
-            @include configInput;
-            width: 41%;
+        mat-form-field{
+            display: inline-block;
+            margin-bottom: 3%;
+            background-color:rgba(77, 7, 124, 0.363);
+            box-shadow: 0 0 5px $lightColor;
+            margin-right: 5%;
         }
+
         .comuna{
-            @include configInput;
             width: 41%;
-        }
-    }
-    
-    .sectionFour{
-        display: flex;
-        justify-content: space-around;
 
-        .direccion{
-            @include configInput;
         }
-        .email{
-            @include configInput;
-        }
-    }
-    
-    .sectionFive{
-        display: flex;
-        justify-content: space-around;
-
-        .password{
-            @include configInput;
-        }
-        .confirmPassword{
-            @include configInput;
+        
+        .region{
+            width: 41%;
         }
     }
     
