@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   border: 1px solid #aaa;
+  box-shadow: 0 0 5px #aaa;
   border-radius: 15px;
   margin: 10px;
 
@@ -29,6 +30,12 @@
     .button {
       width: 20%;
       margin: 0px 0px 10px auto;
+      background-color: #23063e8e;
+      box-shadow: 0 0 10px #a945c7;
+    }
+
+    .button:hover{
+      background-color: #a945c7;
     }
   }
 }
