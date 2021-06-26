@@ -12,7 +12,14 @@
       display: flex;
       position: absolute;
       right: 10px;
+      margin-right: 4%;
     }
+  }
+
+  button{
+    justify-content: flex-end;
+    border-radius: 20%;
+    margin-left: 1%;
   }
 }
 
