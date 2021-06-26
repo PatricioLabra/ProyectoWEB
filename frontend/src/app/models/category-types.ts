@@ -6,10 +6,10 @@ export enum CategoryTypes {
 }
 
 export const CategoryList = [
-	'movies',
-	'clothes',
-	'music',
-	'food'
+	'Películas',
+	'Ropa',
+	'Música',
+	'Comida'
 ];
 
 export const Subcategories = [

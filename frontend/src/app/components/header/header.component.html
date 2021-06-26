@@ -44,10 +44,9 @@
 	</div>
 
 	<ng-template #carrito> 
-		<app-cart-header></app-cart-header>
+		<p (click)="openDialog()">Carrito</p>
 	</ng-template>
 </div>
-		<p (click)="openDialog()">Carrito</p>
 
 <ng-template #noEstaLogueado>
 	<button class = buttonLoginIn routerLink="/login" mat-flat-button color="primary">
