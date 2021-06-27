@@ -2,13 +2,14 @@
 
 $textColor: white; 
 $backgroundColorButtons: transparent;
+$lightColor: #a945c7;
 
 .cart{
     margin-bottom: 3%;
     width: 48%;
     margin-left :auto;
     margin-right : auto;
-
+    font-weight: 500;
     ul{
         margin-top: 3%;
         list-style-type: none;
@@ -16,11 +17,10 @@ $backgroundColorButtons: transparent;
 
     .product{
         padding: 2%;
-        box-shadow: 0 0 20px #640df0;
+        box-shadow: 0 0 10px $lightColor;
         margin-right: 8%;
         margin-bottom: 3%;
         justify-content: center;
-        text-shadow: 0 0 20px #f09;
         border-radius: 5px;
 
         .image-product{
@@ -63,8 +63,12 @@ $backgroundColorButtons: transparent;
             button{
                 background:$backgroundColorButtons;
                 color: $textColor;
-                box-shadow: 0 0 20px #640df0;
+                box-shadow: 0 0 5px $lightColor;
                 margin-right: 0.5%;
+            }
+            button:hover{
+                background:$lightColor;
+                transform: scale(1.05);
             }
         }
     }
@@ -81,28 +85,28 @@ $backgroundColorButtons: transparent;
         text-align: center;
 
         .buttonVaciar{
-            border: 2px solid white;
-            box-shadow: 0 0 20px rgb(235, 75, 26);
+            box-shadow: 0 0 10px rgb(235, 75, 26);
             border-radius: 5px;
 
-            @include neonButton($textColor, $backgroundColorButtons);
+            @include neonButton($textColor, red);
             @include neonButtonText;
         }
         .buttonVaciar:hover{
-            @include neonButtonHover(red);
+            transform: scale(1.05);
+            box-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px red;
         }
     
         .buttonPagar{
-            border: 2px solid white;
             margin-left :2%;
-            box-shadow: 0 0 20px rgb(26, 235, 96);
+            box-shadow: 0 0 10px rgb(26, 235, 96);
             border-radius: 5px;
 
-            @include neonButton($textColor, $backgroundColorButtons);
+            @include neonButton($textColor, green);
             @include neonButtonText;
         }
         .buttonPagar:hover{
-            @include neonButtonHover(green);
+            transform: scale(1.05);
+            box-shadow: 0 0 5px green, 0 0 10px green, 0 0 20px green;
         }
     }    
 }
