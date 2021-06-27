@@ -1,6 +1,9 @@
 <app-form-filter></app-form-filter>
 
 <div class="products">
+  <div *ngIf="quantityProducts == 0">
+    <p>No se encontro ningun producto</p>
+  </div>
   <mat-grid-list cols="3" class="custom-grid-layout">
     <mat-grid-tile *ngFor="let product of products">
       <app-product-card [product]="product"></app-product-card>
