@@ -22,9 +22,10 @@ export class ApiConnectionService {
    * @param initialCart primer carrito a traer
    * @param quantityCarts cantidad de carrito a obtener
    */
-  getNewerCarts(initialCart: number, quantityCarts: number) {
+  getNewerCarts(token: string, initialCart: number, quantityCarts: number) {
     const url = this.makeUrl(['carts', 'newer', initialCart, quantityCarts]);
-    return this.http.get(url);
+    this.headers = this.setToken(token);
+    return this.http.get(url, { headers: this.headers });
   }
 
   /**

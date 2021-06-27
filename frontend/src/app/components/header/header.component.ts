@@ -12,22 +12,24 @@ import { CategoryList } from '@models/category-types';
 export class HeaderComponent implements OnInit {
 
   CategoryTypes = CategoryList;
+  isLogged: boolean = false;
+  isAdmin: boolean = false;
+  nickname: string = 'Visitant';
 
   constructor(private userInfo: UserInfoService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-  }
+    if (this.userInfo.isLogged) {
+      this.isLogged = this.userInfo.isLogged;
+      this.isAdmin = this.userInfo.isAdmin;
+      this.nickname = this.userInfo.userInfo.nickname;
+    }
 
-  get isLogged() {
-    return this.userInfo.isLogged;
-  }
-
-  get isAdmin() {
-    return this.userInfo.isAdmin;
-  }
-
-  get nickname() {
-    return this.userInfo.userInfo.nickname;
+    this.userInfo.changesUser$.subscribe((data: any) => {
+      this.isLogged = data.isLogged;
+      this.isAdmin = data.isAdmin;
+      this.nickname = data.nickname;
+    });
   }
 
   public openDialog() {
@@ -39,6 +41,6 @@ export class HeaderComponent implements OnInit {
   }
 
   signout() {
-
+    this.userInfo.signOutUser();
   }
 }

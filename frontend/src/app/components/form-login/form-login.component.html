@@ -1,4 +1,4 @@
-<div class = form>
+<div class = form *ngIf="!isOldUser; else oldUser">
 	<form novalidate [formGroup]="profileForm" (ngSubmit)="onSubmit()">
 		<div class = logInText>
 			<span>Iniciar Sesion</span>
@@ -26,6 +26,7 @@
 			</div>
 		</div>
 		
+		<mat-checkbox formControlName="recordar" color="primary">Recordar contraseña</mat-checkbox>
 	
 		<button class = buttonLogIn type="submit" mat-flat-button color="primary">
 			<span class = span1></span>
@@ -33,6 +34,14 @@
 			<span class = span3></span>
 			<span class = span4></span>
 			Iniciar Sesion
+		</button>
+
+		<button routerLink="/home" class = buttonLogIn mat-flat-button color="primary">
+			<span class = span1></span>
+			<span class = span2></span>
+			<span class = span3></span>
+			<span class = span4></span>
+			Continuar como invitado
 		</button>
 	
 		<app-field-error
@@ -47,4 +56,15 @@
 	
 </div>
 
+<ng-template #oldUser>
+	<div class="old-user-login">
+		<p class="saludo">
+			Hola de nuevo: 
+			<span class="nickname-user">
+				{{ userInfo.userInfo.nickname }}
+			</span>
+		</p>
 
+		<button (click)="recordarUsuario()" mat-flat-button color="primary">Iniciar Sesion</button>
+	</div>
+</ng-template>
