@@ -37,16 +37,17 @@ $lightColor: #a945c7;
         }
 
         .comuna{
-            width: 41%;
+            width: 38.5%;
 
         }
         
         .region{
-            width: 41%;
+            width: 38.5%;
         }
     }
-    
+
     .buttonRegistred{
+        margin-left:5%;
         display: block;
         margin-top: 3%;
         @include neonButton(white, transparent);
