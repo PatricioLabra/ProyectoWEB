@@ -62,6 +62,10 @@ $lightColor: #a945c7;
                 color: White;
             }
         }
+        ::ng-deep .mat-checkbox-content{
+            display:flex;
+            border: 1px solid white;
+        }
     }
 
     .buttonLogIn{
