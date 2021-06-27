@@ -28,7 +28,17 @@ $borderLightHeader: #bb90ff;
         font-weight: 600;
         text-shadow: 0 0 10px black;
     }
-
+    ::ng-deep #carrito {
+        margin-top: 1%;
+        font-size: 20px;
+        padding: 0.6%;
+        box-shadow: 0 0 10px $lightColor;
+        border-radius: 100%;
+        color: $lightColor;
+    }
+    ::ng-deep #carrito:hover{
+        background: rgba(225, 0, 255, 0.356);
+    }
     .panelAdmin{
         padding-top: 1%;
         padding-right: 1%;

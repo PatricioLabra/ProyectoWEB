@@ -39,8 +39,9 @@
 	</div>
 
 	<ng-template  #carrito> 
-		<p style="cursor: pointer;" (click)="openDialog()"><i class="fas fa-shopping-cart"></i></p>
+		<p id = carrito style="cursor: pointer;" (click)="openDialog()"><i class="fas fa-shopping-cart"></i></p>
 	</ng-template>
+
 
 	<div *ngIf="isLogged; else noEstaLogueado">
 		<button class = buttonSignOut (click)="signout()" mat-flat-button color="primary">
