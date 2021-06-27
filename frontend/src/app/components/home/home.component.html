@@ -1,4 +1,5 @@
 <div class="carousel">
+  <mat-spinner *ngIf="isLoading" class="spinner"></mat-spinner>
   <ngb-carousel *ngIf="products.length > 0">
     <ng-template ngbSlide *ngFor="let product of products">
       <div [routerLink]="['/product', product._id]" class="picsum-img-wrapper image-wrapper">
