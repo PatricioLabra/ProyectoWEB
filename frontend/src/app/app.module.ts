@@ -30,6 +30,7 @@ import { PanelAdminComponent } from './components/panel-admin/panel-admin.compon
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormCommentComponent } from './components/form-comment/form-comment.component';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,7 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
     RecaptchaFormsModule,
     RecaptchaModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
