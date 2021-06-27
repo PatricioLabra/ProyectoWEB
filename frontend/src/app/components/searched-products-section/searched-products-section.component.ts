@@ -26,20 +26,24 @@ export class SearchedProductsSectionComponent implements OnInit {
       lower_limit: null,
       upper_limit: null
     };
+
   }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((newQueryParams: any) => {
-      this.textSearched = newQueryParams.text || '';
-      this.currentFilter.text_index = newQueryParams.text || '';
-      this.currentFilter.category = newQueryParams.category || '';
-      this.currentFilter.lower_limit = newQueryParams.lower_limit || null;
-      this.currentFilter.upper_limit = newQueryParams.upper_limit || null;
-      this.currentFilter.subcategories = newQueryParams.subcategories || [];
-      console.log(this.currentFilter);
-
+      this.getQueryParamsFilter(newQueryParams);
       this.filterProducts();
     });
+  }
+
+  getQueryParamsFilter(queryParams: any) {
+      this.textSearched = queryParams.text || '';
+      this.currentFilter.text_index = queryParams.text || '';
+      this.currentFilter.category = queryParams.category || '';
+      this.currentFilter.lower_limit = queryParams.lower_limit || null;
+      this.currentFilter.upper_limit = queryParams.upper_limit || null;
+      this.currentFilter.subcategories = queryParams.subcategories || [];
+      console.log(this.currentFilter);
   }
 
   /**
