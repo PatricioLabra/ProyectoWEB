@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Profile } from '@models/profile.model';
@@ -11,7 +11,7 @@ import { ApiConnectionService } from '@services/api-connection.service';
   templateUrl: './form-login.component.html',
   styleUrls: ['./form-login.component.scss']
 })
-export class FormLoginComponent {
+export class FormLoginComponent implements OnInit {
 
   @Input()
   isAdmin: boolean = false;
@@ -20,23 +20,33 @@ export class FormLoginComponent {
   submitAttempt: boolean;
   badNick: boolean;
   badPass: boolean;
+  isOldUser: boolean;
 
   constructor(
     private _fb: FormBuilder,
     private api: ApiConnectionService,
-    private userInfo: UserInfoService,
+    public userInfo: UserInfoService,
     private router: Router
   ) {
     this.profileForm = this._fb.group(
       {
         nickname: [null, Validators.required],
-        password: [null, Validators.required]
+        password: [null, Validators.required],
+        recordar: [false]
       }
     )
 
     this.submitAttempt = false;
     this.badNick = false;
     this.badPass = false;
+    this.isOldUser = false;
+  }
+
+  ngOnInit(): void {
+    if (this.userInfo.checkUserCookie()) {
+      this.userInfo.loadUserCookie();
+      this.isOldUser = true;
+    }
   }
 
   public isFieldInvalid(field: string) {
@@ -50,7 +60,8 @@ export class FormLoginComponent {
     this.submitAttempt = true;
 
     if (this.profileForm.valid) {
-      const profileData: Profile = this.profileForm.getRawValue() as Profile;
+      const data: Profile = this.profileForm.getRawValue() as Profile;
+      const profileData = {nickname: data.nickname, password: data.password};
 
       this.api.signIn(profileData, this.isAdmin).subscribe(this.successLogin, this.handleError);
     }
@@ -63,7 +74,7 @@ export class FormLoginComponent {
     const { token } = data as any;
     const nickname = this.profileForm.controls.nickname.value;
 
-    this.userInfo.signInUser(nickname, token, this.isAdmin);
+    this.userInfo.signInUser(nickname, token, this.isAdmin, this.profileForm.controls.recordar.value);
     this.router.navigate(['/']);
   }
 
@@ -79,5 +90,9 @@ export class FormLoginComponent {
         break;
       default : console.log(error);
     }
+  }
+
+  recordarUsuario() {
+
   }
 }
