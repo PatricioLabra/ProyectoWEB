@@ -21,6 +21,39 @@ $borderLightHeader: #bb90ff;
     background: $backgroundColorHeader;
     color: $textColor;
 
+    .nickname{
+        font-family: neon;
+        color: $lightColor;
+        font-size: 18px;
+        font-weight: 600;
+        text-shadow: 0 0 10px black;
+    }
+    ::ng-deep #carrito {
+        margin-top: 1%;
+        font-size: 20px;
+        padding: 0.6%;
+        box-shadow: 0 0 10px $lightColor;
+        border-radius: 100%;
+        color: $lightColor;
+    }
+    ::ng-deep #carrito:hover{
+        background: rgba(225, 0, 255, 0.356);
+    }
+    .panelAdmin{
+        padding-top: 1%;
+        padding-right: 1%;
+        padding-left: 1%;
+        background: transparent;
+        border-radius: 5px;
+        @include neonButtonText;
+    }
+
+    .panelAdmin:hover{
+        background: $lightColor;
+        box-shadow: 0 0 5px $lightColor, 0 0 10px $lightColor, 0 0 20px $lightColor;
+        transition-delay: 0.25s;
+    }
+
     .search-bar {
         width: 25%;
     }

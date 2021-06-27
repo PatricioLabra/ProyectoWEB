@@ -1,5 +1,5 @@
 <div routerLink="/home">
-	<div class = logo>
+	<div class = logo style="cursor: pointer;">
 		<div class = back>Back</div>
 		<div class = toThe>to the</div>
 		<div class = noventa>90's</div>
@@ -9,59 +9,65 @@
 </div>
 <div class = header>
 
-<button class = buttonCategory mat-button [matMenuTriggerFor]="animals">
-	<span class = "span1"></span>
-	<span class = "span2"></span>
-	<span class = "span3"></span>
-	<span class = "span4"></span>
-	<div class = categoryText> <i class="fas fa-bars"></i> Categorias</div> 
-</button>
-
-<mat-menu   #animals="matMenu">
-
-  	<button class = categories mat-menu-item *ngFor="let category of CategoryTypes">
-	  <div class = categoriesText routerLink="/search" [queryParams]="{category: category}">{{ category | titlecase }}</div> 
-  	</button>
-
-</mat-menu>
-
-<app-search-bar class="search-bar"></app-search-bar>
-
-<div *ngIf="isLogged; else noEstaLogueado">
-	<button class = buttonSignOut (click)="signout()" mat-flat-button color="primary">
-		<span class = "span5"></span>
-		<span class = "span6"></span>
-		<span class = "span7"></span>
-		<span class = "span8"></span>
-		<div class = signoutText> <i class="fas fa-sign-in-alt"></i> Cerrar Sesion</div>
+	<button class = buttonCategory mat-button [matMenuTriggerFor]="animals">
+		<span class = "span1"></span>
+		<span class = "span2"></span>
+		<span class = "span3"></span>
+		<span class = "span4"></span>
+		<div class = categoryText> <i class="fas fa-bars"></i> Categorias</div> 
 	</button>
+
+	<mat-menu   #animals="matMenu">
+
+		<button class = categories mat-menu-item *ngFor="let category of CategoryTypes">
+		<div class = categoriesText routerLink="/search" [queryParams]="{category: category}">{{ category | titlecase }}</div> 
+		</button>
+
+	</mat-menu>
+
+	<app-search-bar class="search-bar"></app-search-bar>
 
 	<div class = nickname>
+		<i class="fas fa-angle-double-right"></i> 
 		{{ nickname }}
+		<i class="fas fa-angle-double-left"></i>
 	</div>
-	<div *ngIf="isAdmin; else carrito">
-		<p class = panelAdmin routerLink="/admin/panel">Panel Admin</p>
+	
+	<div class = panelAdmin style="cursor: pointer;" *ngIf="isAdmin; else carrito">
+		<p routerLink="/admin/panel">
+			<i class="fas fa-crown"></i> Panel Admin</p>
 	</div>
 
-	<ng-template #carrito> 
-		<p (click)="openDialog()">Carrito</p>
+	<ng-template  #carrito> 
+		<p id = carrito style="cursor: pointer;" (click)="openDialog()"><i class="fas fa-shopping-cart"></i></p>
 	</ng-template>
-</div>
 
-<ng-template #noEstaLogueado>
-	<button class = buttonLoginIn routerLink="/login" mat-flat-button color="primary">
-		<span class = "span9"></span>
-		<span class = "span10"></span>
-		<span class = "span11"></span>
-		<span class = "span12"></span>
-		<div class = loginInText> <i class="fas fa-user"></i> Iniciar Sesion</div> 
-	</button>
-	<button class = buttonRegister routerLink="/register" mat-flat-button color="primary">
-		<span class = "span13"></span>
-		<span class = "span14"></span>
-		<span class = "span15"></span>
-		<span class = "span16"></span>
-		<div class = registerText> <i class="fas fa-plus"></i> Registrarse</div>	
-	</button>
-</ng-template>
+
+	<div *ngIf="isLogged; else noEstaLogueado">
+		<button class = buttonSignOut (click)="signout()" mat-flat-button color="primary">
+			<span class = "span5"></span>
+			<span class = "span6"></span>
+			<span class = "span7"></span>
+			<span class = "span8"></span>
+			<div class = signoutText> <i class="fas fa-sign-in-alt"></i> Cerrar Sesion</div>
+		</button>
+
+	</div>
+
+	<ng-template #noEstaLogueado>
+		<button class = buttonLoginIn routerLink="/login" mat-flat-button color="primary">
+			<span class = "span9"></span>
+			<span class = "span10"></span>
+			<span class = "span11"></span>
+			<span class = "span12"></span>
+			<div class = loginInText> <i class="fas fa-user"></i> Iniciar Sesion</div> 
+		</button>
+		<button class = buttonRegister routerLink="/register" mat-flat-button color="primary">
+			<span class = "span13"></span>
+			<span class = "span14"></span>
+			<span class = "span15"></span>
+			<span class = "span16"></span>
+			<div class = registerText> <i class="fas fa-plus"></i> Registrarse</div>	
+		</button>
+	</ng-template>
 </div>
