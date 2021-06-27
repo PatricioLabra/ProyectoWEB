@@ -31,7 +31,8 @@ export class FormLoginComponent implements OnInit {
     this.profileForm = this._fb.group(
       {
         nickname: [null, Validators.required],
-        password: [null, Validators.required]
+        password: [null, Validators.required],
+        recordar: [false]
       }
     )
 
@@ -59,7 +60,8 @@ export class FormLoginComponent implements OnInit {
     this.submitAttempt = true;
 
     if (this.profileForm.valid) {
-      const profileData: Profile = this.profileForm.getRawValue() as Profile;
+      const data: Profile = this.profileForm.getRawValue() as Profile;
+      const profileData = {nickname: data.nickname, password: data.password};
 
       this.api.signIn(profileData, this.isAdmin).subscribe(this.successLogin, this.handleError);
     }
@@ -72,7 +74,7 @@ export class FormLoginComponent implements OnInit {
     const { token } = data as any;
     const nickname = this.profileForm.controls.nickname.value;
 
-    this.userInfo.signInUser(nickname, token, this.isAdmin);
+    this.userInfo.signInUser(nickname, token, this.isAdmin, this.profileForm.controls.recordar.value);
     this.router.navigate(['/']);
   }
 

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './modules/app-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppComponent } from '@components/app-component/app.component';
 import { TestingComponent } from './components/testing/testing.component';
@@ -62,6 +62,7 @@ import { CookieService } from 'ngx-cookie-service';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
     NgbModule,

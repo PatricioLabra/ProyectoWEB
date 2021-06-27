@@ -31,7 +31,7 @@ export class UserInfoService {
     }
   }
 
-  signInUser(nickname: string, token: string, isAdmin: boolean, savePass: boolean=true) {
+  signInUser(nickname: string, token: string, isAdmin: boolean, savePass: boolean=false) {
     this.isAdmin = isAdmin;
     this.isLogged = true;
     this.token = token;
