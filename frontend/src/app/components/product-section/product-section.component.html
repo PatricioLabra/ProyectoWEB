@@ -46,8 +46,8 @@
 
   <div class="categories-wrapper">
     <p>Categoria: {{ product.category }}</p>
-    <mat-chip-list [selectable]="false">
-      <mat-chip *ngFor="let sub of product.subcategories" [disableRipple]="true">
+    <mat-chip-list>
+      <mat-chip *ngFor="let sub of product.subcategories" routerLink="/search" [queryParams]="{subcategories: [sub]}">
         {{ sub }}
       </mat-chip>
     </mat-chip-list>

@@ -20,7 +20,7 @@
 <mat-menu   #animals="matMenu">
 
   	<button class = categories mat-menu-item *ngFor="let category of CategoryTypes">
-	  <div class = categoriesText>{{ category | titlecase }}</div> 
+	  <div class = categoriesText routerLink="/search" [queryParams]="{category: category}">{{ category | titlecase }}</div> 
   	</button>
 
 </mat-menu>
