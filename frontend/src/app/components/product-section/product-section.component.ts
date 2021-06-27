@@ -56,9 +56,10 @@ export class ProductSectionComponent implements OnInit {
   }
 
   submitComment(commentToSubmit: any) {
-
-    this.api.addCommentProduct(this._id, commentToSubmit).subscribe((res: any) => {
-      this.comments = res.comments.filter((comment: Comment) => comment.comment_body);
-    });
+    if ((commentToSubmit.rating != 0) || (commentToSubmit.comment_body != '')) {
+      this.api.addCommentProduct(this._id, commentToSubmit).subscribe((res: any) => {
+        this.comments = res.comments.filter((comment: Comment) => comment.comment_body);
+      });
+    }
   }
 }
