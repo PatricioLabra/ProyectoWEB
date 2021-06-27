@@ -1,4 +1,4 @@
-<div class = form>
+<div class = form *ngIf="!isOldUser; else oldUser">
 	<form novalidate [formGroup]="profileForm" (ngSubmit)="onSubmit()">
 		<div class = logInText>
 			<span>Iniciar Sesion</span>
@@ -55,4 +55,15 @@
 	
 </div>
 
+<ng-template #oldUser>
+	<div class="old-user-login">
+		<p class="saludo">
+			Hola de nuevo: 
+			<span class="nickname-user">
+				{{ userInfo.userInfo.nickname }}
+			</span>
+		</p>
 
+		<button (click)="recordarUsuario()" mat-flat-button color="primary">Iniciar Sesion</button>
+	</div>
+</ng-template>

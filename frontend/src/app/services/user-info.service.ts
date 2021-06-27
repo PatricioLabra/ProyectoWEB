@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { UserInfo } from '@models/user-info.model';
 import { ApiConnectionService } from './api-connection.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserInfoService {
+
+  changeUser: Subject<{isLogged: boolean, isAdmin: boolean, nickname: string}> = new Subject();
+  changesUser$ = this.changeUser.asObservable();
 
   isLogged: boolean;
   isAdmin: boolean;
@@ -21,7 +25,9 @@ export class UserInfoService {
 
     if (this.checkUserCookie()) {
       this.loadUserCookie();
+      this.isLogged = true;
       console.log(this.userInfo);
+      this.changeUser.next({isLogged: this.isLogged, isAdmin: this.isAdmin, nickname: this.userInfo.nickname});
     }
   }
 
@@ -37,6 +43,8 @@ export class UserInfoService {
       if (savePass) {
         this.saveUserCookie();
       }
+
+      this.changeUser.next({isLogged: this.isLogged, isAdmin: this.isAdmin, nickname: this.userInfo.nickname});
     });
   }
 
@@ -45,6 +53,7 @@ export class UserInfoService {
     this.isAdmin = false;
     this.userInfo = { nickname: 'Visitant' };
     this.token = '';
+    this.changeUser.next({isLogged: this.isLogged, isAdmin: this.isAdmin, nickname: this.userInfo.nickname});
     this.deleteUserCookie();
   }
 
