@@ -29,6 +29,7 @@ import { AngularMaterialModule } from '@modules/angular-material/angular-materia
 import { PanelAdminComponent } from './components/panel-admin/panel-admin.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormCommentComponent } from './components/form-comment/form-comment.component';
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,8 @@ import { FormCommentComponent } from './components/form-comment/form-comment.com
     BrowserAnimationsModule,
     AngularMaterialModule,
     NgbModule,
+    RecaptchaFormsModule,
+    RecaptchaModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

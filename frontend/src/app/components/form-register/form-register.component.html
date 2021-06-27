@@ -93,8 +93,12 @@
       [displayError]="!isCorrectPass"
       [errorMessage]="'no coinciden'"
     ></app-field-error>
+
+    <re-captcha (resolved)="resolveCaptcha($event)" 
+                [siteKey]="SITE_KEY">  
+    </re-captcha>
   
-    <button class = buttonRegistred type="submit" mat-flat-button color="primary">
+    <button [disabled]="!completeCaptcha" class = buttonRegistred type="submit" mat-flat-button color="primary">
       <span class = span1></span>
       <span class = span2></span>
       <span class = span3></span>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Region, Regiones } from '@models/communes.model';
 import { ApiConnectionService } from '@services/api-connection.service';
 import { UserInfoService } from '@services/user-info.service';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-form-register',
@@ -12,8 +13,11 @@ import { UserInfoService } from '@services/user-info.service';
 })
 export class FormRegisterComponent {
 
+  SITE_KEY = environment.CAPTCHA_KEY;
+
   registerForm: FormGroup;
 
+  completeCaptcha: boolean = false;
   submitAttempt: boolean = false;
   isCorrectPass: boolean = true;
   badNick: boolean = false;
@@ -80,6 +84,10 @@ export class FormRegisterComponent {
       this.CurrentRegion = this.Regions[index];
       this.registerForm.controls.commune.setValue(this.CurrentRegion.provincias[0].name);
     }
+  }
+
+  resolveCaptcha(evt: any) {
+    this.completeCaptcha = true;
   }
 
   private validPasswords() {
