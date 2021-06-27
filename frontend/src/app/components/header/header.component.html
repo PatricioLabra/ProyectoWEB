@@ -1,5 +1,5 @@
 <div routerLink="/home">
-	<div class = logo>
+	<div class = logo style="cursor: pointer;">
 		<div class = back>Back</div>
 		<div class = toThe>to the</div>
 		<div class = noventa>90's</div>
@@ -33,12 +33,13 @@
 		<i class="fas fa-angle-double-left"></i>
 	</div>
 	
-	<div class = panelAdmin *ngIf="isAdmin; else carrito">
-		<p routerLink="/admin/panel">Panel Admin</p>
+	<div class = panelAdmin style="cursor: pointer;" *ngIf="isAdmin; else carrito">
+		<p routerLink="/admin/panel">
+			<i class="fas fa-crown"></i> Panel Admin</p>
 	</div>
 
 	<ng-template  #carrito> 
-		<p (click)="openDialog()"><i class="fas fa-shopping-cart"></i></p>
+		<p style="cursor: pointer;" (click)="openDialog()"><i class="fas fa-shopping-cart"></i></p>
 	</ng-template>
 
 	<div *ngIf="isLogged; else noEstaLogueado">

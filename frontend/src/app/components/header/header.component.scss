@@ -29,6 +29,21 @@ $borderLightHeader: #bb90ff;
         text-shadow: 0 0 10px black;
     }
 
+    .panelAdmin{
+        padding-top: 1%;
+        padding-right: 1%;
+        padding-left: 1%;
+        background: transparent;
+        border-radius: 5px;
+        @include neonButtonText;
+    }
+
+    .panelAdmin:hover{
+        background: $lightColor;
+        box-shadow: 0 0 5px $lightColor, 0 0 10px $lightColor, 0 0 20px $lightColor;
+        transition-delay: 0.25s;
+    }
+
     .search-bar {
         width: 25%;
     }
