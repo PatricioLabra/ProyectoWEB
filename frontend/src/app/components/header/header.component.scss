@@ -21,6 +21,14 @@ $borderLightHeader: #bb90ff;
     background: $backgroundColorHeader;
     color: $textColor;
 
+    .nickname{
+        font-family: neon;
+        color: $lightColor;
+        font-size: 18px;
+        font-weight: 600;
+        text-shadow: 0 0 10px black;
+    }
+
     .search-bar {
         width: 25%;
     }
