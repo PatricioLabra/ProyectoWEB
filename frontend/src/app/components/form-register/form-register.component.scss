@@ -86,3 +86,8 @@ $lightColor: #a945c7;
         }
     }
 }
+
+::ng-deep .mat-select-value {
+    color: white !important;
+    text-shadow: 0 0 2px white;
+}
