@@ -5,7 +5,7 @@
           
           <div class = description>
             <p class = name>{{ product.name }}</p>
-            <p class = price>Precio: {{ product.price }}</p>
+            <p class = price>Precio: ${{ product.price }}</p>
             <p class = discount>Descuento: {{ product.discount *100 }}%</p>
             <p class = quantity>Cantidad: {{ product.quantity }}</p>
             <p class = finalPrice>Precio Final: {{ product.finalPrice }}</p>
@@ -20,8 +20,8 @@
   </ul>
   
   <div class = total>
-    <p>Total: {{ totalPrice }}</p>
-    <p>Descuento: {{ totalDiscount }}</p>
+    <p>Total: ${{ totalPrice }}</p>
+    <p>Descuento: ${{ totalDiscount }}</p>
   </div>
 
   <div class = buttons>
