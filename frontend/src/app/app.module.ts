@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './modules/app-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppComponent } from '@components/app-component/app.component';
 import { TestingComponent } from './components/testing/testing.component';
@@ -22,7 +22,15 @@ import { FormFilterComponent } from './components/form-filter/form-filter.compon
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { FormRegisterComponent } from './components/form-register/form-register.component';
 import { ReportUsersComponent } from './components/report-users/report-users.component';
-import { UserCardComponent } from './components/user-card/user-card.component';
+import { ReportProductsComponent } from './components/report-products/report-products.component';
+import { CartBoughtCardComponent } from './components/cart-bought-card/cart-bought-card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularMaterialModule } from '@modules/angular-material/angular-material.module';
+import { PanelAdminComponent } from './components/panel-admin/panel-admin.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormCommentComponent } from './components/form-comment/form-comment.component';
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -44,15 +52,24 @@ import { UserCardComponent } from './components/user-card/user-card.component';
     AdminLoginComponent,
     FormRegisterComponent,
     ReportUsersComponent,
-    UserCardComponent
+    ReportProductsComponent,
+    CartBoughtCardComponent,
+    PanelAdminComponent,
+    FormCommentComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    AngularMaterialModule,
+    NgbModule,
+    RecaptchaFormsModule,
+    RecaptchaModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

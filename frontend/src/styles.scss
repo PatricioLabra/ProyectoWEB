@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+
+/*se incluye una fuente noventera del tipo neon*/
+@font-face {
+    font-family: neon;
+    src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
+}
+
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    background: white;
+    color: white;
+    background: url('https://tienda-ecommerce.sfo3.digitaloceanspaces.com/Fondo.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}

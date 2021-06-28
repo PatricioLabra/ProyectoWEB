@@ -1,0 +1,18 @@
+$lightColor: #a945c7;
+
+.content {
+  background-color: #0b0422;
+  margin: 20px;
+  padding: 30px;
+  border-radius: 10px;
+  .quantity {
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .carts{
+    font-weight: 500;
+    font-size: 15px;
+  }
+}

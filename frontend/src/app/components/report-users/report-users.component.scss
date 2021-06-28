@@ -1,0 +1,35 @@
+.content {
+  background-color: #0b0422;
+  margin: 20px;
+  padding: 30px;
+  border-radius: 10px;
+
+  .quantity {
+    margin-bottom: 30px;
+    font-weight: 500;
+    font-size: 15px;
+  }
+
+  .table {
+    width: 100%;  
+    background-color: rgba(255, 255, 255, 0);
+    box-shadow: 0 0 20px rgb(195, 0, 255);
+    
+
+    th{
+      font-family: neon;
+      font-size:18px;
+      padding-bottom: 18px;
+      font-weight: 600;
+      color:rgb(174, 0, 255);
+      padding-left: 4%;
+      text-shadow: 0 0 10px black;
+    }
+
+    td{
+      color:white;
+      font-size: 15px;
+      font-weight: 600;
+    }
+  }
+}

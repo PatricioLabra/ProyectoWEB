@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://localhost:4000'
-};
+  API_URL: 'http://localhost:4000',
+  CAPTCHA_KEY: '6LfB3lsbAAAAAMa5-aZXidSUw0ZZBo8wKpRpztLu', 
+}
 
 /*
  * For easier debugging in development mode, you can import the following file

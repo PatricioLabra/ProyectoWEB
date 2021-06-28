@@ -17,6 +17,38 @@ export class ApiConnectionService {
   }
 
   /**
+   * Obtiene los carritos comprados mas nuevos, desde el carrito 'initialCart' mas nuevo, obtiene
+   * 'quantityCarts'
+   * @param initialCart primer carrito a traer
+   * @param quantityCarts cantidad de carrito a obtener
+   */
+  getNewerCarts(token: string, initialCart: number, quantityCarts: number) {
+    const url = this.makeUrl(['carts', 'newer', initialCart, quantityCarts]);
+    this.headers = this.setToken(token);
+    return this.http.get(url, { headers: this.headers });
+  }
+
+  /**
+   * Ingresa un nuevo comentario a un producto
+   * @param id_product Id del producto a ingresar el comentario
+   * @param comment comentario a ingresar
+   */
+  addCommentProduct(id_product: string, comment: any) {
+    const url = this.makeUrl(['comment']);
+    const commentToSubmit = { id_product, comment };
+    return this.http.post(url, commentToSubmit);
+  }
+
+  /**
+   * Obtiene los comentarios de un producto
+   * @param id_product Id del producto al que se quiere obtener los comentarios
+   */
+  getCommentsProduct(id_product: string) {
+    const url = this.makeUrl(['comment', id_product]);
+    return this.http.get(url);
+  }
+
+  /**
    * Obtiene la informacion de un producto en base a su id
    * @param id Id del producto
    */
@@ -39,18 +71,24 @@ export class ApiConnectionService {
   /**
    * Obtiene los productos que coincidan con el texto ingresado
    * @param keyword texto de busqueda
+   * @param initialProduct primer producto a traer
+   * @param quantityProducts cantidad de productos a obtener
    */
-  getSearchProducts(keyword: string) {
-    const url = this.makeUrl(['products', keyword]);
+  getSearchProducts(keyword: string, initialProduct: number, quantityProducts: number) {
+    const url = this.makeUrl(['products', keyword, initialProduct, quantityProducts]);
     return this.http.get(url);
   }
 
   /**
    * Obtiene los productos que coincidan con el filtro ingresado
    * @param filter Filtro que se aplicara a los productos para buscarlos
+   * @param initialProduct primer producto a traer
+   * @param initialProduct primer producto a traer
+   * @param quantityProducts cantidad de productos a obtener
+   * @param quantityProducts cantidad de productos a obtener
    */
-  getFilteredProducts(filter: FilterType) {
-    const url = this.makeUrl(['products', 'filtered']);
+  getFilteredProducts(filter: FilterType, initialProduct: number, quantityProducts: number) {
+    const url = this.makeUrl(['products', 'filtered', initialProduct, quantityProducts]);
     return this.http.post(url, filter);
   }
 
@@ -60,9 +98,10 @@ export class ApiConnectionService {
    * @param initialUsers primer usuario a traer
    * @param quantityUsers cantidad de usuarios a obtener
    */
-  getNewerUsers(initialUser: number, quantityUsers: number) {
+  getNewerUsers(token: string, initialUser: number, quantityUsers: number) {
     const url = this.makeUrl(['users', 'newer', initialUser, quantityUsers]);
-    return this.http.get(url);
+    this.headers = this.setToken(token);
+    return this.http.get(url, { headers: this.headers });
   }
 
   /**

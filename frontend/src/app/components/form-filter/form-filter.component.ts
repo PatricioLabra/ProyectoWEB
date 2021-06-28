@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CategoryList, Subcategories } from '@models/category-types';
 import { FilterType } from '@models/filter.model';
 
@@ -16,10 +17,7 @@ export class FormFilterComponent {
 
   filterForm: FormGroup;
 
-  @Output()
-  filterSubmit = new EventEmitter<FilterType>();
-
-  constructor(private _fb: FormBuilder) {
+  constructor(private _fb: FormBuilder, private router: Router) {
     this.filterForm = this._fb.group({
       category: [''],
       minPrice: [],
@@ -41,8 +39,7 @@ export class FormFilterComponent {
       subcategories: this.SubcategoriesChecked
     }
 
-    console.log(data);
-    this.filterSubmit.emit(data);
+    this.router.navigate(['search'], {queryParams: data});
   }
 
   /**

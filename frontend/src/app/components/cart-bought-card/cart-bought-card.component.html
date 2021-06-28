@@ -1,0 +1,21 @@
+<div class="content">
+  <p class="nickname">{{ cart.nickname_buyer }}</p>
+  <p class="date">{{ cart.date | date }}</p>
+
+  <mat-accordion class="products" multi>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Productos
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+      <div *ngFor="let product of cart.productCart" class="product-wrapper">
+        <img [src]="product.image_url" alt="Image Product" class="image-product">
+
+        <p>{{ product.name }} x {{ product.quantity }}</p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+

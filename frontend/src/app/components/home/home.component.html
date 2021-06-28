@@ -1,11 +1,25 @@
-<div>
-  carousel
-  {{ products | json }}
+<div class="carousel">
+  <mat-spinner *ngIf="isLoading" class="spinner"></mat-spinner>
+  <ngb-carousel *ngIf="products.length > 0">
+    <ng-template ngbSlide *ngFor="let product of products">
+      <div [routerLink]="['/product', product._id]" class="picsum-img-wrapper image-wrapper">
+        <img [src]="product.images_urls[0]" alt="Random first slide" class="image-carousel">
+      </div>
+      <div class="carousel-caption">
+        <h3 [routerLink]="['/product', product._id]" class="title-product">{{ product.name }}</h3>
+        <p class="price-info">
+          <span [class.price-discounted]="product.discount">$ {{ product.price }}</span>
+          <span *ngIf="product.discount">$ {{ product.price * (1 - product.discount) }}</span>
+          <span *ngIf="product.discount" class="discount">-{{ product.discount * 100 }}% OFF</span>
+        </p>
+      </div>
+    </ng-template>
+  </ngb-carousel>
 </div>
 
 <div>
-  <app-category-catalog [products]="movies" [categoryName]="'Movies'"></app-category-catalog>
-  <app-category-catalog [products]="music" [categoryName]="'Music'"></app-category-catalog>
-  <app-category-catalog [products]="clothes" [categoryName]="'Clothes'"></app-category-catalog>
-  <app-category-catalog [products]="food" [categoryName]="'Food'"></app-category-catalog>
+  <app-category-catalog [products]="movies" [categoryName]="'Películas'"></app-category-catalog>
+  <app-category-catalog [products]="music" [categoryName]="'Música'"></app-category-catalog>
+  <app-category-catalog [products]="clothes" [categoryName]="'Ropa'"></app-category-catalog>
+  <app-category-catalog [products]="food" [categoryName]="'Comida'"></app-category-catalog>
 </div>

@@ -1,0 +1,234 @@
+@import 'src/styles/mixinsNeonButtons';
+
+$lightColor: #a945c7;
+
+.content {
+  display: flex;
+  flex-direction: column;
+  background-color: #23063e70;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+
+  .info-wrapper {
+    display: flex;
+    height: 80vh;
+
+    .image-picker {
+      margin: auto 20px auto 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      height: 60vh;
+      width: fit-content;
+      background-color: rgba(85, 85, 85, 0.103);
+      border-radius: 10px;
+      padding: 10px;
+
+      .images {
+        width: 7vw;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        opacity: 0.5;
+      }
+
+      .selected-image {
+        border: 4px solid rgba(128, 128, 128, 0.3);
+        opacity: 1;
+        border-radius: 5px;
+      }
+    }
+
+    .image-product {
+      width: 30%;
+      height: fit-content;
+      margin: auto 0px;
+      border-radius: 5px;
+      box-shadow: 0 0 20px #a945c7;
+    }
+
+    .info-product {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      margin: 0px 40px;
+      padding: 20px;
+      width: 50%;
+      height: auto;
+
+      .name-product {
+        font-size: 35px;
+        text-transform: uppercase;
+        font-weight: 400;
+        color: cyan;
+        font-family: neon;
+        text-shadow: 0 0 8px cyan;
+        line-height: 40px;
+      }
+
+      .description {
+        font-size: 15px;
+        width: 50%;
+        font-weight: 400;
+      }
+
+      .calification {
+        font-size: 20px;
+        margin: 10px;
+      }
+
+      .prices-wrapper {
+        font-size: 20px;
+        color: orange;
+
+        .price {
+          background-color: #ffff0029;
+          width: fit-content;
+          padding: 10px;
+          border-radius: 5px;
+          color: gold;
+        }
+
+        .discount {
+          font-size: 18px;
+          color: #d21e1ee0;
+        }
+
+        .price-discounted {
+          text-decoration: line-through;
+          color: gray;
+          font-size: 15px;
+          background-color: transparent;
+          width: fit-content;
+        }
+
+        .stock {
+          color: green;
+          margin: 0px 0px 30px;
+          background-color: rgba(0, 255, 0, 0.1);
+          width: fit-content;
+          padding: 10px;
+          border-radius: 5px;
+        }
+
+        .no-stock {
+          color: red;
+        }
+      }
+
+      .button {
+        width: 30px;
+        margin-right: 10px;
+        @include neonButton (white, #23063e8e);
+        box-shadow: 0 0 6px $lightColor;
+        font-size: 20px;
+      }
+
+      .button:hover{
+        background: $lightColor;
+        box-shadow: 0 0 5px $lightColor, 0 0 10px $lightColor, 0 0 20px $lightColor;
+      }
+    }
+  }
+
+  .categories-wrapper {
+    margin: 40px 0px;
+    font-weight: 500;
+
+    mat-chip{
+      box-shadow: 0 0 5px rgb(255, 123, 0);
+      background: rgba(255, 166, 0, 0.712);
+      color: white;
+    }
+  }
+
+  .description-features {
+    display: flex;
+
+    .background-description {
+      background-color: #0b0422;
+      margin: 10px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 5px $lightColor;
+    }
+
+    .description {
+      width: 50%;
+    }
+
+    .dimensions {
+      display: flex;
+      width: 50%;
+      justify-content: space-evenly;
+      align-items: center;
+
+      p {
+        margin: 0px;
+      }
+    }
+  }
+
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+
+  .comment {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 15px;
+    margin: 10px;
+    box-shadow: 0 0 5px $lightColor;
+
+    .background-comment {
+      background-color: #0b0422;
+      padding: 10px;
+      border-radius: 10px;
+      margin: 15px;
+    }
+
+    .comment-info {
+      width: 30%;
+
+      .comment-date {
+        font-size: 10px;
+        color: gray;
+        margin: 0px;
+      }
+    }
+
+    .comment-body {
+      width: 65%;
+    }
+  }
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  p {
+    font-size: 20px;
+    margin: 50px auto 10px;
+    color: #ddd;
+  }
+}
+
+.star {
+  font-size: 1.5rem;
+  color: #cf8700;
+  opacity: 0.1;
+}
+
+.filled {
+  color: #cf8700;
+  opacity: 1;
+}
+
+::ng-deep .mat-tab-label .mat-tab-label-content {
+  color: white !important;
+}

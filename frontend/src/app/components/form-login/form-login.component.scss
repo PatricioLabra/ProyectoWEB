@@ -1,0 +1,137 @@
+@import 'src/styles/mixinsNeonButtons';
+
+@mixin configInput{
+    box-shadow: 0 0 5px $lightColor;
+    margin-bottom: 3%;
+    background-color:rgba(77, 7, 124, 0.363);
+    margin-top: 5%;
+    font-size: 20px;
+    padding-left: 5%;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+$lightColor: #a945c7;
+
+.form{
+    padding: 3%;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5%;
+    box-shadow: 0 0 30px #a945c7;
+    border: 1px solid;
+    text-align: center;
+    width: 30%;
+    height: 50%;
+    text-align: center;
+    justify-content: center;
+    text-align: center;
+    display:table;
+    margin-bottom: 2%;
+
+    .logInText{
+        font-size: 20px;
+        color: #fff;
+        text-shadow:
+            0 0 7px #fff,
+            0 0 10px #fff,
+            0 0 21px #fff,
+            0 0 42px #f09,
+            0 0 82px #f09,
+            0 0 92px #f09,
+            0 0 102px #f09,
+            0 0 151px #f09;
+    }
+
+    .inputLogIn{
+        margin-top: 5%;
+
+        .nickname{
+            @include configInput;
+
+            mat-label{
+                    color: White;
+            }
+        }
+        .password{
+            @include configInput;
+
+            mat-label{
+                color: White;
+            }
+        }
+        ::ng-deep .mat-checkbox-content{
+            display:flex;
+            border: 1px solid white;
+        }
+    }
+
+    .buttonLogIn{
+        margin-top: 3%;
+        @include neonButton(white, transparent);
+        @include neonButtonText;
+
+        span {
+            @include buttonSpans;
+        }
+        .span1{
+            @include spanConfiguration(0, none, -100%, none, 100%, 2px, 90deg, $lightColor);
+        }
+        .span2{
+            @include spanConfiguration(-100%, none, none, 0, 2px, 100%, 180deg, $lightColor);
+        }
+        .span3{
+            @include spanConfiguration(none, 0, none, -100%, 100%, 2px, 270deg, $lightColor);
+        }
+        .span4{
+            @include spanConfiguration(none, -100%, 0, none, 2px, 100%, 360deg, $lightColor);
+        }
+    }
+    .buttonLogIn:hover{
+        @include neonButtonHover($lightColor);
+
+        .span1{
+            @include buttonHoverSpan(none, none, 100%, none, none);
+        }
+        .span2{
+            @include buttonHoverSpan(100%, none, none, none, 0.25s);
+        }
+        .span3{
+            @include buttonHoverSpan(none, none, none, 100%, 0.5s);
+        }
+        .span4{
+            @include buttonHoverSpan(none, 100%, none, none, 0.75s);
+        }
+    }
+}
+
+.old-user-login {
+    height: 30vh;
+    width: 40%;
+    background-color: #0b0422;
+    margin: 120px auto;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .saludo {
+        font-size: 30px;
+        font-family: neon;
+        color: cyan;
+
+        .nickname-user {
+            font-size: 25px;
+            font-family: 'Roboto';
+            color: white;
+        }
+    }
+}
+
+::ng-deep .mat-input-element::placeholder {
+    color: white;
+    opacity: 0.2;
+}

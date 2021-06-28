@@ -1,9 +1,39 @@
-<div>
-  <p>{{ quantUsers }}</p>
+<div class="content">
+  <p class="quantity">Cantidad de usuarios registrados: {{ quantUsers }}</p>
 
-  <div>
-    <app-user-card *ngFor="let user of users" [user]="user"></app-user-card>
-  </div>
+  <table mat-table [dataSource]="users" class="mat-elevation-z8 table">
+
+    <ng-container matColumnDef="nickname">
+      <th mat-header-cell *matHeaderCellDef> Nickname </th>
+      <td mat-cell *matCellDef="let element"> {{ element.nickname }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="nombres">
+      <th mat-header-cell *matHeaderCellDef> Nombres </th>
+      <td mat-cell *matCellDef="let element"> {{ element.names }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="apellidos">
+      <th mat-header-cell *matHeaderCellDef> Apellidos </th>
+      <td mat-cell *matCellDef="let element"> {{ element.last_name }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="rut">
+      <th mat-header-cell *matHeaderCellDef> Rut </th>
+      <td mat-cell *matCellDef="let element"> {{ element.rut }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{ element.email }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="direccion">
+      <th  class = direccion mat-header-cell *matHeaderCellDef> Direccion </th>
+      <td mat-cell *matCellDef="let element"> {{ element.address }}, {{ element.commune }}, {{ element.region}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
 </div>
-
-<p>report-users works!</p>

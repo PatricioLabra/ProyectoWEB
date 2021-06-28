@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject, Optional } from '@angular/core';
 import { CartService } from '@services/cart.service';
 import { Cart } from '@models/cart.class';
 import { ProductCart } from '@models/product-cart.model';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart-header',
@@ -10,9 +12,24 @@ import { ProductCart } from '@models/product-cart.model';
 })
 export class CartHeaderComponent extends Cart {
 
-  constructor(cart: CartService) {
+  constructor(
+    cart: CartService,
+    private router: Router,
+    @Optional() public dialogRef: MatDialogRef<CartHeaderComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: null
+  ) {
     super(cart);
     this.cart.currentDataCart$.subscribe(this.handleCartChange);
+  }
+
+  public redirectToCartPage() {
+    this.router.navigate(['/cart']);
+    this.dialogRef.close();
+  }
+
+  public redirectToProductPage(_id: string) {
+    this.router.navigate(['/product', _id]);
+    this.dialogRef.close();
   }
 
   /**

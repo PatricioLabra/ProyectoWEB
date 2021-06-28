@@ -1,0 +1,270 @@
+@import 'src/styles/mixinsNeonButtons';
+@import 'src/styles/mixinsLogo';
+
+/*VARIABLES*/
+$backgroundColorHeader:transparent;
+$backgroundColorButtons:transparent;
+$textColor: white;
+$lightColor: #a945c7;
+$borderLightHeader: #bb90ff;
+
+
+/*COMPONENTE HEADER*/
+.header{   
+    margin : 2%;
+    padding: 2%;
+    display: flex;
+    margin-left: 10%;
+    justify-content:space-around;
+    align-items:center;
+    height: 13vh;
+    background: $backgroundColorHeader;
+    color: $textColor;
+
+    .nickname{
+        font-family: neon;
+        color: $lightColor;
+        font-size: 18px;
+        font-weight: 600;
+        text-shadow: 0 0 10px black;
+    }
+    ::ng-deep #carrito {
+        margin-top: 1%;
+        font-size: 20px;
+        padding: 0.6%;
+        box-shadow: 0 0 10px $lightColor;
+        border-radius: 100%;
+        color: $lightColor;
+    }
+    ::ng-deep #carrito:hover{
+        background: rgba(225, 0, 255, 0.356);
+    }
+    .panelAdmin{
+        padding-top: 1%;
+        padding-right: 1%;
+        padding-left: 1%;
+        background: transparent;
+        border-radius: 5px;
+        @include neonButtonText;
+    }
+
+    .panelAdmin:hover{
+        background: $lightColor;
+        box-shadow: 0 0 5px $lightColor, 0 0 10px $lightColor, 0 0 20px $lightColor;
+        transition-delay: 0.25s;
+    }
+
+    .search-bar {
+        width: 25%;
+    }
+
+    .buttonCategory{
+        @include neonButton($textColor, $backgroundColorButtons);
+
+        span {
+            @include buttonSpans;
+        }
+        .span1{
+            @include spanConfiguration(0, none, -100%, none, 100%, 2px, 90deg, $lightColor);
+        }
+        .span2{
+            @include spanConfiguration(-100%, none, none, 0, 2px, 100%, 180deg, $lightColor);
+        }
+        .span3{
+            @include spanConfiguration(none, 0, none, -100%, 100%, 2px, 270deg, $lightColor);
+        }
+        .span4{
+            @include spanConfiguration(none, -100%, 0, none, 2px, 100%, 360deg, $lightColor);
+        }
+        .categoryText{
+            @include neonButtonText;
+        }
+    }
+
+    .buttonCategory:hover{
+        @include neonButtonHover($lightColor);
+
+        .span1{
+            @include buttonHoverSpan(none, none, 100%, none, none);
+        }
+        .span2{
+            @include buttonHoverSpan(100%, none, none, none, 0.25s);
+        }
+        .span3{
+            @include buttonHoverSpan(none, none, none, 100%, 0.5s);
+        }
+        .span4{
+            @include buttonHoverSpan(none, 100%, none, none, 0.75s);
+        }
+    }
+
+    .buttonSignOut{
+        @include neonButton($textColor, $backgroundColorButtons);
+        justify-content:right;
+
+        span {
+            @include buttonSpans;
+        }
+        .span5{
+            @include spanConfiguration(0, none, -100%, none, 100%, 2px, 90deg, $lightColor);
+        }
+        .span6{
+            @include spanConfiguration(-100%, none, none, 0, 2px, 100%, 180deg, $lightColor);
+        }
+        .span7{
+            @include spanConfiguration(none, 0, none, -100%, 100%, 2px, 270deg, $lightColor);
+        }
+        .span8{
+            @include spanConfiguration(none, -100%, 0, none, 2px, 100%, 360deg, $lightColor);
+        }
+        .signoutText{
+            @include neonButtonText;
+        }
+    }
+
+    .buttonSignOut:hover{
+        @include neonButtonHover($lightColor);
+
+        .span5{
+            @include buttonHoverSpan(none, none, 100%, none, none);
+        }
+        .span6{
+            @include buttonHoverSpan(100%, none, none, none, 0.25s);
+        }
+        .span7{
+            @include buttonHoverSpan(none, none, none, 100%, 0.5s);
+        }
+        .span8{
+            @include buttonHoverSpan(none, 100%, none, none, 0.75s);
+        }
+    }
+
+    .buttonLoginIn{
+        @include neonButton($textColor, $backgroundColorButtons);
+
+        span {
+            @include buttonSpans;
+        }
+        .span9{
+            @include spanConfiguration(0, none, -100%, none, 100%, 2px, 90deg, $lightColor);
+        }
+        .span10{
+            @include spanConfiguration(-100%, none, none, 0, 2px, 100%, 180deg, $lightColor);
+        }
+        .span11{
+            @include spanConfiguration(none, 0, none, -100%, 100%, 2px, 270deg, $lightColor);
+        }
+        .span12{
+            @include spanConfiguration(none, -100%, 0, none, 2px, 100%, 360deg, $lightColor);
+        }
+        .loginInText{
+            @include neonButtonText;
+        }
+    }
+
+    .buttonLoginIn:hover{
+        @include neonButtonHover($lightColor);
+
+        .span9{
+            @include buttonHoverSpan(none, none, 100%, none, none);
+        }
+        .span10{
+            @include buttonHoverSpan(100%, none, none, none, 0.25s);
+        }
+        .span11{
+            @include buttonHoverSpan(none, none, none, 100%, 0.5s);
+        }
+        .span12{
+            @include buttonHoverSpan(none, 100%, none, none, 0.75s);
+        }
+    }
+
+    .buttonRegister {
+        @include neonButton($textColor, $backgroundColorButtons);
+
+        span {
+            @include buttonSpans;
+        }
+        .span13{
+            @include spanConfiguration(0, none, -100%, none, 100%, 2px, 90deg, $lightColor);
+        }
+        .span14{
+            @include spanConfiguration(-100%, none, none, 0, 2px, 100%, 180deg, $lightColor);
+        }
+        .span15{
+            @include spanConfiguration(none, 0, none, -100%, 100%, 2px, 270deg, $lightColor);
+        }
+        .span16{
+            @include spanConfiguration(none, -100%, 0, none, 2px, 100%, 360deg, $lightColor);
+        }
+        .registerText{
+            @include neonButtonText;
+        }
+    }
+
+    .buttonRegister:hover{
+        @include neonButtonHover($lightColor);
+
+        .span13{
+            @include buttonHoverSpan(none, none, 100%, none, none);
+        }
+        .span14{
+            @include buttonHoverSpan(100%, none, none, none, 0.25s);
+        }
+        .span15{
+            @include buttonHoverSpan(none, none, none, 100%, 0.5s);
+        }
+        .span16{
+            @include buttonHoverSpan(none, 100%, none, none, 0.75s);
+        }
+    }  
+}
+
+.categories{
+    border: 1px solid white;
+    position: relative;
+    color: white;
+    font-size: 12px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: 0.2s;
+    background:#5b5b5b; 
+    border: 0.5px solid white;
+    .categoryText{
+        @include neonButtonText;
+    }
+
+}
+
+.categories:hover{
+    background: #a945c7;
+    box-shadow: 0 0 10px #a945c7, 0 0 40px #a945c7, 0 0 80px #a945c7;
+}
+
+.logo{
+    font-family: neon;
+    display: inline-block;
+    text-align: center;
+    margin-left: 3%;
+    position: absolute;
+
+    .squares-common{
+        @include squares-common(9.5vw,9.5vw);
+    }
+    .square-one{
+        @include square-one;
+    }
+    .square-two{
+        @include square-two;
+    }
+    .back{
+        @include back(3vw,3vw);
+    }
+    .toThe{
+        @include toThe( 1.5vw,2vw);
+
+    }
+    .noventa{
+        @include noventa(3vw,3vw);
+    }
+}

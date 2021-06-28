@@ -1,25 +1,70 @@
-<form novalidate [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-	<span>Iniciar Sesion</span>
+<div class = form *ngIf="!isOldUser; else oldUser">
+	<form novalidate [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+		<div class = logInText>
+			<span>Iniciar Sesion</span>
+		</div>
+		
+		<div class="inputLogIn">
+			<div class = nickname>
+				<mat-form-field>
+					<mat-label >Nickname</mat-label>
+					<input type="text" matInput formControlName="nickname" placeholder="Madara" autocomplete="off">
+					<mat-error *ngIf="isFieldInvalid('nickname')">
+							Nickname requerido
+					</mat-error>
+				</mat-form-field>
+			</div>
 
-	<input formControlName="nickname" type="text">
-	<app-field-error
-		[displayError]="isFieldInvalid('nickname')"
-		[errorMessage]="'nickname requerido'">
-	</app-field-error>
+			<div class="password">
+				<mat-form-field>
+				<mat-label>Password</mat-label>
+				<input type="password" matInput formControlName="password" placeholder="Uchiha" autocomplete="off">
+				<mat-error *ngIf="isFieldInvalid('password')">
+						Password requerida
+				</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		
+		<mat-checkbox formControlName="recordar" color="primary">Recordar contraseña</mat-checkbox>
+		<br>
+		<button class = buttonLogIn type="submit" mat-flat-button color="primary">
+			<span class = span1></span>
+			<span class = span2></span>
+			<span class = span3></span>
+			<span class = span4></span>
+			Iniciar Sesion
+		</button>
 
-	<input formControlName="password" type="password">
-	<app-field-error
-		[displayError]="isFieldInvalid('password')"
-		[errorMessage]="'password requerido'">
-	</app-field-error>
+		<button routerLink="/home" class = buttonLogIn mat-flat-button color="primary">
+			<span class = span1></span>
+			<span class = span2></span>
+			<span class = span3></span>
+			<span class = span4></span>
+			Continuar como invitado
+		</button>
+	
+		<app-field-error
+			[displayError]="badNick"
+			[errorMessage]="'Nickname no existe'">
+		</app-field-error>
+		<app-field-error
+			[displayError]="badPass"
+			[errorMessage]="'Password incorrecta'">
+		</app-field-error>
+	</form>
+	
+</div>
 
-	<button type="submit">Iniciar Sesion</button>
-	<app-field-error
-		[displayError]="badNick"
-		[errorMessage]="'Nickname no existe'">
-	</app-field-error>
-	<app-field-error
-		[displayError]="badPass"
-		[errorMessage]="'Contraseña no coincide'">
-	</app-field-error>
-</form>
+<ng-template #oldUser>
+	<div class="old-user-login">
+		<p class="saludo">
+			Hola de nuevo: 
+			<span class="nickname-user">
+				{{ userInfo.userInfo.nickname }}
+			</span>
+		</p>
+
+		<button (click)="recordarUsuario()" mat-flat-button color="primary">Iniciar Sesion</button>
+	</div>
+</ng-template>

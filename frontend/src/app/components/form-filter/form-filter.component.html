@@ -1,25 +1,38 @@
-<form novalidate [formGroup]="filterForm" (ngSubmit)="onSubmit()">
-  <select formControlName="category">
-    <option value="">Categoria</option>
-    <option *ngFor="let category of CategoryList" [value]="category">{{ category }}</option>
-  </select>
+<form novalidate [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="form-filter">
+  <mat-form-field appearance="fill" class="category">
+    <mat-label>Categoria</mat-label>
+    <mat-select formControlName="category" name="category_">
+      <mat-option>---</mat-option>
+      <mat-option *ngFor="let category of CategoryList" [value]="category">
+        {{ category }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
+  <mat-accordion class="subcategories" multi>
+    <p>Subcategoria</p>
+    <mat-expansion-panel *ngFor="let category of CategoryList; index as i">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ category | titlecase }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+      <div>
+        <p *ngFor="let sub of Subcategories[i]"><mat-checkbox (change)="onChange(sub)" color="primary">{{ sub }}</mat-checkbox></p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
 
-  <div *ngFor="let category of CategoryList; index as i">
-    {{ category }}
-    <p *ngFor="let sub of Subcategories[i]">
-      <input (change)="onChange(sub)" type="checkbox">
-      {{ sub }}
-    </p>
-  </div>
+  <mat-form-field class="price-range">
+    <mat-label>Precio minimo</mat-label>
+    <input type="number" matInput formControlName="minPrice" placeholder="1600">
+  </mat-form-field>
 
-  <label for="lowerLimit">Precio minimo</label>
-  <input formControlName="minPrice" type="text" name="lowerLimit">
+  <mat-form-field class="price-range">
+    <mat-label>Precio maximo</mat-label>
+    <input type="number" matInput formControlName="maxPrice" placeholder="32000">
+  </mat-form-field>
 
-  <label for="upperLimit">Precio maximo</label>
-  <input formControlName="maxPrice" type="text" name="upperLimit">
-
-  <button type="submit">Filtrar</button>
+  <button type="submit" mat-flat-button color="primary" class="button-filter">Filtrar</button>
 </form>
-
-<p>form-filter works!</p>

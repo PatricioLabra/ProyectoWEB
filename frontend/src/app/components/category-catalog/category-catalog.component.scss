@@ -1,0 +1,35 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 20px;
+
+  .products-wrapper {
+    display: flex;
+    overflow-x: scroll;
+    background-color: #23063e91;
+    border-radius: 10px;
+    width: 100%;
+    min-height: 250px;
+    justify-content: space-evenly;
+
+    p{
+      margin-top: 8%;
+      color: gray;
+    }
+  }
+
+  .category {
+    background-color: #23063e91;
+    box-shadow:0 0 10px rgb(131, 43, 231);
+    text-shadow:0 0 15px rgb(159, 91, 236);
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0px;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-bottom: 1%;
+    cursor: pointer;
+  }
+}

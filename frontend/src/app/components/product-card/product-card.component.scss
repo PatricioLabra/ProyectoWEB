@@ -1,0 +1,110 @@
+@import '../../../styles/mixinsNeonButtons';
+
+$textColor : white; 
+$backgroundColorButtons : #a945c7;
+$lightColor: #a945c7;
+
+.product-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  background-color: #0b0422;
+  align-items: center;
+  margin: 20px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px $lightColor;
+  transition: 0.5s ease;
+}
+
+.product-wrapper:hover{
+  transform: scale(1.05);
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+  box-shadow: 0 0 30px rgb(252, 252, 34);
+  animation:  1.5s infinite 
+  
+}
+
+.title-image-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0px;
+  position: relative;
+  width: 100%;
+}
+
+.title {
+  font-weight: 500;
+  margin-bottom: 5px;
+  text-shadow: 0 0 20px rgb(234, 0, 255);
+}
+
+.prices-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0px 20%;
+  box-sizing: border-box;
+}
+
+.price {
+  color: #9905ee;
+  font-weight: 500;
+}
+
+.price-discounted {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.discount {
+  background-color: chocolate;
+  position: absolute;
+  top: 30px;
+  left: 15%;
+  border-radius: 3px;
+  padding: 0px 5px;
+  transform: rotate(-30deg);
+}
+
+.button {
+  margin-top: 3%;
+  background: transparent;
+  height: 30px;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $textColor;
+  letter-spacing: 2px;
+  font-size: 12px;
+  transition: 0.2s;
+  background-color: transparent;
+  border: 1px solid $lightColor;
+  box-shadow: 0 0 5px $lightColor;
+  @include neonButtonText;
+}
+
+.button:hover{
+  background: $lightColor;
+  box-shadow: 0 0 5px $lightColor, 0 0 10px $lightColor, 0 0 20px $lightColor;
+}
+
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 1rem;
+  color: black;
+}
+
+.full {
+  color: rgb(207, 135, 0);
+}
+
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: rgb(207, 135, 0);
+}

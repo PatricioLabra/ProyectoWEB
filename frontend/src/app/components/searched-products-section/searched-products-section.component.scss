@@ -1,0 +1,48 @@
+:host {
+  display: flex;
+  
+  .products {
+    .custom-grid-layout {
+      width: 70vw;
+      height: 70vh;
+    }
+
+    .custom-paginator {
+      display: flex;
+      position: absolute;
+      right: 10px;
+      margin-right: 4%;
+      width: 55%;
+
+      p{
+        margin-right: auto;
+        margin-left: auto;
+        font-weight: 500;
+        font-size: 15px;
+        color:white;
+        text-shadow: 0 0 10px #a945c7;
+      }
+    }
+    
+    button{
+      justify-content: flex-end;
+      border-radius: 20%;
+      margin-left: 1%;
+      background: transparent;
+      color : white;
+      width: 70px;
+      border-radius: 50%;
+      border: 1px solid rgb(255, 145, 0);
+      box-shadow: 0 0 5px rgb(255, 145, 0);
+    }
+    
+    button:hover{
+      background-color:rgb(255, 145, 0);
+      transition: 0.25ms;
+    }
+  }
+}
+
+::ng-deep .mat-input-element {
+  color: black;
+}

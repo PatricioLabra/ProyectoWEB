@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   music: Array<Product> = [];
   clothes: Array<Product> = [];
   food: Array<Product> = [];
+  isLoading: boolean = true;
 
   constructor(private api: ApiConnectionService) { }
 
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit {
       this.music = this.products.filter((product: Product) => product.category == CategoryTypes.MUSIC);
       this.clothes = this.products.filter((product: Product) => product.category == CategoryTypes.CLOTHES);
       this.food = this.products.filter((product: Product) => product.category == CategoryTypes.FOOD);
+      this.isLoading = false;
     });
   }
 }

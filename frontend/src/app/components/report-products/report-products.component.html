@@ -1,0 +1,7 @@
+<div class="content">
+  <p class="quantity">Cantidad de carritos comprados: {{ quantityCarts }}</p>
+
+  <div class="carts">
+    <app-cart-bought-card *ngFor="let cart of carts" [cart]="cart"></app-cart-bought-card>
+  </div>
+</div>

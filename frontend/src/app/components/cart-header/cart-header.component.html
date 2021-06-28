@@ -1,17 +1,34 @@
-<ul>
-  <li *ngFor="let product of products; index as i">
-    <img [src]="product.image_url" alt="Image Product" style="width: 100px; height: 100px;">
-    <p>{{ product.name }}</p>
-    <p>{{ product.price }}</p>
-    <p>{{ product.discount }}</p>
-    <p>{{ product.quantity }}</p>
-    <p>{{ product.finalPrice }}</p>
-    <button [disabled]="product.stock <= product.quantity" (click)="incrementProduct(i)">+</button>
-    <button (click)="decrementProduct(i)">-</button>
-  </li>
-</ul>
+<div class="content">
 
-<p>{{ totalPrice }}</p>
 
-<button routerLink="/cart">Ir a carrito</button>
-<button (click)="emptyCart()">Vaciar carrito</button>
+  <div class="products-list">
+    <div *ngFor="let product of products; index as i" class="product">
+      <img [src]="product.image_url" alt="Image Product" class="image-product">
+      <p (click)="redirectToProductPage(product._id)" class="title">{{ product.name }}</p>
+
+      <div class="product-info">
+        <div>
+          <p>Cantidad:    </p>
+
+          <div class="quantity">
+            <button mat-icon-button (click)="decrementProduct(i)">
+              <mat-icon>remove</mat-icon>
+            </button>
+            <p>{{ product.quantity }}</p>
+            <button mat-icon-button [disabled]="product.stock <= product.quantity" (click)="incrementProduct(i)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="prices-wrapper">
+          <p>${{ product.finalPrice }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="final-price">Precio total: ${{ totalPrice }}</p>
+  <button mat-flat-button color="primary" class="button1" (click)="redirectToCartPage()">Ir a carrito</button>
+  <button mat-flat-button color="primary" class="button2" (click)="emptyCart()">Vaciar carrito</button>
+</div>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ProductCart } from '@models/product-cart.model';
-import { Product } from '@models/product.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class CartService {
   private _cart = new BehaviorSubject<Array<ProductCart>>([]);
   public currentDataCart$ = this._cart.asObservable();
 
-  constructor() { }
+  constructor(private snackbar: MatSnackBar) { }
 
   /**
    * Comprueba si el producto ya esta ingresado, si es asi incrementa en 1 su cantidad,
@@ -23,10 +23,13 @@ export class CartService {
     const listProducts = this._cart.getValue();
     const index = this.searchProduct(listProducts, product);
 
-    if (-1 == index)
+    if (-1 == index) {
       listProducts.push(product);
-    else if (listProducts[index].stock >= (listProducts[index].quantity + quantityToInsert))
+      this.openSnackBar('Producto agregado!');
+    } else if (listProducts[index].stock >= (listProducts[index].quantity + quantityToInsert)) {
       listProducts[index].increaseQuantity(quantityToInsert);
+      this.openSnackBar('Producto agregado!');
+    }
 
     console.log(listProducts);
     this._cart.next(listProducts);
@@ -50,6 +53,7 @@ export class CartService {
         listProducts.splice(index, 1);
       }
 
+      this.openSnackBar('Producto removido!');
       console.log(listProducts);
       this._cart.next(listProducts);
     }
@@ -72,5 +76,11 @@ export class CartService {
    */
   searchProduct(listProducts: Array<ProductCart>, product: ProductCart): number {
     return listProducts.findIndex((productCart: ProductCart) => productCart._id == product._id);
+  }
+
+  openSnackBar(message: string) {
+    this.snackbar.open(message, 'Listo', {
+      duration: 3000,
+    });
   }
 }
